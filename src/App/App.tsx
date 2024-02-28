@@ -5,7 +5,7 @@ import { Button } from "@ui/index";
 const App = () => {
   return (
     <div className="content">
-      <Button></Button>
+      <Button>xxx</Button>
     </div>
   );
 };

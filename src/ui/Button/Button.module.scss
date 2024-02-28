@@ -1,0 +1,33 @@
+.button {
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button.primaryMode {
+  color: var(--text-color-default);
+  border: 1px solid var(--default-border);
+  transition: border 0.2s, color 0.2s;
+}
+
+.button.smallSize {
+  padding: 6px 10px;
+}
+
+.button.bigSize {
+  padding: 8px 18px;
+}
+
+@media (hover: hover) {
+  .button.primaryMode:hover {
+    color: var(--text-color-secondary);
+    border: 1px solid var(--secondary-border);
+  }
+}
+
+@media (hover: none) {
+  .button.primaryMode:active {
+    color: var(--text-color-secondary);
+    border: 1px solid var(--secondary-border);
+  }
+}
+

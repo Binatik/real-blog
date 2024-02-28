@@ -1,14 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:root {
+  --desktopWidth: 1440px;
+  --tableWidth: 768px;
+
+  --container: calc(1440px - 20px); //Вычитаем padding по бокам.
+  --border-main: 5px;
+  --family: "Inter", sans-serif;
+
+
+  // main Color light
+  --default-color: #000000;
+  --secondary-color: #52C41A;
+
+  --text-color-default: #000000;
+  --text-color-secondary: #52C41A;
+
+  // hover Color light
+
+  // border Color
+  --default-border: #000000;
+  --secondary-border: #52C41A;
+}
+
+html {
+  font-family: var(--family);
+  font-weight: 400;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
+button {
+  background-color: transparent;
+}
+
+.container-desktop {
+  max-width: var(--desktopWidth);
+  margin: 0 auto;
+  padding: 20px;
+}
