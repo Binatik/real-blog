@@ -1,0 +1,18 @@
+.RouterLink.defaultMode {
+  font-size: 18px;
+  text-decoration: none;
+  color: var(--text-color-default);
+  transition: color 0.2s ;
+}
+
+@media (hover: hover) {
+  .RouterLink.defaultMode:hover {
+    color: var(--text-color-grey);
+  }
+}
+
+@media (hover: none) {
+  .RouterLink.defaultMode:active {
+    color: var(--text-color-grey);
+  }
+}

@@ -14,9 +14,13 @@
 
 
   // main Color light
+  --background: #ebeef3;
+
+  --main-color: #fff;
   --default-color: #000000;
   --secondary-color: #52C41A;
 
+  --text-color-grey: #00000080;
   --text-color-default: #000000;
   --text-color-secondary: #52C41A;
 
@@ -36,6 +40,11 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--background);
+}
+
+header {
+  background-color: var(--main-color);
 }
 
 main {
@@ -50,4 +59,12 @@ button {
   max-width: var(--desktopWidth);
   margin: 0 auto;
   padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }

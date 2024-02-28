@@ -1,12 +1,15 @@
 import "normalize.css";
 import "./Global.scss";
-import { Button } from "@ui/index";
+import { BrowserRouter } from "react-router-dom";
+import Layout from "../layout/Layout";
 
 const App = () => {
   return (
-    <div className="content">
-      <Button>xxx</Button>
-    </div>
+    <BrowserRouter>
+      <Layout>
+        <div>Content</div>
+      </Layout>
+    </BrowserRouter>
   );
 };
 
