@@ -1,29 +1,39 @@
-# Rsbuild Project
+# Real-blog + TS + RTK
 
-## Setup
+##### Cоздавай, редактируй свои статьи и делись с ними в мире!
 
-Install the dependencies:
+---
 
-```bash
-pnpm install
-```
+## Проверить
 
-## Get Started
+Проверить последнюю версию web приложения можно [здесь](https://real-blog-oxpgqgawx-binatik.vercel.app/).
 
-Start the dev server:
+## Запуск
 
-```bash
-pnpm dev
-```
-
-Build the app for production:
+Для запуска у вас должен быть установлен [Node.js](http://nodejs.org)
+Для установки пакетов используется [npm](https://www.npmjs.com)
 
 ```bash
-pnpm build
+npm install -g npm
 ```
-
-Preview the production build locally:
 
 ```bash
-pnpm preview
+$ git clone repository # Клонирование репозитория
+$ npm i # Установка зависимостей
+$ npm dev # Запуск в dev  режиме
 ```
+
+```js
+//scripts vite
+"dev": "rsbuild dev --open",
+"build": "rsbuild build",
+"preview": "rsbuild preview",
+"eslint:fix": "eslint ./src --fix",
+"format": "prettier ./src --write"
+```
+
+## В разработке:
+Регистрация и авторизация пользователя.
+
+
+`Поддержка Ege, Chrome, Yandex последних версий`

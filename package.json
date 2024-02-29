@@ -9,7 +9,8 @@
     "lint:fix": "eslint ./src --fix",
     "format": "prettier ./src --write",
     "preview": "rsbuild preview",
-    "prepare": "husky"
+    "prepare": "husky",
+    "vercel": "vercel"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
