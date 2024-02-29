@@ -7,7 +7,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Layout>
-        <div>Content</div>
+        <div></div>
       </Layout>
     </BrowserRouter>
   );

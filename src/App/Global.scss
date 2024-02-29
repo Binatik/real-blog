@@ -7,6 +7,7 @@
 :root {
   --desktopWidth: 1440px;
   --tableWidth: 768px;
+  --mobileWidth: 600px;
 
   --container: calc(1440px - 20px); //Вычитаем padding по бокам.
   --border-main: 5px;
@@ -19,6 +20,7 @@
   --main-color: #fff;
   --default-color: #000000;
   --secondary-color: #52C41A;
+  --avatar-color: #2e5871;
 
   --text-color-grey: #00000080;
   --text-color-default: #000000;
@@ -62,9 +64,17 @@ button {
 }
 
 .header-container {
+  position: relative;
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 20px;
   align-items: center;
   justify-content: space-between;
+}
+
+@media (max-width: 560px) {
+  .header-container {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: baseline;
+  }
 }

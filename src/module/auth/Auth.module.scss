@@ -1,4 +1,11 @@
 .auth {
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 27px;
+}
+
+.autorization {
   display: flex;
   gap: 19px;
 }

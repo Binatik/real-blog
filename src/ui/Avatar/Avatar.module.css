@@ -1,0 +1,17 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--avatar-color);
+  border-radius: 50%;
+}
+
+.avatar.sizeSmall {
+  width: 46px;
+  height: 46px;
+}
+
+.avatar.sizeSmall img {
+  display: block;
+  width: 100%;
+}

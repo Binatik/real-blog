@@ -1,0 +1,22 @@
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+@media (max-width: 768px) {
+  .profileText {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .profile {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    /* 20px ширина логотипа */
+    transform: translateY(calc(-20px / 1.5));
+  }
+}
