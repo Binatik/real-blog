@@ -2,7 +2,7 @@ import { HTMLAttributes } from "react";
 import classes from "./Button.module.scss";
 import classNames from "classnames";
 
-type IButtonProps = {
+type ButtonProps = {
   children: React.ReactNode;
   mode?: "primary" | "default";
   size?: "big" | "small" | "none";
@@ -14,7 +14,7 @@ function Button({
   mode = "primary",
   className,
   ...props
-}: IButtonProps) {
+}: ButtonProps) {
   return (
     <button
       {...props}

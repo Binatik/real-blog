@@ -2,7 +2,7 @@ import classNames from "classnames";
 import classes from "./RouterLink.module.scss";
 import { Link, LinkProps } from "react-router-dom";
 
-type IRouterLinkProps = {
+type RouterLinkProps = {
   mode?: "default";
   children: React.ReactNode;
 } & LinkProps;
@@ -12,7 +12,7 @@ function RouterLink({
   mode = "default",
   className,
   ...props
-}: IRouterLinkProps) {
+}: RouterLinkProps) {
   return (
     <Link
       {...props}

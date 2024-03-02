@@ -2,11 +2,11 @@ import { Avatar, RouterLink } from "@ui/index";
 import classes from "./ProfileInfo.module.css";
 import avatar from "@assets/avatar.svg";
 
-type IProfileProps = {
+type ProfileProps = {
   to: string;
 };
 
-function ProfileInfo({ to }: IProfileProps) {
+function ProfileInfo({ to }: ProfileProps) {
   return (
     <RouterLink className={classes.profile} to={to}>
       <span className={classes.profileText}>John Doe</span>

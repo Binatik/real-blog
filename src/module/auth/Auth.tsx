@@ -29,6 +29,7 @@ function Auth() {
       </div>
     );
   }
+
   return renderProfile();
 }
 

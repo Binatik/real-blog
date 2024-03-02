@@ -8,6 +8,7 @@ export default defineConfig({
       "@ui": "./src/ui/*",
       "@module": "./src/module/*",
       "@assets": "./src/assets/*",
+      "@api": "./src/api/*",
     },
   },
   html: {
