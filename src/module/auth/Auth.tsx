@@ -1,18 +1,25 @@
 import { Button } from "@ui/index";
 import classes from "./Auth.module.scss";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const isAuth = false;
 
 function Auth() {
-  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+
+  function linkSignUp() {
+    navigate("/sign-up");
+  }
+
   function renderProfile() {
     if (!isAuth) {
       return (
         <div className={classes.autorization}>
-          <Button onClick={() => setIsAuth(true)} mode="default" size="none">
+          <Button mode="default" size="none">
             Sign In
           </Button>
-          <Button onClick={() => setIsAuth(true)}>Sign Up</Button>
+          <Button onClick={linkSignUp}>Sign Up</Button>
         </div>
       );
     }
@@ -23,9 +30,7 @@ function Auth() {
           Create article
         </Button>
         <ProfileInfo to="/profile" />
-        <Button onClick={() => setIsAuth(false)} size="big">
-          Log Out
-        </Button>
+        <Button size="big">Log Out</Button>
       </div>
     );
   }

@@ -1,19 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { storeAuth } from "./store/redux/store";
-import Layout from "../layout/Layout";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router";
 import "normalize.css";
 import "./Global.scss";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Provider store={storeAuth}>
-        <Layout>
-          <div></div>
-        </Layout>
-      </Provider>
-    </BrowserRouter>
+    <Provider store={storeAuth}>
+      <RouterProvider router={router} />
+    </Provider>
   );
 };
 

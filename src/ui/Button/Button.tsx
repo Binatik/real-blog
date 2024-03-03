@@ -1,12 +1,12 @@
-import { HTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import classes from "./Button.module.scss";
 import classNames from "classnames";
 
 type ButtonProps = {
-  children: React.ReactNode;
-  mode?: "primary" | "default";
+  children: ReactNode;
+  mode?: "primary" | "secondary" | "default";
   size?: "big" | "small" | "none";
-} & HTMLAttributes<HTMLButtonElement>;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
   children,
@@ -20,6 +20,7 @@ function Button({
       {...props}
       className={classNames(className, classes.button, {
         [classes.primaryMode]: mode === "primary",
+        [classes.secondaryMode]: mode === "secondary",
         [classes.defaultMode]: mode === "default",
         [classes.noneSize]: size === "none",
         [classes.smallSize]: size === "small",

@@ -9,6 +9,13 @@
   transition: border 0.2s, color 0.2s;
 }
 
+.button.secondaryMode {
+  background-color: var(--primary-color);
+  color: var(--text-color-light-v2);
+  border: none;
+  transition: box-shadow 0.2s;
+}
+
 .button.defaultMode {
   color: var(--text-color-default);
   border: 1px solid transparent;
@@ -39,6 +46,10 @@
   .button.defaultMode:hover {
     color: var(--text-color-grey);
   }
+
+  .button.secondaryMode:hover {
+    box-shadow: 0 0 8px var(--secondary-hover);
+  }
 }
 
 @media (hover: none) {
@@ -49,6 +60,10 @@
 
   .button.defaultMode:active {
     color: var(--text-color-grey);
+  }
+
+  .button.secondaryMode:active {
+    box-shadow: 0 0 8px var(--secondary-hover);
   }
 }
 

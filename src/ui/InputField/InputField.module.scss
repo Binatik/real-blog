@@ -1,0 +1,44 @@
+.inputField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputFieldLabel {
+  font-size: 14px;
+  padding-bottom: 2px;
+}
+
+.inputFieldElement.primaryMode {
+  background-color: transparent;
+  color: var(--text-color-grey-v3);
+  border: 1px solid var(--primary-border);
+  outline: 1.5px solid transparent;
+  border-radius: 4px;
+  transition: outline 0.2s;
+}
+
+.inputFieldElement.primaryMode::placeholder {
+  color: var(--text-color-light);
+  text-indent: 0px;
+  transition: text-indent 0.2s ease;
+}
+.inputFieldElement.primaryMode:focus::placeholder {
+  text-indent: 100%;
+  transition: text-indent 0.2s ease;
+}
+
+.inputFieldElement.primaryMode:focus-visible {
+  outline: 1.5px solid var(--primary-color);
+}
+
+.inputFieldElement.mediumSize {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.inputError {
+  font-size: 14px;
+  color: var(--error-color);
+}
+

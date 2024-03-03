@@ -5,7 +5,7 @@ import classNames from "classnames";
 type AvatarProps = {
   photo?: string;
   size?: "small";
-} & HTMLAttributes<HTMLDivElement>;
+} & Partial<HTMLAttributes<HTMLDivElement>>;
 
 function Avatar({ photo, size = "small", className }: AvatarProps) {
   function renderAvatar() {

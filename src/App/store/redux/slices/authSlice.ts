@@ -38,7 +38,7 @@ const authSlice = createSlice({
 });
 
 export const registerProfile = createAsyncThunk(
-  "authSlice/fetchRegisterUser",
+  "authSlice/fetchRegisterProfile",
   async (payload: Profile) => {
     const result = await api.post<Profile>("/users", {
       headers: {

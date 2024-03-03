@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
 
 * {
   box-sizing: border-box;
@@ -18,18 +18,27 @@
   --background: #ebeef3;
 
   --main-color: #fff;
+  --primary-color: #1890FF;
   --default-color: #000000;
   --secondary-color: #52C41A;
   --avatar-color: #2e5871;
+  --error-color: #F5222D;
 
-  --text-color-grey: #00000080;
   --text-color-default: #000000;
   --text-color-secondary: #52C41A;
 
+  --text-color-light: #BFBFBF;
+  --text-color-light-v2: #FFFFFF;
+  --text-color-grey: #00000080;
+  --text-color-grey-v2: #262626;
+  --text-color-grey-v3: #000000BF;
+
   // hover Color light
+  --secondary-hover: #1890FF;
 
   // border Color
   --default-border: #000000;
+  --primary-border: #D9D9D9;
   --secondary-border: #52C41A;
 }
 
@@ -46,7 +55,12 @@ body {
 }
 
 header {
+  position: sticky;
+  left: 0;
+  top: 0;
   background-color: var(--main-color);
+  z-index: 10;
+  border-bottom: 0.5px solid var(--primary-border);
 }
 
 main {
@@ -60,12 +74,13 @@ button {
 .container-desktop {
   max-width: var(--desktopWidth);
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
 }
 
 .header-container {
   position: relative;
   display: flex;
+  padding-block: 16px;
   gap: 20px;
   align-items: center;
   justify-content: space-between;

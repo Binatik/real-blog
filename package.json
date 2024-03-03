@@ -10,7 +10,7 @@
     "format": "prettier ./src --write",
     "preview": "rsbuild preview",
     "prepare": "husky",
-    "vercel": "vercel"
+    "now": "now"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [

@@ -7,6 +7,8 @@ export default defineConfig({
     alias: {
       "@ui": "./src/ui/*",
       "@module": "./src/module/*",
+      "@page": "./src/page/*",
+      "@layout": "./src/layout/*",
       "@assets": "./src/assets/*",
       "@api": "./src/api/*",
     },

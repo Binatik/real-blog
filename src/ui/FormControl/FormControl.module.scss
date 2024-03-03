@@ -1,0 +1,16 @@
+.formControl {
+  background-color: var(--main-color);
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  box-shadow: 0px 0.61px 2.93px 0px rgba(0, 0, 0, 0.02), 0px 1.46px 7.05px 0px rgba(0, 0, 0, 0.03), 0px 2.75px 13.27px 0px rgba(0, 0, 0, 0.04), 0px 4.91px 23.68px 0px rgba(0, 0, 0, 0.04), 0px 9.19px 44.28px 0px rgba(0, 0, 0, 0.05), 0px 22px 106px 0px rgba(0, 0, 0, 0.07);
+}
+
+.formControlWide input {
+  width: 100%;
+}
+
+.formControl.defaultSize {
+  padding: 48px 32px;
+  max-width: 384px;
+}
