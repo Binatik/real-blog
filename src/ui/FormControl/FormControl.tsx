@@ -17,11 +17,11 @@ function FormControl({
 }: FormControlProps) {
   return (
     <form
-      {...props}
       className={classNames(className, classes.formControl, {
         [classes.defaultSize]: size === "default",
         [classes.formControlWide]: wide,
       })}
+      {...props}
     >
       {children}
     </form>

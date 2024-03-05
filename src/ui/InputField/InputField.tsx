@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, useEffect, useRef } from "react";
 import classes from "./InputField.module.scss";
 import classNames from "classnames";
 
@@ -8,6 +8,7 @@ type InputFieldProps = {
   idLabel: string;
   label: string;
   error?: boolean;
+  autoFocus?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "size">;
 
 function InputField({
@@ -16,9 +17,18 @@ function InputField({
   error,
   mode = "primary",
   size = "medium",
+  autoFocus,
   className,
   ...props
 }: InputFieldProps) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      inputRef.current?.focus();
+    }
+  }, [autoFocus]);
+
   function renderErrorField() {
     return (
       <span
@@ -37,12 +47,13 @@ function InputField({
         {label}
       </label>
       <input
-        placeholder={label}
         className={classNames(className, classes.inputFieldElement, {
           [classes.primaryMode]: mode === "primary",
           [classes.mediumSize]: size === "medium",
           [classes.inputFieldElementError]: error,
         })}
+        ref={inputRef}
+        placeholder={label}
         id={idLabel}
         {...props}
       />

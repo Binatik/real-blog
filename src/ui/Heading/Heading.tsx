@@ -17,20 +17,20 @@ function Heading({
   className,
   ...props
 }: HeadingProps) {
-  const ComponentH = as;
+  const Tag = as;
 
   return (
-    <ComponentH
-      {...props}
+    <Tag
       className={classNames(className, classes.heading, {
         [classes.level7Size]: size === "level7",
         [classes.level4Size]: size === "level4",
         [classes.mediumWeight]: weight === "medium",
         [classes.boldWeight]: weight === "bold",
       })}
+      {...props}
     >
       {children}
-    </ComponentH>
+    </Tag>
   );
 }
 

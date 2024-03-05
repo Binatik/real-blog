@@ -13,7 +13,7 @@
   background-color: var(--primary-color);
   color: var(--text-color-light-v2);
   border: none;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.3s;
 }
 
 .button.defaultMode {
@@ -48,7 +48,7 @@
   }
 
   .button.secondaryMode:hover {
-    box-shadow: 0 0 8px var(--secondary-hover);
+    box-shadow: 0 0 6px var(--secondary-hover);
   }
 }
 

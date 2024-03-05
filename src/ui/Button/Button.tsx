@@ -17,7 +17,6 @@ function Button({
 }: ButtonProps) {
   return (
     <button
-      {...props}
       className={classNames(className, classes.button, {
         [classes.primaryMode]: mode === "primary",
         [classes.secondaryMode]: mode === "secondary",
@@ -27,6 +26,7 @@ function Button({
         [classes.bigSize]: size === "big",
       })}
       type="button"
+      {...props}
     >
       {children}
     </button>

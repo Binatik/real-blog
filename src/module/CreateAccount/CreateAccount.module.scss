@@ -3,11 +3,29 @@
 }
 
 .createAccountForm {
-  margin: 0 auto;
   gap: 12px;
+  margin: 0 auto;
 }
 
 .createAccountHeading {
   text-align: center;
   margin-block: 10px;
+}
+
+.createAccountFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: calc(20px - 12px); //Вычитаем gap createAccountForm
+}
+
+.createAccountCheckbox {
+  border-top: 1px solid var(--primary-border);
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.login {
+  display: inline-flex;
+  gap: 5px;
 }

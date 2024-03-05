@@ -1,8 +1,23 @@
-.RouterLink.defaultMode {
-  font-size: 18px;
+.routerLink {
   text-decoration: none;
+}
+
+.routerLink.defaultMode {
   color: var(--text-color-default);
   transition: color 0.2s ;
+}
+
+.routerLink.primaryMode {
+  color: var(--text-primary);
+  transition: color 0.2s ;
+}
+
+.routerLink.smallSize {
+  font-size: 12px;
+}
+
+.routerLink.mediumSize {
+  font-size: 18px;
 }
 
 @media (hover: hover) {
