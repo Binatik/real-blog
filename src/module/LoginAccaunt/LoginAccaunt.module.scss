@@ -1,31 +1,25 @@
-.createAccount {
+.loginAccount {
   padding-top: 60px;
 }
 
-.createAccountForm {
+.loginAccountForm {
   gap: 12px;
   margin: 0 auto;
 }
 
-.createAccountHeading {
+.loginAccountHeading {
   text-align: center;
   margin-block: 10px;
 }
 
-.createAccountFields {
+.loginAccountFields {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding-bottom: calc(20px - 12px); //Вычитаем gap createAccountForm
 }
 
-.createAccountCheckbox {
-  border-top: 1px solid var(--default-color-40);
-  padding-top: 10px;
-  padding-bottom: 20px;
-}
-
-.login {
+.register {
   display: inline-flex;
   gap: 5px;
 }

@@ -4,14 +4,14 @@ import classNames from "classnames";
 
 type ButtonProps = {
   children: ReactNode;
-  mode?: "primary" | "secondary" | "default";
+  mode?: "primary" | "success" | "default";
   size?: "big" | "small" | "none";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
   children,
   size = "big",
-  mode = "primary",
+  mode = "default",
   className,
   ...props
 }: ButtonProps) {
@@ -19,13 +19,12 @@ function Button({
     <button
       className={classNames(className, classes.button, {
         [classes.primaryMode]: mode === "primary",
-        [classes.secondaryMode]: mode === "secondary",
+        [classes.successMode]: mode === "success",
         [classes.defaultMode]: mode === "default",
         [classes.noneSize]: size === "none",
         [classes.smallSize]: size === "small",
         [classes.bigSize]: size === "big",
       })}
-      type="button"
       {...props}
     >
       {children}

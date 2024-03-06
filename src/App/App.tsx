@@ -3,7 +3,7 @@ import { storeAuth } from "./store/redux/store";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./router";
 import "normalize.css";
-import "./Global.scss";
+import "./global.scss";
 
 const App = () => {
   return (

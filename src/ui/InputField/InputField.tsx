@@ -3,7 +3,7 @@ import classes from "./InputField.module.scss";
 import classNames from "classnames";
 
 type InputFieldProps = {
-  mode?: "primary";
+  mode?: "default";
   size?: "medium";
   idLabel: string;
   label: string;
@@ -15,7 +15,7 @@ function InputField({
   idLabel,
   label,
   error,
-  mode = "primary",
+  mode = "default",
   size = "medium",
   autoFocus,
   className,
@@ -48,7 +48,7 @@ function InputField({
       </label>
       <input
         className={classNames(className, classes.inputFieldElement, {
-          [classes.primaryMode]: mode === "primary",
+          [classes.defaultMode]: mode === "default",
           [classes.mediumSize]: size === "medium",
           [classes.inputFieldElementError]: error,
         })}

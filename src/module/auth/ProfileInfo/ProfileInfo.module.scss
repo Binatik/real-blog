@@ -1,16 +1,18 @@
+@import "../../../app/vars.scss";
+
 .profile {
   display: flex;
   align-items: center;
   gap: 13px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: $tableWidth) {
   .profileText {
     display: none;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: $mobileWidth) {
   .profile {
     position: absolute;
     right: 0;

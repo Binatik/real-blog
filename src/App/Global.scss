@@ -1,58 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+@import "./fonts.scss";
+@import "./vars.scss";
 
-* {
+*, 
+*::before, 
+*::after {
   box-sizing: border-box;
 }
 
 :root {
-  --desktopWidth: 1440px;
-  --tableWidth: 768px;
-  --mobileWidth: 600px;
-
   --container: calc(1440px - 20px); //Вычитаем padding по бокам.
-  --border-main: 5px;
   --family: "Inter", sans-serif;
 
+  --default-color-alpha85: rgba(0, 0, 0, 0.85);
+  --default-color-alpha75: rgba(0, 0, 0, 0.75);
+  --default-color-alpha50: rgba(0, 0, 0, 0.50);
+  --default-color-90: #262626;
+  --default-color-80: #595959;
+  --default-color-70: #8C8C8C;
+  --default-color-60: #BFBFBF;
+  --default-color-50: #D9D9D9;
+  --default-color-40: #E8E8E8;
 
-  // main Color light
-  --background: #ebeef3;
+  --success-color-80: #52C41A;
+  --success-color-90: #399b08;
 
-  --main-color: #fff;
+  --main-background: #ebeef3;
+  --surface-background: #2e5871;
+  --main-color: #ffffff;
   --primary-color: #1890FF;
-  --default-color: #000000;
-  --secondary-color: #52C41A;
-  --avatar-color: #2e5871;
+  --warning-color-60: #FAAD14;
   --error-color: #F5222D;
-
-  --text-color-default: #000000;
-  --text-primary: #1890FF;
-  --text-color-secondary: #52C41A;
-  
-  --text-color-light: #BFBFBF;
-  --text-color-light-v2: #FFFFFF;
-  --text-color-grey: #00000080;
-  --text-color-grey-v2: #262626;
-  --text-color-grey-v3: #000000BF;
-
-  // hover Color light
-  --secondary-hover: #1890FF;
-
-  // border Color
-  --default-border: #000000;
-  --primary-border: #D9D9D9;
-  --secondary-border: #52C41A;
 }
 
 html {
   font-family: var(--family);
   font-weight: 400;
+  height: 100%;
 }
 
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background-color: var(--background);
+  min-height: 100%;
+  background-color: var(--main-background);
+  line-height: 1.5;
 }
 
 header {
@@ -61,19 +52,20 @@ header {
   top: 0;
   background-color: var(--main-color);
   z-index: 10;
-  border-bottom: 0.5px solid var(--primary-border);
+  border-bottom: 0.5px solid var(--default-color-40);
 }
 
 main {
   flex-grow: 1;
 }
 
-button {
-  background-color: transparent;
+img {
+  display: block;
+  max-width: 100%;
 }
 
 .container-desktop {
-  max-width: var(--desktopWidth);
+  max-width: $desktopWidth;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -87,7 +79,7 @@ button {
   justify-content: space-between;
 }
 
-@media (max-width: 560px) {
+@media (max-width: $mobileWidth) {
   .header-container {
     flex-wrap: wrap;
     flex-direction: column;

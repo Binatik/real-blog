@@ -13,12 +13,7 @@ function CreateAccount() {
   return (
     <section className={classes.createAccount}>
       <div className="container-desktop">
-        <FormControl
-          method="post"
-          wide
-          autoComplete="false"
-          className={classes.createAccountForm}
-        >
+        <FormControl method="post" wide className={classes.createAccountForm}>
           <Heading className={classes.createAccountHeading} as="h2">
             Create new account
           </Heading>
@@ -42,7 +37,7 @@ function CreateAccount() {
             idLabel="license"
             label="I agree to the processing of my personal information"
           />
-          <Button mode="secondary">Create</Button>
+          <Button mode="primary">Create</Button>
           <div className={classes.login}>
             <Text as="span">Already have an account?</Text>
             <RouterLink to="/sign-in" size="small" mode="primary">

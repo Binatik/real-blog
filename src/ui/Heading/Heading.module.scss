@@ -1,11 +1,15 @@
-.heading {
-  color: var(--text-color-grey-v2)
+.button.defaultMode {
+  color: var(--default-color-90);
 }
 
-.heading.level7Size {
-  font-size: 20px;
+.button.primaryMode {
+  color: var(--primary-color);
 }
 
 .heading.boldWeight {
   font-weight: 600;
+}
+
+.heading.level7Size {
+  font-size: 20px;
 }

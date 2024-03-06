@@ -1,25 +1,39 @@
 .button {
   cursor: pointer;
   border-radius: 5px;
+  background-color: transparent;
 }
 
-.button.primaryMode {
-  color: var(--text-color-default);
-  border: 1px solid var(--default-border);
+.button.defaultMode {
+  color: var(--default-color-alpha85);
+  border: 1px solid transparent;
+  transition: color 0.2s;
+}
+
+.button.successMode {
+  color: var(--success-color-80);
+  border: 1px solid var(--success-color-80);
   transition: border 0.2s, color 0.2s;
 }
 
-.button.secondaryMode {
+.button.primaryMode {
   background-color: var(--primary-color);
-  color: var(--text-color-light-v2);
+  color: var(--main-color);
   border: none;
   transition: box-shadow 0.3s;
 }
 
-.button.defaultMode {
-  color: var(--text-color-default);
-  border: 1px solid transparent;
-  transition: color 0.2s;
+.button.defaultMode:disabled {
+  color: var(--default-color-alpha50);
+  pointer-events: none;
+  user-select: none;
+}
+
+.button.successMode:disabled {
+  color: var(--success-color-90);
+  border: 1px solid var(--success-color-90);
+  pointer-events: none;
+  user-select: none;
 }
 
 .button.smallSize {
@@ -38,32 +52,32 @@
 }
 
 @media (hover: hover) {
-  .button.primaryMode:hover {
-    color: var(--text-color-secondary);
-    border: 1px solid var(--secondary-border);
-  }
-
   .button.defaultMode:hover {
-    color: var(--text-color-grey);
+    color: var(--default-color-alpha50);
   }
 
-  .button.secondaryMode:hover {
-    box-shadow: 0 0 6px var(--secondary-hover);
+  .button.primaryMode:hover {
+    box-shadow: 0 0 6px var(--primary-color);
+  }
+
+  .button.successMode:hover {
+    color: var(--success-color-90);
+    border: 1px solid var(--success-color-90);
   }
 }
 
 @media (hover: none) {
-  .button.primaryMode:active {
-    color: var(--text-color-secondary);
-    border: 1px solid var(--secondary-border);
-  }
-
   .button.defaultMode:active {
-    color: var(--text-color-grey);
+    color: var(--default-color-alpha50);
   }
 
-  .button.secondaryMode:active {
-    box-shadow: 0 0 8px var(--secondary-hover);
+  .button.primaryMode:active {
+    box-shadow: 0 0 6px var(--primary-color);
+  }
+
+  .button.successMode:hover {
+    color: var(--success-color-90);
+    border: 1px solid var(--success-color-90);
   }
 }
 

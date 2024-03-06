@@ -5,30 +5,31 @@
 }
 
 .inputFieldLabel {
+  color: var(--default-color-90);
   font-size: 14px;
   padding-bottom: 2px;
 }
 
-.inputFieldElement.primaryMode {
+.inputFieldElement.defaultMode {
   background-color: transparent;
-  color: var(--text-color-grey-v3);
-  border: 1px solid var(--primary-border);
+  color: var(--default-color-alpha75);
+  border: 1px solid var(--default-color-50);
   outline: 1.5px solid transparent;
   border-radius: 4px;
   transition: outline 0.2s;
 }
 
-.inputFieldElement.primaryMode::placeholder {
-  color: var(--text-color-light);
+.inputFieldElement.defaultMode::placeholder {
+  color: var(--default-color-60);
   text-indent: 0px;
   transition: text-indent 0.2s ease;
 }
-.inputFieldElement.primaryMode:focus::placeholder {
+.inputFieldElement.defaultMode:focus::placeholder {
   text-indent: 100%;
   transition: text-indent 0.2s ease;
 }
 
-.inputFieldElement.primaryMode:focus-visible {
+.inputFieldElement.defaultMode:focus-visible {
   outline: 1.5px solid var(--primary-color);
 }
 

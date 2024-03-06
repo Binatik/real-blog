@@ -1,5 +1,5 @@
 import { Avatar, RouterLink } from "@ui/index";
-import classes from "./ProfileInfo.module.css";
+import classes from "./ProfileInfo.module.scss";
 import avatar from "@assets/avatar.svg";
 
 type ProfileProps = {

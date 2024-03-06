@@ -3,13 +3,13 @@
 }
 
 .routerLink.defaultMode {
-  color: var(--text-color-default);
-  transition: color 0.2s ;
+  color: var(--default-color-alpha85);
+  transition: color 0.2s;
 }
 
 .routerLink.primaryMode {
-  color: var(--text-primary);
-  transition: color 0.2s ;
+  color: var(--primary-color);
+  transition: color 0.2s;
 }
 
 .routerLink.smallSize {
@@ -21,13 +21,13 @@
 }
 
 @media (hover: hover) {
-  .RouterLink.defaultMode:hover {
-    color: var(--text-color-grey);
+  .routerLink.defaultMode:hover {
+    color: var(--default-color-alpha50);
   }
 }
 
 @media (hover: none) {
-  .RouterLink.defaultMode:active {
-    color: var(--text-color-grey);
+  .routerLink.defaultMode:active {
+    color: var(--default-color-alpha50);
   }
 }
