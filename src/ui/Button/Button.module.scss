@@ -2,6 +2,8 @@
   cursor: pointer;
   border-radius: 5px;
   background-color: transparent;
+  font-size: 18px;
+  padding: 0;
 }
 
 .button.defaultMode {
@@ -41,13 +43,13 @@
   font-size: 18px;
 }
 
-.button.bigSize {
-  padding: 12px 18px;
-  font-size: 18px;
+.button.mediumSize {
+  padding: 8px 10px;
+  font-size: 16px;
 }
 
-.button.noneSize {
-  padding: 0;
+.button.bigSize {
+  padding: 12px 18px;
   font-size: 18px;
 }
 

@@ -8,6 +8,7 @@ const isAuth = false;
 function Auth() {
   const navigate = useNavigate();
   const location = useLocation();
+
   function linkSignUp() {
     navigate("/sign-up");
   }
@@ -23,10 +24,16 @@ function Auth() {
     if (!isAuth) {
       return (
         <div className={classes.autorization}>
-          <Button onClick={linkSignIn} size="none" disabled={signInLocation}>
+          <Button type="button" onClick={linkSignIn} disabled={signInLocation}>
             Sign In
           </Button>
-          <Button onClick={linkSignUp} mode="success" disabled={signUpLocation}>
+          <Button
+            type="button"
+            size="big"
+            onClick={linkSignUp}
+            mode="success"
+            disabled={signUpLocation}
+          >
             Sign Up
           </Button>
         </div>

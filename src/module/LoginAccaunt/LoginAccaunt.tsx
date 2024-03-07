@@ -25,7 +25,9 @@ function LoginAccaunt() {
             />
             <InputField type="password" idLabel="password" label="Password" />
           </div>
-          <Button mode="primary">Login</Button>
+          <Button type="submit" size="medium" mode="primary">
+            Login
+          </Button>
           <div className={classes.register}>
             <Text>Don’t have an account?</Text>
             <RouterLink to="/sign-up" size="small" mode="primary">

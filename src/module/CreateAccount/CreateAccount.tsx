@@ -37,7 +37,9 @@ function CreateAccount() {
             idLabel="license"
             label="I agree to the processing of my personal information"
           />
-          <Button mode="primary">Create</Button>
+          <Button type="submit" size="medium" mode="primary">
+            Create
+          </Button>
           <div className={classes.login}>
             <Text as="span">Already have an account?</Text>
             <RouterLink to="/sign-in" size="small" mode="primary">
