@@ -12,11 +12,12 @@ import { useValidation } from "@hooks/useValidation/useValidation";
 import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
 import { registerProfile } from "@src/app/store/redux/slices/authSlice";
 import { validatorGroup } from "@validations/createAccount";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import classNames from "classnames";
 
 function CreateAccount() {
   const authDispatch = useAuthDispatch();
+  const fieldRefs = useRef<HTMLInputElement[]>([]);
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
 
   const userName = useValidation(validatorGroup.userName);
@@ -46,6 +47,11 @@ function CreateAccount() {
     password.changeValidator();
     repeatPassword.changeValidator();
 
+    errorsFields.some((field, index) => {
+      fieldRefs.current[index].focus();
+      return field;
+    });
+
     if (!userConsent) {
       setUsersConsent(false);
       return;
@@ -63,7 +69,6 @@ function CreateAccount() {
       <div className="container-desktop">
         <FormControl
           onSubmit={createAccountSubmit}
-          method="post"
           wide
           className={classes.createAccountForm}
         >
@@ -77,6 +82,7 @@ function CreateAccount() {
               name="username"
               idLabel="username"
               label="Username"
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
               onChange={userName.changeValue}
               onBlur={userName.changeValidator}
               error={userName.error}
@@ -87,6 +93,7 @@ function CreateAccount() {
               type="email"
               idLabel="email"
               label="Email address"
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
               onChange={email.changeValue}
               onBlur={email.changeValidator}
               error={email.error}
@@ -97,6 +104,7 @@ function CreateAccount() {
               name="password"
               idLabel="password"
               label="Password"
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[2] = ref)}
               onChange={password.changeValue}
               onBlur={password.changeValidator}
               message={password.message}
@@ -106,6 +114,7 @@ function CreateAccount() {
               type="password"
               idLabel="repeatPassword"
               label="Repeat Password"
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[3] = ref)}
               onChange={repeatPassword.changeValue}
               onBlur={repeatPassword.changeValidator}
               message={isPasswordConfirmed ? repeatPassword.message : message}

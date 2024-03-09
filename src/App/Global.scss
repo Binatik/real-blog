@@ -47,9 +47,9 @@ body {
 }
 
 .loading-page {
-  position: relative;
+  position: fixed;
   background-color: var(--main-background);
-  z-index: 99;
+  z-index: 19;
 }
 
 header {

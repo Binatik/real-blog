@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useEffect, useRef } from "react";
+import { InputHTMLAttributes, forwardRef } from "react";
 import classes from "./InputField.module.scss";
 import classNames from "classnames";
 
@@ -12,56 +12,52 @@ type InputFieldProps = {
   autoFocus?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "size">;
 
-function InputField({
-  idLabel,
-  label,
-  error,
-  message,
-  mode = "default",
-  size = "medium",
-  autoFocus,
-  className,
-  ...props
-}: InputFieldProps) {
-  const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (autoFocus) {
-      inputRef.current?.focus();
+const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
+  function InputField(
+    {
+      idLabel,
+      label,
+      error,
+      message,
+      mode = "default",
+      size = "medium",
+      className,
+      ...props
+    }: InputFieldProps,
+    forwardedRef,
+  ) {
+    function renderErrorField() {
+      return (
+        <span
+          className={classNames({
+            [classes.inputError]: error,
+          })}
+        >
+          {message}
+        </span>
+      );
     }
-  }, [autoFocus]);
 
-  function renderErrorField() {
     return (
-      <span
-        className={classNames({
-          [classes.inputError]: error,
-        })}
-      >
-        {message}
-      </span>
+      <div className={classes.inputField}>
+        <label className={classes.inputFieldLabel} htmlFor={idLabel}>
+          {label}
+        </label>
+        <input
+          className={classNames(className, classes.inputFieldElement, {
+            [classes.defaultMode]: mode === "default",
+            [classes.mediumSize]: size === "medium",
+            [classes.inputFieldElementError]: error && message,
+          })}
+          ref={forwardedRef}
+          placeholder={label}
+          id={idLabel}
+          {...props}
+        />
+        {error && renderErrorField()}
+      </div>
     );
-  }
-
-  return (
-    <div className={classes.inputField}>
-      <label className={classes.inputFieldLabel} htmlFor={idLabel}>
-        {label}
-      </label>
-      <input
-        className={classNames(className, classes.inputFieldElement, {
-          [classes.defaultMode]: mode === "default",
-          [classes.mediumSize]: size === "medium",
-          [classes.inputFieldElementError]: error,
-        })}
-        ref={inputRef}
-        placeholder={label}
-        id={idLabel}
-        {...props}
-      />
-      {error && renderErrorField()}
-    </div>
-  );
-}
+  },
+);
 
 export { InputField };

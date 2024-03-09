@@ -18,7 +18,8 @@ const App = () => {
     if (token && username) {
       authDispatch(fetchCurrentProfile(token));
     }
-  });
+  }, [authDispatch]);
+
   return <RouterProvider router={router} />;
 };
 
