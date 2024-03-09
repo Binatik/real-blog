@@ -39,14 +39,18 @@ const authSlice = createSlice({
 
 export const registerProfile = createAsyncThunk(
   "authSlice/fetchRegisterProfile",
-  async (payload: Profile) => {
+  async (form: EventTarget & HTMLFormElement) => {
+    const registerProfileForm = new FormData(form);
+    const fields = Object.fromEntries(registerProfileForm.entries());
+
+    const request = JSON.stringify({ user: fields });
+
     const result = await api.post<Profile>("/users", {
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: request,
     });
-
     return result;
   },
 );

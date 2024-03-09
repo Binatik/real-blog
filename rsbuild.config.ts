@@ -5,12 +5,15 @@ import ESLintPlugin from "eslint-webpack-plugin";
 export default defineConfig({
   source: {
     alias: {
+      "@validations": "./src/validations/*",
       "@ui": "./src/ui/*",
       "@module": "./src/module/*",
       "@page": "./src/page/*",
       "@layout": "./src/layout/*",
+      "@hooks": "./src/hooks/*",
       "@assets": "./src/assets/*",
       "@api": "./src/api/*",
+      "@src": "./src/*",
     },
   },
   html: {

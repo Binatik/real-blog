@@ -7,6 +7,7 @@ type InputFieldProps = {
   size?: "medium";
   idLabel: string;
   label: string;
+  message?: string | false;
   error?: boolean;
   autoFocus?: boolean;
 } & Omit<InputHTMLAttributes<HTMLInputElement>, "size">;
@@ -15,6 +16,7 @@ function InputField({
   idLabel,
   label,
   error,
+  message,
   mode = "default",
   size = "medium",
   autoFocus,
@@ -36,7 +38,7 @@ function InputField({
           [classes.inputError]: error,
         })}
       >
-        Incorrect {label}
+        {message}
       </span>
     );
   }

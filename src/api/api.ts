@@ -1,10 +1,14 @@
 import { Method } from "./api.types";
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Z…xNTJ9.CLB3NVauBhZci6TbWuLi03hhUjYOzIFHXYstFZQ3cyQ
 
+// {username: 'serega111111',
+// email: 'sss@mal.ru',
+// token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Z…xNTJ9.CLB3NVauBhZci6TbWuLi03hhUjYOzIFHXYstFZQ3cyQ'
 export class Api {
-  private api: "https://blog.kata.academy/api/";
+  private api: "https://blog.kata.academy/api";
 
   constructor() {
-    this.api = "https://blog.kata.academy/api/";
+    this.api = "https://blog.kata.academy/api";
   }
 
   private async fetchEndpoint(
