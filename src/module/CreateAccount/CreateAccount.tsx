@@ -12,17 +12,27 @@ import { useValidation } from "@hooks/useValidation/useValidation";
 import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
 import { registerProfile } from "@src/app/store/redux/slices/authSlice";
 import { validatorGroup } from "@validations/createAccount";
+import { useState } from "react";
+import classNames from "classnames";
 
 function CreateAccount() {
   const authDispatch = useAuthDispatch();
+  const [userConsent, setUsersConsent] = useState<boolean | null>(null);
+
   const userName = useValidation(validatorGroup.userName);
   const email = useValidation(validatorGroup.email);
   const password = useValidation(validatorGroup.password);
   const repeatPassword = useValidation(validatorGroup.repeatPassword, false);
 
+  const errorsFields = [
+    userName.error,
+    email.error,
+    password.error,
+    repeatPassword.error,
+  ];
+
   const isPasswordConfirmed = password.value === repeatPassword.value;
-  const isValidationFailed =
-    userName.error || email.error || password.error || repeatPassword.error;
+  const isValidationFailed = errorsFields.some((field) => field);
   const canSubmit = isPasswordConfirmed && !isValidationFailed;
   const message = "Password and repeat password must match!";
 
@@ -35,6 +45,11 @@ function CreateAccount() {
     email.changeValidator();
     password.changeValidator();
     repeatPassword.changeValidator();
+
+    if (!userConsent) {
+      setUsersConsent(false);
+      return;
+    }
 
     if (!canSubmit) {
       return;
@@ -98,9 +113,12 @@ function CreateAccount() {
             />
           </div>
           <Checkbox
-            className={classes.createAccountCheckbox}
+            className={classNames(classes.createAccountCheckbox, {
+              [classes.userConsent]: userConsent === false,
+            })}
             idLabel="license"
             label="I agree to the processing of my personal information"
+            onChange={(event) => setUsersConsent(event.currentTarget.checked)}
           />
           <Button type="submit" size="medium" mode="primary">
             Create

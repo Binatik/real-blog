@@ -25,6 +25,16 @@
   padding-bottom: 20px;
 }
 
+.createAccountCheckbox {
+  border-top: 1px solid var(--default-color-40);
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.userConsent {
+  border-top: 1px solid var(--error-color);
+}
+
 .login {
   display: inline-flex;
   gap: 5px;

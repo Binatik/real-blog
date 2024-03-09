@@ -46,6 +46,12 @@ body {
   line-height: 1.5;
 }
 
+.loading-page {
+  position: relative;
+  background-color: var(--main-background);
+  z-index: 99;
+}
+
 header {
   position: sticky;
   left: 0;

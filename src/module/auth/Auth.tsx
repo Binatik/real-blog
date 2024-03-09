@@ -2,10 +2,10 @@ import { Button } from "@ui/index";
 import classes from "./Auth.module.scss";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const isAuth = false;
+import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
 
 function Auth() {
+  const isAuth = useAuthSelector((state) => state.authSlice.isAuth);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,7 +42,7 @@ function Auth() {
 
     return (
       <div className={classes.auth}>
-        <Button mode="primary" size="small">
+        <Button mode="success" size="small">
           Create article
         </Button>
         <ProfileInfo to="/profile" />
