@@ -2,10 +2,15 @@ import { Button } from "@ui/index";
 import classes from "./Auth.module.scss";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
+import Cookies from "js-cookie";
+import { CookieKey } from "@src/app/enums/Cookies";
+import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
+import { actions } from "@src/app/store/redux/slices/authSlice";
 
 function Auth() {
-  const isAuth = useAuthSelector((state) => state.authSlice.isAuth);
+  const token = Cookies.get(CookieKey.token);
+
+  const authDispatch = useAuthDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -17,11 +22,16 @@ function Auth() {
     navigate("/sign-in");
   }
 
+  function linkLogOut() {
+    authDispatch(actions.logOut());
+    navigate("/sign-in");
+  }
+
   const signUpLocation = location.pathname === "/sign-up";
   const signInLocation = location.pathname === "/sign-in";
 
   function renderProfile() {
-    if (!isAuth) {
+    if (!token) {
       return (
         <div className={classes.autorization}>
           <Button type="button" onClick={linkSignIn} disabled={signInLocation}>
@@ -46,7 +56,9 @@ function Auth() {
           Create article
         </Button>
         <ProfileInfo to="/profile" />
-        <Button size="big">Log Out</Button>
+        <Button onClick={linkLogOut} size="big">
+          Log Out
+        </Button>
       </div>
     );
   }

@@ -6,3 +6,5 @@ export * from "./Heading/Heading";
 export * from "./FormControl/FormControl";
 export * from "./Checkbox/Checkbox";
 export * from "./Text/Text";
+export * from "./SkeletonText/SkeletonText";
+export * from "./SkeletonAvatar/SkeletonAvatar";

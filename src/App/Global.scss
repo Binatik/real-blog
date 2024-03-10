@@ -64,6 +64,20 @@ img {
   max-width: 100%;
 }
 
+.skeleton-animation {
+  opacity: 0.7;
+  animation: skeleton-loading 0.5s infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background: var(--default-color-70);
+  }
+  0% {
+    background: var(--default-color-40);
+  }
+}
+
 .container-desktop {
   max-width: $desktopWidth;
   margin: 0 auto;

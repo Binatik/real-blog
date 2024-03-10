@@ -3,8 +3,8 @@ import { HTMLAttributes, ReactNode } from "react";
 import classes from "./Text.module.scss";
 
 type TextProps = {
-  mode?: "default";
-  size?: "small";
+  mode?: "default" | "danger" | "off";
+  size?: "small" | "big";
   as?: "p" | "span";
   children: ReactNode;
 } & HTMLAttributes<HTMLParagraphElement>;
@@ -23,7 +23,9 @@ function Text({
     <Tag
       className={classNames(className, classes.text, {
         [classes.defaultMode]: mode === "default",
+        [classes.dangerMode]: mode === "danger",
         [classes.smallSize]: size === "small",
+        [classes.bigSize]: size === "big",
       })}
       {...props}
     >

@@ -14,9 +14,13 @@ import { registerProfile } from "@src/app/store/redux/slices/authSlice";
 import { validatorGroup } from "@validations/createAccount";
 import { useRef, useState } from "react";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
+import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
 
 function CreateAccount() {
+  const navigate = useNavigate();
   const authDispatch = useAuthDispatch();
+  const isAuth = useAuthSelector((state) => state.authSlice.isAuth);
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
 
@@ -36,6 +40,10 @@ function CreateAccount() {
   const isValidationFailed = errorsFields.some((field) => field);
   const canSubmit = isPasswordConfirmed && !isValidationFailed;
   const message = "Password and repeat password must match!";
+
+  if (isAuth) {
+    navigate("/");
+  }
 
   function createAccountSubmit(
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
@@ -69,6 +77,7 @@ function CreateAccount() {
       <div className="container-desktop">
         <FormControl
           onSubmit={createAccountSubmit}
+          method="post"
           wide
           className={classes.createAccountForm}
         >

@@ -2,6 +2,14 @@ span.defaultMode {
   color: var(--default-color-70);
 }
 
-span.text.smallSize {
+span.dangerMode {
+  color: var(--error-color);
+}
+
+span.smallSize {
   font-size: 12px;
+}
+
+span.bigSize {
+  font-size: 18px;
 }
