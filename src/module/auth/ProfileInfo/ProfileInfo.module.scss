@@ -6,10 +6,11 @@
   gap: 13px;
 }
 
-@media (max-width: $tableWidth) {
-  .profileText {
-    display: none;
-  }
+.profileText {
+  max-width: 200px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 @media (max-width: $mobileWidth) {
@@ -19,6 +20,6 @@
     top: 0;
 
     /* 20px ширина логотипа */
-    transform: translateY(calc(-20px / 1.5));
+    transform: translate(-10px, 5px);
   }
 }

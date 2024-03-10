@@ -18,7 +18,6 @@ import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
 function LoginAccaunt() {
   const navigate = useNavigate();
   const authDispatch = useAuthDispatch();
-  const isAuth = useAuthSelector((state) => state.authSlice.isAuth);
   const hasValidCredentials = useAuthSelector(
     (state) => state.authSlice.hasValidCredentials,
   );
@@ -30,10 +29,6 @@ function LoginAccaunt() {
   const errorsFields = [email.error, password.error];
 
   const isValidationFailed = errorsFields.some((field) => field);
-
-  if (isAuth) {
-    navigate("/");
-  }
 
   function loginAccountSubmit(
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,

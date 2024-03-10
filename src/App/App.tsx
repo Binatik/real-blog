@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { router } from "./router";
+import { router } from "@src/router/router";
 import { useEffect } from "react";
 import { CookieKey } from "./enums/Cookies";
 import { useAuthDispatch } from "./store/hooks/useAuthDispatch";
