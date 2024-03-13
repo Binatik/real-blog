@@ -1,26 +1,16 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "@src/router/router";
-import { useEffect } from "react";
-import { CookieKey } from "./enums/Cookies";
-import { useAuthDispatch } from "./store/hooks/useAuthDispatch";
-import { fetchCurrentProfile } from "./store/redux/slices/authSlice";
-import Cookies from "js-cookie";
+import { Provider } from "react-redux";
+import { storeAuth } from "./store/redux/store";
 import "normalize.css";
 import "./global.scss";
 
 const App = () => {
-  const authDispatch = useAuthDispatch();
-
-  useEffect(() => {
-    const token = Cookies.get(CookieKey.token);
-    const username = Cookies.get(CookieKey.username);
-
-    if (token && username) {
-      authDispatch(fetchCurrentProfile(token));
-    }
-  }, [authDispatch]);
-
-  return <RouterProvider router={router} />;
+  return (
+    <Provider store={storeAuth}>
+      <RouterProvider router={router} />
+    </Provider>
+  );
 };
 
 export default App;

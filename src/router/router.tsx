@@ -1,30 +1,43 @@
 import { Login } from "@page/Login/Login";
 import { Register } from "@page/Register/Register";
-import { Root } from "@page/Root/Root";
 import { createBrowserRouter } from "react-router-dom";
-import { RedirectAuth } from "./RedirectAuth.tsx/RedirectAuth";
+import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
+import { Layout } from "@layout/Layout";
+import { Home } from "@page/Home/Home";
+import { Feed } from "@page/Feed/Feed";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-  },
-  {
-    path: "/sign-up",
-    element: (
-      <RedirectAuth to="/">
-        <Register />
-      </RedirectAuth>
-    ),
-  },
-
-  {
-    path: "/sign-in",
-    element: (
-      <RedirectAuth to="/">
-        <Login />
-      </RedirectAuth>
-    ),
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        element: <ProtectedRoute to="/" protectedRole="ghost" />,
+        children: [
+          {
+            path: "sign-up",
+            element: <Register />,
+          },
+          {
+            path: "sign-in",
+            element: <Login />,
+          },
+        ],
+      },
+      {
+        element: <ProtectedRoute to="/" protectedRole="client" />,
+        children: [
+          {
+            path: "user",
+            element: <Feed />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 

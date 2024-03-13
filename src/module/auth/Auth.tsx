@@ -55,7 +55,7 @@ function Auth() {
         <Button mode="success" size="small">
           Create article
         </Button>
-        <ProfileInfo to="/profile" />
+        <ProfileInfo to="profile" />
         <Button onClick={linkLogOut} size="big">
           Log Out
         </Button>

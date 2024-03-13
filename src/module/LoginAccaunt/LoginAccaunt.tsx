@@ -12,8 +12,8 @@ import { validatorGroup } from "@validations/loginAccount";
 import { useRef } from "react";
 import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
 import { loginProfile } from "@src/app/store/redux/slices/authSlice";
-import { useNavigate } from "react-router-dom";
 import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
+import { useNavigate } from "react-router-dom";
 
 function LoginAccaunt() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ function LoginAccaunt() {
 
   const isValidationFailed = errorsFields.some((field) => field);
 
-  function loginAccountSubmit(
+  async function loginAccountSubmit(
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
   ) {
     event.preventDefault();
@@ -47,11 +47,8 @@ function LoginAccaunt() {
       return;
     }
 
-    authDispatch(loginProfile(event.currentTarget));
-
-    if (hasValidCredentials) {
-      navigate("/");
-    }
+    await authDispatch(loginProfile(event.currentTarget));
+    navigate("/user");
   }
 
   function renderErrorText() {

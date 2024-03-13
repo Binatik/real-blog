@@ -1,17 +1,13 @@
-import React from "react";
 import { Header } from "./header/Header";
+import { Outlet } from "react-router-dom";
 
-type ILayoutProps = {
-  children: React.ReactNode;
-};
-
-const Layout = ({ children }: ILayoutProps) => {
+const Layout = () => {
   return (
     <>
       <Header></Header>
-      <main>{children}</main>
+      <Outlet />
     </>
   );
 };
 
-export default Layout;
+export { Layout };

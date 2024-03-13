@@ -15,12 +15,10 @@ import { validatorGroup } from "@validations/createAccount";
 import { useRef, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
 
 function CreateAccount() {
-  const navigate = useNavigate();
   const authDispatch = useAuthDispatch();
-  const isAuth = useAuthSelector((state) => state.authSlice.isAuth);
+  const navigate = useNavigate();
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
 
@@ -41,11 +39,7 @@ function CreateAccount() {
   const canSubmit = isPasswordConfirmed && !isValidationFailed;
   const message = "Password and repeat password must match!";
 
-  if (isAuth) {
-    navigate("/");
-  }
-
-  function createAccountSubmit(
+  async function createAccountSubmit(
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
   ) {
     event.preventDefault();
@@ -69,7 +63,8 @@ function CreateAccount() {
       return;
     }
 
-    authDispatch(registerProfile(event.currentTarget));
+    await authDispatch(registerProfile(event.currentTarget));
+    navigate("/user");
   }
 
   return (

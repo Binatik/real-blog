@@ -14,7 +14,7 @@ type ProfileProps = {
 };
 
 function ProfileInfo({ to }: ProfileProps) {
-  const loading = useAuthSelector((stete) => stete.authSlice.loading);
+  const loading = useAuthSelector((state) => state.authSlice.loading);
   const profile = useAuthSelector((stete) => stete.authSlice.profile);
 
   return (
