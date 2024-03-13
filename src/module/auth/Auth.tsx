@@ -1,4 +1,4 @@
-import { Button } from "@ui/index";
+import { Button, SketonButton } from "@ui/index";
 import classes from "./Auth.module.scss";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -6,9 +6,11 @@ import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
 import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
 import { actions } from "@src/app/store/redux/slices/authSlice";
+import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
 
 function Auth() {
   const token = Cookies.get(CookieKey.token);
+  const loading = useAuthSelector((state) => state.authSlice.loading);
 
   const authDispatch = useAuthDispatch();
   const navigate = useNavigate();
@@ -52,9 +54,14 @@ function Auth() {
 
     return (
       <div className={classes.auth}>
-        <Button mode="success" size="small">
-          Create article
-        </Button>
+        {loading ? (
+          <SketonButton />
+        ) : (
+          <Button mode="success" size="small">
+            Create article
+          </Button>
+        )}
+
         <ProfileInfo to="profile" />
         <Button onClick={linkLogOut} size="big">
           Log Out

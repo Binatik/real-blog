@@ -24,8 +24,6 @@ function ProtectedRoute({ protectedRole, ...props }: ProtectedRouteProps) {
     (role === "ghost" && token)
   );
 
-  console.log("изменение состояние за счет того что меняется loading");
-
   if ((!canUserVisit && token) || (!canGuestVisit && !token)) {
     return <Navigate {...props} replace />;
   }

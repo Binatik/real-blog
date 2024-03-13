@@ -1,0 +1,20 @@
+@import '../../app/vars.scss';
+
+.headerContainer {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: $mobileWidth) {
+  .headerContainer {
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+
+  .headerContainer.auth {
+    flex-direction: column;
+  }
+}
