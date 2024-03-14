@@ -8,20 +8,20 @@ const api = new Api();
 type AuthState = {
   profile: Profile | null;
   loading: boolean;
-  role: "ghost" | "client";
-  loadingProfile: boolean;
   error: boolean;
   isAuthorized: boolean;
   hasValidCredentials: boolean | null;
+  status: "pending" | "fulfilled" | "rejected" | null;
+  role: "ghost" | "client";
 };
 
 const initialState: AuthState = {
   profile: null,
   loading: true,
-  loadingProfile: true,
   error: false,
   isAuthorized: false,
   hasValidCredentials: null,
+  status: null,
   role: "ghost",
 };
 
@@ -80,12 +80,12 @@ const authSlice = createSlice({
     });
 
     builder.addCase(fetchCurrentProfile.pending, (state) => {
-      state.loadingProfile = true;
+      state.status = "pending";
       state.loading = true;
       state.error = false;
     });
     builder.addCase(fetchCurrentProfile.fulfilled, (state, action) => {
-      state.loadingProfile = false;
+      state.status = "fulfilled";
       state.loading = false;
       state.isAuthorized = true;
       state.error = false;
@@ -93,7 +93,7 @@ const authSlice = createSlice({
       state.role = "client";
     });
     builder.addCase(fetchCurrentProfile.rejected, (state) => {
-      state.loadingProfile = false;
+      state.status = "rejected";
       state.loading = false;
       state.isAuthorized = false;
       state.error = true;

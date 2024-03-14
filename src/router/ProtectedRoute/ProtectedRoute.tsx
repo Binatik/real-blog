@@ -9,10 +9,10 @@ type ProtectedRouteProps = {
 
 function ProtectedRoute({ protectedRole, ...props }: ProtectedRouteProps) {
   const token = Cookies.get(CookieKey.token);
-  const loading = useAuthSelector((state) => state.authSlice.loading);
+  const status = useAuthSelector((state) => state.authSlice.status);
   const role = useAuthSelector((state) => state.authSlice.role);
 
-  if (!loading && token) {
+  if (status === "pending") {
     return;
   }
 
