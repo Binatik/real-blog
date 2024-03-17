@@ -9,15 +9,15 @@ import {
 } from "@ui/index";
 import classes from "./CreateAccount.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
-import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
-import { registerProfile } from "@src/app/store/redux/slices/authSlice";
+import { registerProfile } from "@src/app/store/profile/slices/authSlice";
 import { validatorGroup } from "@validations/createAccount";
 import { useRef, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
+import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
 
 function CreateAccount() {
-  const authDispatch = useAuthDispatch();
+  const profileDispatch = useProfileDispatch();
   const navigate = useNavigate();
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
@@ -63,23 +63,23 @@ function CreateAccount() {
       return;
     }
 
-    await authDispatch(registerProfile(event.currentTarget));
+    await profileDispatch(registerProfile(event.currentTarget));
     navigate("/user");
   }
 
   return (
-    <section className={classes.createAccount}>
+    <section className={classes.create}>
       <div className="container-desktop">
         <FormControl
           onSubmit={createAccountSubmit}
           method="post"
           wide
-          className={classes.createAccountForm}
+          className={classes.createForm}
         >
-          <Heading className={classes.createAccountHeading} as="h2">
+          <Heading className={classes.createHeading} as="h2">
             Create new account
           </Heading>
-          <div className={classes.createAccountFields}>
+          <div className={classes.createFields}>
             <InputField
               autoFocus
               type="text"
@@ -126,7 +126,7 @@ function CreateAccount() {
             />
           </div>
           <Checkbox
-            className={classNames(classes.createAccountCheckbox, {
+            className={classNames(classes.createCheckbox, {
               [classes.userConsent]: userConsent === false,
             })}
             idLabel="license"

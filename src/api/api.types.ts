@@ -6,6 +6,6 @@ export type Profile = {
     token: string;
     username: string;
     bio: string;
-    image: null;
+    image: null | string;
   };
 };

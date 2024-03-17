@@ -1,26 +1,29 @@
-.login {
+.update {
   padding-top: 60px;
   padding-bottom: 30px;
 }
 
-.loginForm {
+.updateForm {
   gap: 12px;
   margin: 0 auto;
 }
 
-.loginHeading {
+.updateHeading {
   text-align: center;
   margin-block: 10px;
 }
 
-.loginFields {
+.updateFields {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding-bottom: calc(20px - 12px); //Вычитаем gap createAccountForm
 }
 
-.register {
-  display: inline-flex;
-  gap: 5px;
+.updateAvatar {
+  cursor: pointer;
+}
+
+.updateAvatar:hover {
+  color: var(--primary-color);
 }

@@ -6,33 +6,23 @@ import Cookies from "js-cookie";
 const api = new Api();
 
 type AuthState = {
-  profile: Profile | null;
   loading: boolean;
   error: boolean;
-  isAuthorized: boolean;
   hasValidCredentials: boolean | null;
-  status: "pending" | "fulfilled" | "rejected" | null;
-  role: "ghost" | "client";
 };
 
 const initialState: AuthState = {
-  profile: null,
   loading: true,
   error: false,
-  isAuthorized: false,
   hasValidCredentials: null,
-  status: null,
-  role: "ghost",
 };
 
 const authSlice = createSlice({
   name: "authSlice",
   initialState,
   reducers: {
-    logOut: (state) => {
+    logOut: () => {
       Cookies.remove(CookieKey.token);
-      state.isAuthorized = false;
-      state.role = "ghost";
     },
   },
 
@@ -44,16 +34,11 @@ const authSlice = createSlice({
     builder.addCase(registerProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.error = false;
-      state.isAuthorized = true;
-      state.profile = action.payload;
-      state.role = "client";
       Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
     });
     builder.addCase(registerProfile.rejected, (state) => {
       state.loading = false;
       state.error = true;
-      state.isAuthorized = false;
-      state.role = "ghost";
       Cookies.remove(CookieKey.token);
     });
 
@@ -64,41 +49,13 @@ const authSlice = createSlice({
     builder.addCase(loginProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.error = false;
-      state.isAuthorized = true;
       state.hasValidCredentials = true;
-      state.profile = action.payload;
-      state.role = "client";
       Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
     });
     builder.addCase(loginProfile.rejected, (state) => {
       state.loading = false;
-      state.isAuthorized = false;
       state.hasValidCredentials = false;
       state.error = true;
-      state.role = "ghost";
-      Cookies.remove(CookieKey.token);
-    });
-
-    builder.addCase(fetchCurrentProfile.pending, (state) => {
-      state.status = "pending";
-      state.loading = true;
-      state.error = false;
-    });
-    builder.addCase(fetchCurrentProfile.fulfilled, (state, action) => {
-      state.status = "fulfilled";
-      state.loading = false;
-      state.isAuthorized = true;
-      state.error = false;
-      state.profile = action.payload;
-      state.role = "client";
-    });
-    builder.addCase(fetchCurrentProfile.rejected, (state) => {
-      state.status = "rejected";
-      state.loading = false;
-      state.isAuthorized = false;
-      state.error = true;
-      state.role = "ghost";
-
       Cookies.remove(CookieKey.token);
     });
   },
@@ -142,19 +99,6 @@ export const loginProfile = createAsyncThunk(
   },
 );
 
-export const fetchCurrentProfile = createAsyncThunk(
-  "authSlice/fetchCurrentProfile",
-  async (token: string | undefined) => {
-    const result = await api.get<Profile>("/user", {
-      headers: {
-        authorization: `Token ${token}`,
-      },
-    });
-
-    return result;
-  },
-);
-
-const actions = authSlice.actions;
+const auth = authSlice.actions;
 //authSliceReducer
-export { actions, authSlice };
+export { auth, authSlice };

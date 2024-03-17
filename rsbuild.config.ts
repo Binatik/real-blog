@@ -29,4 +29,9 @@ export default defineConfig({
       ]);
     },
   },
+  output: {
+    cssModules: {
+      localIdentName: "[local]-[hash:base64:4]",
+    },
+  },
 });

@@ -1,32 +1,32 @@
-.createAccount {
+.create {
   padding-top: 60px;
   padding-bottom: 30px;
 }
 
-.createAccountForm {
+.createForm {
   gap: 12px;
   margin: 0 auto;
 }
 
-.createAccountHeading {
+.createHeading {
   text-align: center;
   margin-block: 10px;
 }
 
-.createAccountFields {
+.createFields {
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding-bottom: calc(20px - 12px); //Вычитаем gap createAccountForm
 }
 
-.createAccountCheckbox {
+.createCheckbox {
   border-top: 1px solid var(--default-color-40);
   padding-top: 10px;
   padding-bottom: 20px;
 }
 
-.createAccountCheckbox {
+.createCheckbox {
   border-top: 1px solid var(--default-color-40);
   padding-top: 10px;
   padding-bottom: 20px;

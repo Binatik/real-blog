@@ -8,8 +8,11 @@ type ValidationItem = {
 function useValidation(
   validatorGroup: ValidationItem[],
   required: boolean = true,
+  initialStateValue?: string,
 ) {
-  const [value, setValue] = useState("");
+  const state = initialStateValue ? initialStateValue : "";
+
+  const [value, setValue] = useState(state);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(true);
 

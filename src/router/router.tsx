@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";
 import { Layout } from "@layout/Layout";
 import { Home } from "@page/Home/Home";
 import { Feed } from "@page/Feed/Feed";
+import { UpdateProfile } from "@module/updateProfile/UpdateProfile";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
           {
             path: "user",
             element: <Feed />,
+          },
+          {
+            path: "user/profile",
+            element: <UpdateProfile />,
           },
         ],
       },

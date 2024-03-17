@@ -4,15 +4,16 @@ import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
-import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
-import { actions } from "@src/app/store/redux/slices/authSlice";
-import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
+import { auth } from "@src/app/store/profile/slices/authSlice";
+import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
+import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
+import { profile } from "@src/app/store/profile/slices/profileSlice";
 
 function Auth() {
   const token = Cookies.get(CookieKey.token);
-  const loading = useAuthSelector((state) => state.authSlice.loading);
+  const status = useProfileSelector((state) => state.profileSlice.status);
 
-  const authDispatch = useAuthDispatch();
+  const authDispatch = useProfileDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,7 +26,8 @@ function Auth() {
   }
 
   function linkLogOut() {
-    authDispatch(actions.logOut());
+    authDispatch(auth.logOut());
+    authDispatch(profile.updateRole());
     navigate("/sign-in");
   }
 
@@ -54,16 +56,14 @@ function Auth() {
 
     return (
       <div className={classes.auth}>
-        {loading ? (
-          <SketonButton />
-        ) : (
+        {status === "pending" && <SketonButton />}
+        {status === "fulfilled" && (
           <Button mode="success" size="small">
             Create article
           </Button>
         )}
-
-        <ProfileInfo to="profile" />
-        <Button onClick={linkLogOut} size="big">
+        <ProfileInfo to="/user/profile" />
+        <Button onClick={linkLogOut} line size="big">
           Log Out
         </Button>
       </div>

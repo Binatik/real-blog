@@ -5,12 +5,14 @@ import classNames from "classnames";
 type ButtonProps = {
   children: ReactNode;
   mode?: "primary" | "success" | "default";
+  line?: boolean;
   size?: "big" | "medium" | "small";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 function Button({
   children,
   mode = "default",
+  line,
   size,
   className,
   ...props
@@ -24,6 +26,7 @@ function Button({
         [classes.smallSize]: size === "small",
         [classes.mediumSize]: size === "medium",
         [classes.bigSize]: size === "big",
+        [classes.line]: line,
       })}
       {...props}
     >

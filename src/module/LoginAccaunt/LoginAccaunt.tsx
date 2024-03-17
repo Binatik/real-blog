@@ -10,15 +10,15 @@ import classes from "./LoginAccaunt.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { validatorGroup } from "@validations/loginAccount";
 import { useRef } from "react";
-import { useAuthDispatch } from "@src/app/store/hooks/useAuthDispatch";
-import { loginProfile } from "@src/app/store/redux/slices/authSlice";
-import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
+import { loginProfile } from "@src/app/store/profile/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
+import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
 
 function LoginAccaunt() {
   const navigate = useNavigate();
-  const authDispatch = useAuthDispatch();
-  const hasValidCredentials = useAuthSelector(
+  const profileDispatch = useProfileDispatch();
+  const hasValidCredentials = useProfileSelector(
     (state) => state.authSlice.hasValidCredentials,
   );
 
@@ -47,7 +47,7 @@ function LoginAccaunt() {
       return;
     }
 
-    await authDispatch(loginProfile(event.currentTarget));
+    await profileDispatch(loginProfile(event.currentTarget));
     navigate("/user");
   }
 
@@ -58,18 +58,18 @@ function LoginAccaunt() {
   }
 
   return (
-    <section className={classes.loginAccount}>
+    <section className={classes.login}>
       <div className="container-desktop">
         <FormControl
           onSubmit={loginAccountSubmit}
           method="post"
           wide
-          className={classes.loginAccountForm}
+          className={classes.loginForm}
         >
-          <Heading className={classes.loginAccountHeading} as="h2">
+          <Heading className={classes.loginHeading} as="h2">
             Sign In
           </Heading>
-          <div className={classes.loginAccountFields}>
+          <div className={classes.loginFields}>
             <InputField
               autoFocus
               name="email"

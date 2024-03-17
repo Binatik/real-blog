@@ -6,27 +6,31 @@ import {
   Text,
 } from "@ui/index";
 import classes from "./ProfileInfo.module.scss";
-import avatar from "@assets/avatar.svg";
-import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
+import staticAvatar from "@assets/avatar.svg";
+import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
 
 type ProfileProps = {
   to: string;
 };
 
 function ProfileInfo({ to }: ProfileProps) {
-  const loading = useAuthSelector((state) => state.authSlice.loading);
-  const profile = useAuthSelector((stete) => stete.authSlice.profile);
+  const status = useProfileSelector((state) => state.profileSlice.status);
+  const profile = useProfileSelector((stete) => stete.profileSlice.profile);
+
+  const avatar = profile?.user.image;
 
   return (
-    <RouterLink className={classes.profile} to={to}>
-      {loading ? (
-        <SkeletonText />
-      ) : (
+    <RouterLink className={classes.profile} to={to} shine>
+      {status === "pending" && <SkeletonText />}
+      {status === "fulfilled" && (
         <Text size="big" mode="off" className={classes.profileText}>
           {profile?.user.username}
         </Text>
       )}
-      {loading ? <SkeletonAvatar /> : <Avatar photo={avatar} />}
+      {status === "pending" && <SkeletonAvatar />}
+      {status === "fulfilled" && (
+        <Avatar photo={avatar ? avatar : staticAvatar} />
+      )}
     </RouterLink>
   );
 }

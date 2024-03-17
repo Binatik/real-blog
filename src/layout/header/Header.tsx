@@ -1,5 +1,4 @@
 import { Auth } from "@module/index";
-import { useAuthSelector } from "@src/app/store/hooks/useAuthSelector";
 import { RouterLink } from "@ui/index";
 import classNames from "classnames";
 import classes from "./Header.module.scss";
@@ -8,7 +7,6 @@ import { CookieKey } from "@src/app/enums/Cookies";
 
 function Header() {
   const token = Cookies.get(CookieKey.token);
-  const isAuthorized = useAuthSelector((state) => state.authSlice.isAuthorized);
 
   return (
     <header>
@@ -17,7 +15,7 @@ function Header() {
           [classes.auth]: token,
         })}
       >
-        <RouterLink to={isAuthorized ? "/user" : "/"}>Real World</RouterLink>
+        <RouterLink to={token ? "/user" : "/"}>Real World</RouterLink>
         <Auth />
       </div>
     </header>

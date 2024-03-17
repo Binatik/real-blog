@@ -7,6 +7,7 @@ type InputFieldProps = {
   size?: "medium";
   idLabel: string;
   label: string;
+  labelClass?: string;
   message?: string | false;
   error?: boolean;
   autoFocus?: boolean;
@@ -22,6 +23,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       mode = "default",
       size = "medium",
       className,
+      labelClass,
       ...props
     }: InputFieldProps,
     forwardedRef,
@@ -40,7 +42,10 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
 
     return (
       <div className={classes.inputField}>
-        <label className={classes.inputFieldLabel} htmlFor={idLabel}>
+        <label
+          className={classNames(labelClass, classes.inputFieldLabel)}
+          htmlFor={idLabel}
+        >
           {label}
         </label>
         <input

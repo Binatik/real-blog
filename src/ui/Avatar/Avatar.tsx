@@ -13,7 +13,9 @@ function Avatar({ photo, size = "small", className }: AvatarProps) {
       return <span>S</span>;
     }
 
-    return <img src={photo} alt="Avatar" />;
+    return (
+      <img src={photo} width={46} height={46} loading="lazy" alt="Avatar" />
+    );
   }
 
   return (

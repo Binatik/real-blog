@@ -34,4 +34,8 @@ export class Api {
   public async post<T>(url: string, fetchOptions: RequestInit): Promise<T> {
     return this.fetchEndpoint(url, { ...fetchOptions, method: "POST" });
   }
+
+  public async put<T>(url: string, fetchOptions: RequestInit): Promise<T> {
+    return this.fetchEndpoint(url, { ...fetchOptions, method: "PUT" });
+  }
 }

@@ -21,6 +21,12 @@
   font-size: 18px;
 }
 
+.routerLink.active {
+  pointer-events: none;
+  cursor: pointer;
+  color: var(--default-color-alpha50);
+}
+
 @media (hover: hover) {
   .routerLink.defaultMode:hover {
     color: var(--default-color-alpha50);
