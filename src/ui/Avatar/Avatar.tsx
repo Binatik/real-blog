@@ -1,21 +1,26 @@
-import { HTMLAttributes } from "react";
+import { ImgHTMLAttributes } from "react";
 import classes from "./Avatar.module.css";
 import classNames from "classnames";
 
 type AvatarProps = {
+  alternative: string;
   photo?: string;
   size?: "small";
-} & Partial<HTMLAttributes<HTMLDivElement>>;
+} & ImgHTMLAttributes<HTMLImageElement>;
 
-function Avatar({ photo, size = "small", className }: AvatarProps) {
+function Avatar({
+  photo,
+  size = "small",
+  alternative,
+  className,
+  ...props
+}: AvatarProps) {
   function renderAvatar() {
     if (!photo) {
-      return <span>S</span>;
+      return <span className={classes.avatarName}>{alternative}</span>;
     }
 
-    return (
-      <img src={photo} width={46} height={46} loading="lazy" alt="Avatar" />
-    );
+    return <img src={photo} loading="lazy" alt="Avatar" {...props} />;
   }
 
   return (

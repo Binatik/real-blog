@@ -1,15 +1,23 @@
-span.defaultMode {
+.text.defaultMode {
   color: var(--default-color-70);
 }
 
-span.dangerMode {
+.text.defaultModeAlpha50 {
+  color: var(--default-color-alpha50);
+}
+
+.text.defaultModeAlpha75 {
+  color: var(--default-color-alpha75);
+}
+
+.text.dangerMode {
   color: var(--error-color);
 }
 
-span.smallSize {
+.text.smallSize {
   font-size: 12px;
 }
 
-span.bigSize {
+.text.bigSize {
   font-size: 18px;
 }

@@ -12,3 +12,9 @@
   width: 46px;
   height: 46px;
 }
+
+.avatarName {
+  font-size: 20px;
+  color: var(--main-color);
+  font-weight: 500;
+}

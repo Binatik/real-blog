@@ -3,8 +3,8 @@ import classes from "./Heading.module.scss";
 import classNames from "classnames";
 
 type HeadingProps = {
-  mode?: "default" | "primary";
-  size?: "level7" | "level4";
+  mode?: "default" | "defaultAlpha85" | "primary";
+  size?: "level7" | "level6" | "level4";
   weight?: "medium" | "bold";
   as: "h2" | "h3";
   children: ReactNode;
@@ -25,10 +25,12 @@ function Heading({
     <Tag
       className={classNames(className, classes.heading, {
         [classes.defaultMode]: mode === "default",
+        [classes.defaultModeAlpha85]: mode === "defaultAlpha85",
         [classes.primaryMode]: mode === "primary",
         [classes.mediumWeight]: weight === "medium",
         [classes.boldWeight]: weight === "bold",
         [classes.level7Size]: size === "level7",
+        [classes.level6Size]: size === "level6",
         [classes.level4Size]: size === "level4",
       })}
       {...props}

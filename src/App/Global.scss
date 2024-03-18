@@ -84,3 +84,10 @@ img {
   padding: 0 20px;
   padding-block: 16px;
 }
+
+.container-mini-desktop {
+  max-width: $miniDesktopWidth;
+  margin: 0 auto;
+  padding: 0 20px;
+  padding-block: 16px;
+}

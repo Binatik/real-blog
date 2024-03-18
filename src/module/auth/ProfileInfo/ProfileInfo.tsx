@@ -29,7 +29,12 @@ function ProfileInfo({ to }: ProfileProps) {
       )}
       {status === "pending" && <SkeletonAvatar />}
       {status === "fulfilled" && (
-        <Avatar photo={avatar ? avatar : staticAvatar} />
+        <Avatar
+          alternative="A"
+          width={46}
+          height={46}
+          photo={avatar ? avatar : staticAvatar}
+        />
       )}
     </RouterLink>
   );

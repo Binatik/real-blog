@@ -1,0 +1,43 @@
+.blogItems {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorContainer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(1px, 15px);
+}
+
+.author {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authorInfo h2 {
+  margin: 0;
+}
+
+.authorInfo span {
+  display: inline-block;
+  transform: translateY(-5px);
+}
+
+
+.blogItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.blogTop {
+  display: flex;
+  gap: 13px;
+}
+
+.blogDescription {
+  max-width: 682px;
+}

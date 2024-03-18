@@ -3,7 +3,7 @@ import { HTMLAttributes, ReactNode } from "react";
 import classes from "./Text.module.scss";
 
 type TextProps = {
-  mode?: "default" | "danger" | "off";
+  mode?: "default" | "defaultAlpha50" | "defaultAlpha75" | "danger" | "off";
   size?: "small" | "big";
   as?: "p" | "span";
   children: ReactNode;
@@ -23,6 +23,8 @@ function Text({
     <Tag
       className={classNames(className, classes.text, {
         [classes.defaultMode]: mode === "default",
+        [classes.defaultModeAlpha50]: mode === "defaultAlpha50",
+        [classes.defaultModeAlpha75]: mode === "defaultAlpha75",
         [classes.dangerMode]: mode === "danger",
         [classes.smallSize]: size === "small",
         [classes.bigSize]: size === "big",

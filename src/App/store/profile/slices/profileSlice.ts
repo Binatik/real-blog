@@ -48,7 +48,7 @@ const profileSlice = createSlice({
       state.profile = action.payload;
     });
     builder.addCase(fetchCurrentProfile.rejected, (state) => {
-      state.status = "rejected";
+      state.status = "pending";
       state.role = "ghost";
       state.isAuthorized = false;
       state.error = true;
@@ -65,7 +65,7 @@ const profileSlice = createSlice({
       Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
     });
     builder.addCase(updateProfile.rejected, (state) => {
-      state.status = "rejected";
+      state.status = "pending";
       state.error = true;
     });
   },

@@ -1,8 +1,12 @@
-.button.defaultMode {
+.heading.defaultMode {
   color: var(--default-color-90);
 }
 
-.button.primaryMode {
+.heading.defaultModeAlpha85 {
+  color: var(--default-color-alpha85);
+}
+
+.heading.primaryMode {
   color: var(--primary-color);
 }
 
@@ -10,6 +14,14 @@
   font-weight: 600;
 }
 
+.heading.mediumWeight {
+  font-weight: 400;
+}
+
 .heading.level7Size {
   font-size: 20px;
+}
+
+.heading.level6Size {
+  font-size: 18px;
 }

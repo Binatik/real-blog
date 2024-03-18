@@ -1,0 +1,11 @@
+.card {
+  position: relative;
+}
+
+.card.mainMode {
+  background-color: var(--main-color);
+}
+
+.card.smallSize {
+  padding: 15px 15px 24px 15px;
+}

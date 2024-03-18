@@ -4,6 +4,7 @@ import { CookieKey } from "@src/app/enums/Cookies";
 import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
 import { fetchCurrentProfile } from "@src/app/store/profile/slices/profileSlice";
 import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
+import { Blog } from "@module/blog/Blog";
 
 function Feed() {
   const authDispatch = useProfileDispatch();
@@ -19,7 +20,7 @@ function Feed() {
     }
   }, [authDispatch, isAuthorized]);
 
-  return <div>Feed</div>;
+  return <Blog />;
 }
 
 export { Feed };
