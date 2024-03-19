@@ -1,16 +1,31 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "@src/router/router";
-import { Provider } from "react-redux";
-import { storeProfile } from "./store/profile/store";
+import { useEffect } from "react";
+import { CookieKey } from "./enums/Cookies";
+import { useProfileDispatch } from "./store/profile/hooks/useProfileDispatch";
+import { useProfileSelector } from "./store/profile/hooks/useProfileSelector";
+import { fetchCurrentProfile } from "./store/profile/slices/profileSlice";
+import Cookies from "js-cookie";
 import "normalize.css";
 import "./global.scss";
 
-const App = () => {
-  return (
-    <Provider store={storeProfile}>
-      <RouterProvider router={router} />
-    </Provider>
+export const App = () => {
+  const profileDispatch = useProfileDispatch();
+  const isAuthorized = useProfileSelector(
+    (state) => state.authSlice.isAuthorized,
   );
-};
 
-export default App;
+  useEffect(() => {
+    const token = Cookies.get(CookieKey.token);
+
+    if (token && isAuthorized) {
+      profileDispatch(fetchCurrentProfile(token));
+    }
+
+    if (token && !isAuthorized) {
+      profileDispatch(fetchCurrentProfile(token));
+    }
+  }, [profileDispatch, isAuthorized]);
+
+  return <RouterProvider router={router} />;
+};

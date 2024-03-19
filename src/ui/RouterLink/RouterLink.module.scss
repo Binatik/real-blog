@@ -33,8 +33,18 @@
   }
 }
 
+@media (hover: hover) {
+  .routerLink.primaryMode:hover {
+    color: var(--primary-color-90);
+  }
+}
+
 @media (hover: none) {
   .routerLink.defaultMode:active {
     color: var(--default-color-alpha50);
+  }
+
+  .routerLink.primaryMode:active {
+    color: var(--primary-color-90);
   }
 }

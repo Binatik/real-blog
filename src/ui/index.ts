@@ -10,3 +10,4 @@ export * from "./SkeletonText/SkeletonText";
 export * from "./SkeletonAvatar/SkeletonAvatar";
 export * from "./SketonButton/SketonButton";
 export * from "./Card/Card";
+export * from "./Tag/Tag";

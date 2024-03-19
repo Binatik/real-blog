@@ -20,7 +20,7 @@ function Avatar({
       return <span className={classes.avatarName}>{alternative}</span>;
     }
 
-    return <img src={photo} loading="lazy" alt="Avatar" {...props} />;
+    return <img src={photo} alt="Avatar" {...props} />;
   }
 
   return (

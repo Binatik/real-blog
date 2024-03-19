@@ -1,7 +1,5 @@
 import { CreateAccount } from "@module/index";
 
-function Register() {
+export const Register = () => {
   return <CreateAccount />;
-}
-
-export { Register };
+};
