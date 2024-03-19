@@ -9,12 +9,14 @@ type AuthState = {
   loading: boolean;
   error: boolean;
   hasValidCredentials: boolean | null;
+  isAuthorized: boolean;
 };
 
 const initialState: AuthState = {
   loading: true,
   error: false,
   hasValidCredentials: null,
+  isAuthorized: false,
 };
 
 const authSlice = createSlice({
@@ -30,25 +32,30 @@ const authSlice = createSlice({
     builder.addCase(registerProfile.pending, (state) => {
       state.loading = true;
       state.error = false;
+      state.isAuthorized = false;
     });
     builder.addCase(registerProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.error = false;
+      state.isAuthorized = true;
       Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
     });
     builder.addCase(registerProfile.rejected, (state) => {
       state.loading = false;
       state.error = true;
+      state.isAuthorized = false;
       Cookies.remove(CookieKey.token);
     });
 
     builder.addCase(loginProfile.pending, (state) => {
       state.loading = true;
       state.error = false;
+      state.isAuthorized = false;
     });
     builder.addCase(loginProfile.fulfilled, (state, action) => {
       state.loading = false;
       state.error = false;
+      state.isAuthorized = true;
       state.hasValidCredentials = true;
       Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
     });
@@ -56,6 +63,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.hasValidCredentials = false;
       state.error = true;
+      state.isAuthorized = false;
       Cookies.remove(CookieKey.token);
     });
   },

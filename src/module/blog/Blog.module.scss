@@ -1,3 +1,5 @@
+@import '../../app/vars.scss';
+
 .blogItems {
   display: flex;
   flex-direction: column;
@@ -17,27 +19,55 @@
   gap: 12px;
 }
 
+.authorInfo {
+  display: flex;
+  flex-direction: column;
+}
+
 .authorInfo h2 {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 0;
 }
 
 .authorInfo span {
   display: inline-block;
-  transform: translateY(-5px);
 }
-
 
 .blogItem {
   display: flex;
   flex-direction: column;
+  align-items: baseline;
   gap: 6px;
 }
 
 .blogTop {
   display: flex;
-  gap: 13px;
+  flex-direction: column;
+  max-width: 50%;
+}
+
+.blogLink {
+  white-space: wrap;
+}
+
+.blogTag {
+  display: flex;
 }
 
 .blogDescription {
+  margin: 0;
   max-width: 682px;
+}
+
+@media (max-width: $mobileWidth) {
+  .blogItem {
+    padding-top: 50px;
+  }
+
+  .blogTop {
+    max-width: fit-content;
+  }
 }

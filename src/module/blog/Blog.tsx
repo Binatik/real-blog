@@ -1,6 +1,7 @@
-import { Avatar, Card, Heading, RouterLink, Text } from "@ui/index";
+import { Avatar, Card, Heading, RouterLink, Tag, Text } from "@ui/index";
 import classes from "./Blog.module.scss";
 import { Reaction } from "@src/feature";
+import { shortenDescription } from "@src/utils";
 
 export const Blog = () => {
   function updateReaction() {
@@ -36,11 +37,21 @@ export const Blog = () => {
             </div>
             <div className={classes.blogItem}>
               <div className={classes.blogTop}>
-                <RouterLink to="/" mode="primary" size="medium">
-                  Some article title
+                <RouterLink
+                  className={classes.blogLink}
+                  to="/"
+                  mode="primary"
+                  size="medium"
+                >
+                  {shortenDescription("Some article title", 100)}
                 </RouterLink>
                 <Reaction updateReaction={updateReaction} />
               </div>
+              <Tag className={classes.blogTag}>
+                <Text as="span" mode="off" size="small">
+                  Tag1
+                </Text>
+              </Tag>
               <Text
                 as="p"
                 mode="defaultAlpha75"

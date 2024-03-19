@@ -8,6 +8,10 @@
   flex-shrink: 0;
 }
 
+.avatar img {
+  object-fit: cover;
+}
+
 .avatar.sizeSmall {
   width: 46px;
   height: 46px;

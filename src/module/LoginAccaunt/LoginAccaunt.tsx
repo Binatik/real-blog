@@ -48,6 +48,7 @@ function LoginAccaunt() {
     }
 
     await profileDispatch(loginProfile(event.currentTarget));
+    // await profileDispatch(fetchCurrentProfile(token));
     navigate("/user");
   }
 

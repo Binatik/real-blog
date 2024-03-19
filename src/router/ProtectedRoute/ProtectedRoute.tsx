@@ -13,7 +13,7 @@ function ProtectedRoute({ protectedRole, ...props }: ProtectedRouteProps) {
   const status = useProfileSelector((state) => state.profileSlice.status);
   const role = useProfileSelector((state) => state.profileSlice.role);
 
-  if (status === "pending") {
+  if (status === "pending" || status === null) {
     return;
   }
 
