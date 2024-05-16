@@ -9,15 +9,15 @@ import {
 } from "@ui/index";
 import classes from "./CreateAccount.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
-import { registerProfile } from "@src/app/store/profile/slices/authSlice";
+import { registerProfile } from "@src/app/slices/authSlice";
 import { validatorGroup } from "@validations/createAccount";
 import { useRef, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
-import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
+import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 
 function CreateAccount() {
-  const profileDispatch = useProfileDispatch();
+  const dispatch = useRootDispatch();
   const navigate = useNavigate();
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
@@ -63,7 +63,7 @@ function CreateAccount() {
       return;
     }
 
-    await profileDispatch(registerProfile(event.currentTarget));
+    await dispatch(registerProfile(event.currentTarget));
     navigate("/user");
   }
 

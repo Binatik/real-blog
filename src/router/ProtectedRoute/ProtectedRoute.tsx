@@ -1,7 +1,7 @@
-import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
 import { Navigate, NavigateProps, Outlet } from "react-router-dom";
 import { CookieKey } from "@src/app/enums/Cookies";
 import Cookies from "js-cookie";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 type ProtectedRouteProps = {
   protectedRole: "ghost" | "client";
@@ -10,8 +10,8 @@ type ProtectedRouteProps = {
 function ProtectedRoute({ protectedRole, ...props }: ProtectedRouteProps) {
   const token = Cookies.get(CookieKey.token);
 
-  const status = useProfileSelector((state) => state.profileSlice.status);
-  const role = useProfileSelector((state) => state.profileSlice.role);
+  const status = useRootSelector((state) => state.profileSlice.status);
+  const role = useRootSelector((state) => state.profileSlice.role);
 
   if (status === "pending" || (!status && token)) {
     return;

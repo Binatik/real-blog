@@ -2,30 +2,28 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "@src/router/router";
 import { useEffect } from "react";
 import { CookieKey } from "./enums/Cookies";
-import { useProfileDispatch } from "./store/profile/hooks/useProfileDispatch";
-import { useProfileSelector } from "./store/profile/hooks/useProfileSelector";
-import { fetchCurrentProfile } from "./store/profile/slices/profileSlice";
+import { fetchCurrentProfile } from "./slices/profileSlice";
 import Cookies from "js-cookie";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
+import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import "normalize.css";
 import "./global.scss";
 
 export const App = () => {
-  const profileDispatch = useProfileDispatch();
-  const isAuthorized = useProfileSelector(
-    (state) => state.authSlice.isAuthorized,
-  );
+  const dispatch = useRootDispatch();
+  const isAuthorized = useRootSelector((state) => state.authSlice.isAuthorized);
 
   useEffect(() => {
     const token = Cookies.get(CookieKey.token);
 
     if (token && isAuthorized) {
-      profileDispatch(fetchCurrentProfile(token));
+      dispatch(fetchCurrentProfile(token));
     }
 
     if (token && !isAuthorized) {
-      profileDispatch(fetchCurrentProfile(token));
+      dispatch(fetchCurrentProfile(token));
     }
-  }, [profileDispatch, isAuthorized]);
+  }, [dispatch, isAuthorized]);
 
   return <RouterProvider router={router} />;
 };

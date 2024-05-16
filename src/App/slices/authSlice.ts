@@ -108,5 +108,5 @@ export const loginProfile = createAsyncThunk(
 );
 
 const auth = authSlice.actions;
-//authSliceReducer
+
 export { auth, authSlice };

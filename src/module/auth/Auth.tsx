@@ -4,16 +4,16 @@ import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
-import { auth } from "@src/app/store/profile/slices/authSlice";
-import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
-import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
-import { profile } from "@src/app/store/profile/slices/profileSlice";
+import { auth } from "@src/app/slices/authSlice";
+import { profile } from "@src/app/slices/profileSlice";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
+import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 
 function Auth() {
   const token = Cookies.get(CookieKey.token);
-  const status = useProfileSelector((state) => state.profileSlice.status);
+  const status = useRootSelector((state) => state.profileSlice.status);
 
-  const authDispatch = useProfileDispatch();
+  const dispatch = useRootDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,8 +26,8 @@ function Auth() {
   }
 
   function linkLogOut() {
-    authDispatch(auth.logOut());
-    authDispatch(profile.updateRole());
+    dispatch(auth.logOut());
+    dispatch(profile.updateRole());
     navigate("/sign-in");
   }
 

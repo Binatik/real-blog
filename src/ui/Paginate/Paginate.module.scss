@@ -1,0 +1,73 @@
+@import '../../app/vars.scss';
+
+.pagination {
+  padding: 27px 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.previous {
+  padding: 0 20px;
+}
+
+.next {
+  padding: 0 15px;
+}
+
+.previous.disabled > a > svg {
+  cursor: default;
+  fill: var(--default-color-alpha35);
+}
+
+.next.disabled > a > svg {
+  cursor: default;
+  fill: var(--default-color-alpha35);
+}
+
+.break {
+  cursor: pointer;
+}
+
+.paginationItem a {
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.1s background-color, 0.1s color;
+}
+
+.paginationItem.primaryMode a {
+  padding: 8px 12px;
+}
+
+.paginationItem.primaryMode a {
+  border-radius: 4px;
+  background-color: transparent;
+  color: var(--default-color-alpha75);
+}
+.pagination  {
+  user-select: none;
+}
+
+.paginationActive.primaryMode a {
+  pointer-events: none;
+  cursor: default;
+  background-color: var(--primary-color-90);
+  color: var(--main-color);
+}
+
+@media (hover: hover) {
+  .paginationItem.primaryMode a:hover  {
+    background-color: var(--primary-color);
+    color: var(--main-color);
+  }
+}
+
+@media (max-width: $mobileWidth) {
+  .pagination {
+    overflow-x: scroll;
+  }
+}
+

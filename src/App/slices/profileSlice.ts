@@ -104,5 +104,5 @@ export const updateProfile = createAsyncThunk(
 );
 
 const profile = profileSlice.actions;
-//authSliceReducer
+
 export { profile, profileSlice };

@@ -11,3 +11,5 @@ export * from "./SkeletonAvatar/SkeletonAvatar";
 export * from "./SketonButton/SketonButton";
 export * from "./Card/Card";
 export * from "./Tag/Tag";
+export * from "./Spinner/Spinner";
+export * from "./Paginate/Paginate";

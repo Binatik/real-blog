@@ -3,6 +3,7 @@
 .blogItems {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
 .authorContainer {
@@ -60,6 +61,24 @@
 .blogDescription {
   margin: 0;
   max-width: 682px;
+}
+
+.blogSpinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+}
+
+.arrowLeft {
+  cursor: pointer;
+  width: 8px;
+  transform: rotate(180deg);
+}
+
+.arrowRight {
+  cursor: pointer;
+  width: 8px;
 }
 
 @media (max-width: $mobileWidth) {

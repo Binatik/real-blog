@@ -7,15 +7,15 @@ import {
 } from "@ui/index";
 import classes from "./ProfileInfo.module.scss";
 import staticAvatar from "@assets/avatar.svg";
-import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 type ProfileProps = {
   to: string;
 };
 
 function ProfileInfo({ to }: ProfileProps) {
-  const status = useProfileSelector((state) => state.profileSlice.status);
-  const profile = useProfileSelector((stete) => stete.profileSlice.profile);
+  const status = useRootSelector((state) => state.profileSlice.status);
+  const profile = useRootSelector((stete) => stete.profileSlice.profile);
 
   const avatar = profile?.user.image;
 

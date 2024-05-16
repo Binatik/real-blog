@@ -14,6 +14,7 @@
   --default-color-alpha85: rgba(0, 0, 0, 0.85);
   --default-color-alpha75: rgba(0, 0, 0, 0.75);
   --default-color-alpha50: rgba(0, 0, 0, 0.50);
+  --default-color-alpha35: rgba(0, 0, 0, 0.35);
   --default-color-90: #262626;
   --default-color-80: #595959;
   --default-color-70: #8C8C8C;
@@ -36,13 +37,14 @@
 
 html {
   font-family: var(--family);
-  font-weight: 400;
+  font-weight: 400 !important;
   height: 100%;
 }
 
 body {
   display: flex;
   flex-direction: column;
+  font-weight: 400 !important;
   min-height: 100%;
   background-color: var(--main-background);
   line-height: 1.5;

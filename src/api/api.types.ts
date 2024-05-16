@@ -9,3 +9,26 @@ export type Profile = {
     image: null | string;
   };
 };
+
+export type Article = {
+  slug: string;
+  title: string;
+  description: string;
+  body: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
+  favorited: boolean;
+  favoritesCount: number;
+  author: Author;
+};
+export type Author = {
+  username: string;
+  bio: string;
+  image: string;
+  following: boolean;
+};
+export type RootArticles = {
+  articles?: Article[] | null;
+  articlesCount: number;
+};

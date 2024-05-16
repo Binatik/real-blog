@@ -15,8 +15,10 @@ function Avatar({
   className,
   ...props
 }: AvatarProps) {
+  const validPhoto = /\.(png|jpg|jpeg|gif|bmp)$/i;
+
   function renderAvatar() {
-    if (!photo) {
+    if (!photo || !validPhoto.test(photo)) {
       return <span className={classes.avatarName}>{alternative}</span>;
     }
 

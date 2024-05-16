@@ -1,5 +1,6 @@
 import { defineConfig } from "@rsbuild/core";
 import { pluginReact } from "@rsbuild/plugin-react";
+import { pluginSvgr } from "@rsbuild/plugin-svgr";
 import ESLintPlugin from "eslint-webpack-plugin";
 
 export default defineConfig({
@@ -19,7 +20,7 @@ export default defineConfig({
   html: {
     title: "Real-blog",
   },
-  plugins: [pluginReact()],
+  plugins: [pluginReact(), pluginSvgr()],
   tools: {
     bundlerChain(chain) {
       chain.plugin("eslint-plugin").use(ESLintPlugin, [

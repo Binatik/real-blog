@@ -1,18 +1,23 @@
 import { Button, Text } from "@ui/index";
 import classes from "./Reaction.module.scss";
 import classNames from "classnames";
-import { useState } from "react";
 
 type ReactionProps = {
-  updateReaction: () => void;
+  updateReaction: (id: string | number) => void;
+  favoritesCount: number;
+  favorited: boolean;
+  id: string | number;
 };
 
-export const Reaction = ({ updateReaction }: ReactionProps) => {
-  const [hasReaction, setHasReaction] = useState(false);
-
+export const Reaction = ({
+  id,
+  favorited,
+  favoritesCount,
+  updateReaction,
+}: ReactionProps) => {
   function addReaction() {
-    setHasReaction((prev) => (prev = !prev));
-    updateReaction();
+    // setHasReaction((prev) => (prev = !prev));
+    updateReaction(id);
   }
 
   return (
@@ -23,12 +28,12 @@ export const Reaction = ({ updateReaction }: ReactionProps) => {
     >
       <span
         className={classNames(classes.reaction, {
-          [classes.on]: hasReaction,
-          [classes.off]: !hasReaction,
+          [classes.on]: favorited,
+          [classes.off]: !favorited,
         })}
       ></span>
       <Text as="span" mode="defaultAlpha75">
-        11
+        {favoritesCount}
       </Text>
     </Button>
   );

@@ -10,19 +10,20 @@ import classes from "./LoginAccaunt.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { validatorGroup } from "@validations/loginAccount";
 import { useRef } from "react";
-import { loginProfile } from "@src/app/store/profile/slices/authSlice";
+import { loginProfile } from "@src/app/slices/authSlice";
 import { useNavigate } from "react-router-dom";
-import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
-import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
+import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 function LoginAccaunt() {
   const navigate = useNavigate();
-  const profileDispatch = useProfileDispatch();
-  const hasValidCredentials = useProfileSelector(
+  const dispatch = useRootDispatch();
+  const hasValidCredentials = useRootSelector(
     (state) => state.authSlice.hasValidCredentials,
   );
 
   const fieldRefs = useRef<HTMLInputElement[]>([]);
+
   const email = useValidation(validatorGroup.email, false);
   const password = useValidation(validatorGroup.password, false);
 
@@ -47,7 +48,7 @@ function LoginAccaunt() {
       return;
     }
 
-    await profileDispatch(loginProfile(event.currentTarget));
+    await dispatch(loginProfile(event.currentTarget));
     // await profileDispatch(fetchCurrentProfile(token));
     navigate("/user");
   }

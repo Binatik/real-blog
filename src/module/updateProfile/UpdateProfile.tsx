@@ -3,15 +3,15 @@ import classes from "./UpdateProfile.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { useRef } from "react";
 import { validatorGroup } from "@validations/update";
-import { useProfileDispatch } from "@src/app/store/profile/hooks/useProfileDispatch";
-import { updateProfile } from "@src/app/store/profile/slices/profileSlice";
+import { updateProfile } from "@src/app/slices/profileSlice";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
-import { useProfileSelector } from "@src/app/store/profile/hooks/useProfileSelector";
+import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 function UpdateProfile() {
-  const profileDispatch = useProfileDispatch();
-  const profile = useProfileSelector((stete) => stete.profileSlice.profile);
+  const dispatch = useRootDispatch();
+  const profile = useRootSelector((stete) => stete.profileSlice.profile);
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const userName = useValidation(
     validatorGroup.userName,
@@ -50,7 +50,7 @@ function UpdateProfile() {
       return;
     }
 
-    profileDispatch(updateProfile(payload));
+    dispatch(updateProfile(payload));
   }
 
   return (
