@@ -19,7 +19,7 @@ export const CurrentTopic = () => {
 
   useEffect(() => {
     dispatch(fetchTopic(params.slug));
-  }, [dispatch]);
+  }, [dispatch, params.slug]);
 
   const renderTopic = () => {
     if (loading) {

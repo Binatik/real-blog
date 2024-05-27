@@ -16,8 +16,6 @@ export const Blog = () => {
   const loading = !articles;
   const [currentPage, setCurrentPage] = useState(0);
 
-  console.log(articles);
-
   // function updateReaction(id: string | number) {
   //   console.log(id);
   //   //обращение к серверу
