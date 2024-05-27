@@ -6,63 +6,6 @@
   gap: 15px;
 }
 
-.authorContainer {
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: translate(1px, 15px);
-}
-
-.author {
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.authorInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.authorInfo h2 {
-  max-width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-}
-
-.authorInfo span {
-  display: inline-block;
-}
-
-.blogItem {
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  gap: 6px;
-}
-
-.blogTop {
-  display: flex;
-  flex-direction: column;
-  max-width: 50%;
-}
-
-.blogLink {
-  white-space: wrap;
-}
-
-.blogTag {
-  display: flex;
-}
-
-.blogDescription {
-  margin: 0;
-  max-width: 682px;
-}
-
 .blogSpinner {
   position: absolute;
   left: 50%;

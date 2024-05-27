@@ -6,6 +6,7 @@ import { Layout } from "@layout/Layout";
 import { Home } from "@page/Home/Home";
 import { Feed } from "@page/Feed/Feed";
 import { UpdateProfile } from "@module/updateProfile/UpdateProfile";
+import { CurrentTopic } from "@page/CurrentTopic/CurrentTopic";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             path: "sign-in",
             element: <Login />,
           },
+          {
+            path: "/:slug",
+            element: <CurrentTopic />,
+          },
         ],
       },
       {
@@ -39,6 +44,10 @@ const router = createBrowserRouter([
           {
             path: "user/profile",
             element: <UpdateProfile />,
+          },
+          {
+            path: "user/:slug",
+            element: <CurrentTopic />,
           },
         ],
       },

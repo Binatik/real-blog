@@ -15,7 +15,7 @@ export type Article = {
   title: string;
   description: string;
   body: string;
-  tags: string[];
+  tagList: string[];
   createdAt: string;
   updatedAt: string;
   favorited: boolean;
@@ -28,7 +28,12 @@ export type Author = {
   image: string;
   following: boolean;
 };
+
 export type RootArticles = {
   articles?: Article[] | null;
   articlesCount: number;
+};
+
+export type RootTopic = {
+  article?: Article;
 };
