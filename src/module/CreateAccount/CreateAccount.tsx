@@ -10,7 +10,7 @@ import {
 import classes from "./CreateAccount.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { registerProfile } from "@src/app/slices/authSlice";
-import { validatorGroup } from "@validations/createAccount";
+import { validatorGroup } from "@src/misc/validations/createAccount";
 import { useRef, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";

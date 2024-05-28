@@ -6,6 +6,8 @@ import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import { fetchArticles } from "./slices/blogSlice";
 import Arrow from "@assets/arrow.svg?react";
 import { Topic } from "./topic/Topic";
+import Cookies from "js-cookie";
+import { CookieKey } from "@src/app/enums/Cookies";
 
 export const Blog = () => {
   const dispatch = useRootDispatch();
@@ -16,13 +18,13 @@ export const Blog = () => {
   const loading = !articles;
   const [currentPage, setCurrentPage] = useState(0);
 
-  // function updateReaction(id: string | number) {
-  //   console.log(id);
-  //   //обращение к серверу
-  // }
+  const payload = {
+    token: Cookies.get(CookieKey.token),
+    offset: 19 * currentPage,
+  };
 
   useEffect(() => {
-    dispatch(fetchArticles(19 * currentPage));
+    dispatch(fetchArticles(payload));
   }, [currentPage, dispatch]);
 
   return (

@@ -1,20 +1,29 @@
 import { Article } from "@api/api.types";
-import { shortenDescription } from "@src/utils";
-import { splitLongWords } from "@src/utils/splitLongWords";
-import { Avatar, Card, Heading, RouterLink, Tag, Text } from "@ui/index";
+import { shortenDescription } from "@src/misc/utils";
+import { splitLongWords } from "@src/misc/utils/splitLongWords";
+import { Avatar, Card, Heading, Like, RouterLink, Tag, Text } from "@ui/index";
 import classes from "./Topic.module.scss";
 import { useLocation } from "react-router-dom";
+import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
+import { fetchSetReaction } from "../slices/blogSlice";
+import classNames from "classnames";
+import Cookies from "js-cookie";
+import { CookieKey } from "@src/app/enums/Cookies";
 
 type TopicProps = {
   article: Article;
 };
 
 export const Topic = ({ article }: TopicProps) => {
+  const dispatch = useRootDispatch();
+  const token = Cookies.get(CookieKey.token);
   const location = useLocation();
   const redirect = location.pathname === "/";
 
-  // function updateReaction(id: string | number) {
-  // }
+  const payload = {
+    slug: article.slug,
+    token: token,
+  };
 
   return (
     <Card key={article.createdAt}>
@@ -52,18 +61,20 @@ export const Topic = ({ article }: TopicProps) => {
           >
             {shortenDescription(splitLongWords(article.title, 24), 100)}
           </RouterLink>
-          {/* <Reaction
-            favorited={article.favorited}
-            favoritesCount={article.favoritesCount}
-            id={article.slug}
-            updateReaction={updateReaction}
-          /> */}
+          <Like
+            onClick={() => dispatch(fetchSetReaction(payload))}
+            count={article.favoritesCount}
+            innerClass={classNames(classes.reaction, {
+              [classes.on]: article.favorited,
+              [classes.off]: !article.favorited,
+            })}
+          />
         </div>
 
         <div className={classes.tagContainer}>
           {article.tagList &&
             article.tagList.map((tag) => (
-              <Tag className={classes.topicTag}>
+              <Tag key={self.crypto.randomUUID()} className={classes.topicTag}>
                 <Text as="span" mode="off" size="small">
                   {tag}
                 </Text>

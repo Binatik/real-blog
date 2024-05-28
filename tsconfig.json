@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@validations/*": ["./src/validations/*"],
+      "@validations/*": ["./src/misc/validations/*"],
       "@ui/*": ["./src/ui/*"],
       "@module/*": ["./src/module/*"],
       "@page/*": ["./src/page/*"],

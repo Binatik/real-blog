@@ -2,7 +2,7 @@ import { Button, FormControl, Heading, InputField } from "@ui/index";
 import classes from "./UpdateProfile.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { useRef } from "react";
-import { validatorGroup } from "@validations/update";
+import { validatorGroup } from "@src/misc/validations/update";
 import { updateProfile } from "@src/app/slices/profileSlice";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";

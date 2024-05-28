@@ -8,7 +8,7 @@ import {
 } from "@ui/index";
 import classes from "./LoginAccaunt.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
-import { validatorGroup } from "@validations/loginAccount";
+import { validatorGroup } from "@src/misc/validations/loginAccount";
 import { useRef } from "react";
 import { loginProfile } from "@src/app/slices/authSlice";
 import { useNavigate } from "react-router-dom";

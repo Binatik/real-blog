@@ -6,7 +6,7 @@ import ESLintPlugin from "eslint-webpack-plugin";
 export default defineConfig({
   source: {
     alias: {
-      "@validations": "./src/validations/*",
+      "@validations": "./src/misc/validations/*",
       "@ui": "./src/ui/*",
       "@module": "./src/module/*",
       "@page": "./src/page/*",

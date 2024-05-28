@@ -13,3 +13,4 @@ export * from "./Card/Card";
 export * from "./Tag/Tag";
 export * from "./Spinner/Spinner";
 export * from "./Paginate/Paginate";
+export * from "./Like/Like";
