@@ -38,4 +38,8 @@ export class Api {
   public async put<T>(url: string, fetchOptions: RequestInit): Promise<T> {
     return this.fetchEndpoint(url, { ...fetchOptions, method: "PUT" });
   }
+
+  public async delete<T>(url: string, fetchOptions: RequestInit): Promise<T> {
+    return this.fetchEndpoint(url, { ...fetchOptions, method: "DELETE" });
+  }
 }

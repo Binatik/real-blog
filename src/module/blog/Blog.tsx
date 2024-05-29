@@ -18,12 +18,12 @@ export const Blog = () => {
   const loading = !articles;
   const [currentPage, setCurrentPage] = useState(0);
 
-  const payload = {
-    token: Cookies.get(CookieKey.token),
-    offset: 19 * currentPage,
-  };
-
   useEffect(() => {
+    const payload = {
+      token: Cookies.get(CookieKey.token),
+      offset: 19 * currentPage,
+    };
+
     dispatch(fetchArticles(payload));
   }, [currentPage, dispatch]);
 
@@ -37,7 +37,11 @@ export const Blog = () => {
             </div>
           ) : (
             articles.map((article) => (
-              <Topic article={article} key={article.title + article.slug} />
+              <Topic
+                article={article}
+                expanded={false}
+                key={article.title + article.slug}
+              />
             ))
           )}
         </div>

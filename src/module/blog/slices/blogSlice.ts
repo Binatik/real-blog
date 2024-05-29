@@ -23,6 +23,7 @@ type BlogState = {
   articles: RootArticles["articles"] | null;
   articlesCount: RootArticles["articlesCount"];
   topic: RootTopic["article"] | null;
+  isExpandedArticle: boolean;
   error: boolean;
 };
 
@@ -30,6 +31,7 @@ const initialState: BlogState = {
   articles: null,
   articlesCount: 0,
   topic: null,
+  isExpandedArticle: false,
   error: false,
 };
 
@@ -53,10 +55,12 @@ const blogSlice = createSlice({
     });
 
     builder.addCase(fetchTopic.pending, (state) => {
+      state.isExpandedArticle = false;
       state.topic = null;
       state.error = false;
     });
     builder.addCase(fetchTopic.fulfilled, (state, action) => {
+      state.isExpandedArticle = true;
       state.error = false;
       state.topic = action.payload.article;
     });
@@ -65,7 +69,6 @@ const blogSlice = createSlice({
     });
 
     builder.addCase(fetchSetReaction.pending, (state) => {
-      state.topic = null;
       state.error = false;
     });
     builder.addCase(fetchSetReaction.fulfilled, (state, action) => {
@@ -83,6 +86,27 @@ const blogSlice = createSlice({
     builder.addCase(fetchSetReaction.rejected, (state) => {
       state.error = true;
     });
+
+    builder.addCase(fetchDeleteReaction.pending, (state) => {
+      state.error = false;
+    });
+
+    builder.addCase(fetchDeleteReaction.fulfilled, (state, action) => {
+      state.error = false;
+      state.topic = action.payload.article;
+
+      state.articles = state.articles?.map((article) => {
+        if (article.slug === action.payload.article?.slug) {
+          return action.payload.article;
+        }
+
+        return article;
+      });
+    });
+
+    builder.addCase(fetchDeleteReaction.rejected, (state) => {
+      state.error = true;
+    });
   },
 });
 
@@ -93,7 +117,6 @@ export const fetchArticles = createAsyncThunk(
     const result = await api.get<RootArticles>(`/articles?offset=${offset}`, {
       headers: {
         authorization: `Token ${token}`,
-        "Content-type": "application/json",
       },
     });
 
@@ -109,7 +132,6 @@ export const fetchTopic = createAsyncThunk(
     const result = await api.get<RootTopic>(`/articles/${path}`, {
       headers: {
         authorization: `Token ${token}`,
-        "Content-type": "application/json",
       },
     });
 
@@ -124,7 +146,20 @@ export const fetchSetReaction = createAsyncThunk(
     const result = await api.post<RootTopic>(`/articles/${slug}/favorite`, {
       headers: {
         authorization: `Token ${token}`,
-        "Content-type": "application/json",
+      },
+    });
+
+    return result;
+  },
+);
+
+export const fetchDeleteReaction = createAsyncThunk(
+  "blogSlice/fetchDeleteReaction",
+  async (payload: PayloadReaction) => {
+    const { slug, token } = payload;
+    const result = await api.delete<RootTopic>(`/articles/${slug}/favorite`, {
+      headers: {
+        authorization: `Token ${token}`,
       },
     });
 

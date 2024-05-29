@@ -16,15 +16,18 @@ export const CurrentTopic = () => {
   const dispatch = useRootDispatch();
   const params = useParams<params>();
   const topic = useRootSelector((state) => state.blogSlice.topic);
+  const isExpandedArticle = useRootSelector(
+    (state) => state.blogSlice.isExpandedArticle,
+  );
 
   const loading = !topic;
 
-  const payload = {
-    path: params.slug,
-    token: Cookies.get(CookieKey.token),
-  };
-
   useEffect(() => {
+    const payload = {
+      path: params.slug,
+      token: Cookies.get(CookieKey.token),
+    };
+
     dispatch(fetchTopic(payload));
   }, [dispatch, params.slug]);
 
@@ -33,7 +36,7 @@ export const CurrentTopic = () => {
       return <Spinner />;
     }
 
-    return <Topic article={topic} />;
+    return <Topic article={topic} expanded={isExpandedArticle} />;
   };
 
   return <div className="container-mini-desktop">{renderTopic()}</div>;

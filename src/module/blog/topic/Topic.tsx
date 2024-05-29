@@ -5,16 +5,17 @@ import { Avatar, Card, Heading, Like, RouterLink, Tag, Text } from "@ui/index";
 import classes from "./Topic.module.scss";
 import { useLocation } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
-import { fetchSetReaction } from "../slices/blogSlice";
+import { fetchDeleteReaction, fetchSetReaction } from "../slices/blogSlice";
 import classNames from "classnames";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
 
 type TopicProps = {
   article: Article;
+  expanded: boolean;
 };
 
-export const Topic = ({ article }: TopicProps) => {
+export const Topic = ({ article, expanded }: TopicProps) => {
   const dispatch = useRootDispatch();
   const token = Cookies.get(CookieKey.token);
   const location = useLocation();
@@ -24,6 +25,37 @@ export const Topic = ({ article }: TopicProps) => {
     slug: article.slug,
     token: token,
   };
+
+  function getReaction(reaction: boolean) {
+    if (!reaction) {
+      dispatch(fetchSetReaction(payload));
+      return;
+    }
+
+    dispatch(fetchDeleteReaction(payload));
+    return;
+  }
+
+  function renderTitle() {
+    if (expanded) {
+      return (
+        <Heading as="h2" mode="primary">
+          {shortenDescription(splitLongWords(article.title, 24), 100)}
+        </Heading>
+      );
+    }
+
+    return (
+      <RouterLink
+        className={classes.topicLink}
+        to={redirect ? "/sign-up" : `${article.slug}`}
+        mode="primary"
+        size="medium"
+      >
+        {shortenDescription(splitLongWords(article.title, 24), 100)}
+      </RouterLink>
+    );
+  }
 
   return (
     <Card key={article.createdAt}>
@@ -53,16 +85,9 @@ export const Topic = ({ article }: TopicProps) => {
       </div>
       <div className={classes.topicContainer}>
         <div className={classes.topicTop}>
-          <RouterLink
-            className={classes.topicLink}
-            to={redirect ? "/sign-up" : `${article.slug}`}
-            mode="primary"
-            size="medium"
-          >
-            {shortenDescription(splitLongWords(article.title, 24), 100)}
-          </RouterLink>
+          {renderTitle()}
           <Like
-            onClick={() => dispatch(fetchSetReaction(payload))}
+            onClick={() => getReaction(article.favorited)}
             count={article.favoritesCount}
             innerClass={classNames(classes.reaction, {
               [classes.on]: article.favorited,
@@ -89,6 +114,16 @@ export const Topic = ({ article }: TopicProps) => {
         >
           {splitLongWords(article.description, 55)}
         </Text>
+        {expanded && (
+          <Text
+            as="p"
+            mode="defaultAlpha75"
+            size="small"
+            className={classes.topicDescription}
+          >
+            {article.body}
+          </Text>
+        )}
       </div>
     </Card>
   );
