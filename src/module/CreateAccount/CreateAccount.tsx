@@ -73,7 +73,6 @@ function CreateAccount() {
         <FormControl
           onSubmit={createAccountSubmit}
           method="post"
-          wide
           className={classes.createForm}
         >
           <Heading className={classes.createHeading} as="h2">

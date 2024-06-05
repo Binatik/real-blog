@@ -70,7 +70,6 @@ function LoginAccaunt() {
         <FormControl
           onSubmit={loginAccountSubmit}
           method="post"
-          wide
           className={classes.loginForm}
         >
           <Heading className={classes.loginHeading} as="h2">

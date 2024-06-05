@@ -10,6 +10,7 @@ import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 
 function Auth() {
+  console.log("dsdd");
   const token = Cookies.get(CookieKey.token);
   const status = useRootSelector((state) => state.profileSlice.status);
 
@@ -29,6 +30,10 @@ function Auth() {
     dispatch(auth.logOut());
     dispatch(profile.updateRole());
     navigate("/sign-in");
+  }
+
+  function linkCreate() {
+    navigate("/user/creater");
   }
 
   const signUpLocation = location.pathname === "/sign-up";
@@ -58,7 +63,12 @@ function Auth() {
       <div className={classes.auth}>
         {status === "pending" && <SketonButton />}
         {status === "fulfilled" && (
-          <Button mode="success" size="small">
+          <Button
+            mode="success"
+            size="small"
+            type="button"
+            onClick={linkCreate}
+          >
             Create article
           </Button>
         )}

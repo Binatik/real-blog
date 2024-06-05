@@ -7,6 +7,7 @@ import { Home } from "@page/Home/Home";
 import { Feed } from "@page/Feed/Feed";
 import { UpdateProfile } from "@module/updateProfile/UpdateProfile";
 import { CurrentTopic } from "@page/CurrentTopic/CurrentTopic";
+import { Create } from "@page/Create/Create";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
           {
             path: "user/:slug",
             element: <CurrentTopic />,
+          },
+          {
+            path: "user/creater",
+            element: <Create />,
           },
         ],
       },
