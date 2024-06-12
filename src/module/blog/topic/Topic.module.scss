@@ -30,16 +30,27 @@
 }
 
 .topicContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: baseline;
   gap: 6px;
 }
 
+.reactionContainer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
 .tagContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.topicHeader {
+  margin: 0;
 }
 
 .topicTop {

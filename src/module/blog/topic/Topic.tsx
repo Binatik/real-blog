@@ -39,7 +39,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
   function renderTitle() {
     if (expanded) {
       return (
-        <Heading as="h2" mode="primary">
+        <Heading className={classes.topicHeader} as="h2" mode="primary">
           {shortenDescription(splitLongWords(article.title, 24), 100)}
         </Heading>
       );
@@ -86,14 +86,16 @@ export const Topic = ({ article, expanded }: TopicProps) => {
       <div className={classes.topicContainer}>
         <div className={classes.topicTop}>
           {renderTitle()}
-          <Like
-            onClick={() => getReaction(article.favorited)}
-            count={article.favoritesCount}
-            innerClass={classNames(classes.reaction, {
-              [classes.on]: article.favorited,
-              [classes.off]: !article.favorited,
-            })}
-          />
+          <div className={classes.reactionContainer}>
+            <Like
+              onClick={() => getReaction(article.favorited)}
+              count={article.favoritesCount}
+              innerClass={classNames(classes.reaction, {
+                [classes.on]: article.favorited,
+                [classes.off]: !article.favorited,
+              })}
+            />
+          </div>
         </div>
 
         <div className={classes.tagContainer}>

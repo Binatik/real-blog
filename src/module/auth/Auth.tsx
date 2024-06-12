@@ -10,7 +10,6 @@ import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 
 function Auth() {
-  console.log("dsdd");
   const token = Cookies.get(CookieKey.token);
   const status = useRootSelector((state) => state.profileSlice.status);
 
