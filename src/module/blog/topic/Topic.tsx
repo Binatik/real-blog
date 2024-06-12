@@ -9,6 +9,7 @@ import { fetchDeleteReaction, fetchSetReaction } from "../slices/blogSlice";
 import classNames from "classnames";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
+import ReactMarkdown from "react-markdown";
 
 type TopicProps = {
   article: Article;
@@ -116,16 +117,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
         >
           {splitLongWords(article.description, 55)}
         </Text>
-        {expanded && (
-          <Text
-            as="p"
-            mode="defaultAlpha75"
-            size="small"
-            className={classes.topicDescription}
-          >
-            {article.body}
-          </Text>
-        )}
+        {expanded && <ReactMarkdown>{article.body}</ReactMarkdown>}
       </div>
     </Card>
   );

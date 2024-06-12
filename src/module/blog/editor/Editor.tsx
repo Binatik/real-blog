@@ -1,4 +1,4 @@
-import { FormControl, Heading, InputField } from "@ui/index";
+import { FormControl, Heading, InputField, Message } from "@ui/index";
 import classes from "./Editor.module.scss";
 import classNames from "classnames";
 
@@ -29,6 +29,7 @@ export const Editor = ({ title }: EditorProps) => {
               idLabel="description"
               label="Short description"
             />
+            <Message idLabel="Message" label="Text" />
           </div>
         </FormControl>
       </div>

@@ -1,0 +1,44 @@
+.messageTextarea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.messageLabel {
+  color: var(--default-color-90);
+  font-size: 14px;
+  padding-bottom: 2px;
+}
+
+.messageElement {
+  resize: vertical;
+}
+
+.messageElement.defaultMode {
+  background-color: transparent;
+  color: var(--default-color-alpha75);
+  border: 1px solid var(--default-color-50);
+  outline: 1.5px solid transparent;
+  border-radius: 4px;
+  transition: outline 0.2s;
+}
+
+.messageElement.mediumSize {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.messageElement.defaultMode::placeholder {
+  color: var(--default-color-60);
+  text-indent: 0px;
+  transition: text-indent 0.2s ease;
+}
+
+.messageElement.defaultMode:focus::placeholder {
+  opacity: 0;
+  transition: text-indent 0.2s ease;
+}
+
+.messageElement.defaultMode:focus-visible {
+  outline: 1.5px solid var(--primary-color);
+}
