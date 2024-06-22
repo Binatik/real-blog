@@ -11,6 +11,7 @@
 }
 
 .editorTitle {
+  padding-bottom: 21px;
   text-align: center;
 }
 
@@ -18,6 +19,16 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.editorFields:not(:last-child) {
+  padding-bottom: 21px;
+}
+
+.editorTagItem {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 @media (max-width: $tableWidth) {

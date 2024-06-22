@@ -4,6 +4,10 @@
   flex-direction: column;
 }
 
+.inputFieldLabel.labelHidden {
+  display: none;
+}
+
 .inputFieldLabel {
   color: var(--default-color-90);
   font-size: 14px;

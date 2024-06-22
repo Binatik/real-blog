@@ -35,8 +35,8 @@ const initialState: BlogState = {
   error: false,
 };
 
-const blogSlice = createSlice({
-  name: "blogSlice",
+const postsSlice = createSlice({
+  name: "postsSlice",
   initialState,
   reducers: {},
 
@@ -167,6 +167,6 @@ export const fetchDeleteReaction = createAsyncThunk(
   },
 );
 
-const blog = blogSlice.actions;
+const posts = postsSlice.actions;
 
-export { blog, blogSlice };
+export { posts, postsSlice };

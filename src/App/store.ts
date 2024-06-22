@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./slices/authSlice";
 import { profileSlice } from "./slices/profileSlice";
-import { blogSlice } from "@module/blog/slices/blogSlice";
+import { postsSlice } from "@module/blog/slices/postsSlice";
+import { editorSlice } from "@module/blog/slices/editorSlice";
 
 export const store = configureStore({
   reducer: {
     authSlice: authSlice.reducer,
     profileSlice: profileSlice.reducer,
-    blogSlice: blogSlice.reducer,
+    postsSlice: postsSlice.reducer,
+    editorSlice: editorSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

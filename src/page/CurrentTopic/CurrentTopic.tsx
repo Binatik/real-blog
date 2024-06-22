@@ -1,6 +1,6 @@
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
-import { fetchTopic } from "@module/blog/slices/blogSlice";
+import { fetchTopic } from "@module/blog/slices/postsSlice";
 import { Topic } from "@module/index";
 import { Spinner } from "@ui/index";
 import { useEffect } from "react";

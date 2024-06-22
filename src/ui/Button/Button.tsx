@@ -4,7 +4,8 @@ import classNames from "classnames";
 
 type ButtonProps = {
   children: ReactNode;
-  mode?: "primary" | "success" | "default";
+  mode?: "primary" | "success" | "default" | "primaryOutline" | "danger";
+  outline?: boolean;
   line?: boolean;
   size?: "big" | "medium" | "small";
 } & ButtonHTMLAttributes<HTMLButtonElement>;
@@ -21,6 +22,8 @@ function Button({
     <button
       className={classNames(className, classes.button, {
         [classes.primaryMode]: mode === "primary",
+        [classes.primaryOutlineMode]: mode === "primaryOutline",
+        [classes.dangerMode]: mode === "danger",
         [classes.successMode]: mode === "success",
         [classes.defaultMode]: mode === "default",
         [classes.smallSize]: size === "small",

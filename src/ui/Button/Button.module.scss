@@ -6,6 +6,12 @@
   padding: 0;
 }
 
+.button.dangerMode {
+  border: 1px solid var(--error-color);
+  color: var(--error-color);
+  transition: border 0.2s, color 0.2s
+}
+
 .button.defaultMode {
   border: 1px solid transparent;
   color: var(--default-color-alpha85);
@@ -23,6 +29,12 @@
   color: var(--main-color);
   border: none;
   transition: box-shadow 0.3s;
+}
+
+.button.primaryOutlineMode {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  transition: border 0.2s, color 0.2s;
 }
 
 .button.defaultMode:disabled {
@@ -70,6 +82,16 @@
     color: var(--success-color-90);
     border: 1px solid var(--success-color-90);
   }
+
+  .button.dangerMode:hover {
+    border: 1px solid var(--error-color-90);
+    color: var(--error-color-90);
+  }
+
+  .button.primaryOutlineMode:hover {
+    border: 1px solid var(--primary-color-90);
+    color: var(--primary-color-90);
+  }
 }
 
 @media (hover: none) {
@@ -81,9 +103,19 @@
     box-shadow: 0 0 6px var(--primary-color);
   }
 
-  .button.successMode:hover {
+  .button.successMode:active {
     color: var(--success-color-90);
     border: 1px solid var(--success-color-90);
+  }
+
+  .button.dangerMode:active {
+    border: 1px solid var(--error-color-90);
+    color: var(--error-color-90);
+  }
+
+  .button.primaryOutlineMode:active {
+    border: 1px solid var(--primary-color-90);
+    color: var(--primary-color-90);
   }
 }
 

@@ -5,7 +5,7 @@ import { Avatar, Card, Heading, Like, RouterLink, Tag, Text } from "@ui/index";
 import classes from "./Topic.module.scss";
 import { useLocation } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
-import { fetchDeleteReaction, fetchSetReaction } from "../slices/blogSlice";
+import { fetchDeleteReaction, fetchSetReaction } from "../slices/postsSlice";
 import classNames from "classnames";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";

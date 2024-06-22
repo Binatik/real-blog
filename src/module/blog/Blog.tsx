@@ -3,7 +3,7 @@ import classes from "./Blog.module.scss";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { useEffect, useState } from "react";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
-import { fetchArticles } from "./slices/blogSlice";
+import { fetchArticles } from "./slices/postsSlice";
 import Arrow from "@assets/arrow.svg?react";
 import { Topic } from "./topic/Topic";
 import Cookies from "js-cookie";
@@ -11,9 +11,9 @@ import { CookieKey } from "@src/app/enums/Cookies";
 
 export const Blog = () => {
   const dispatch = useRootDispatch();
-  const articles = useRootSelector((state) => state.blogSlice.articles);
+  const articles = useRootSelector((state) => state.postsSlice.articles);
   const articlesCount = useRootSelector(
-    (state) => state.blogSlice.articlesCount,
+    (state) => state.postsSlice.articlesCount,
   );
   const loading = !articles;
   const [currentPage, setCurrentPage] = useState(0);
