@@ -15,9 +15,9 @@ export type params = {
 export const CurrentTopic = () => {
   const dispatch = useRootDispatch();
   const params = useParams<params>();
-  const topic = useRootSelector((state) => state.blogSlice.topic);
+  const topic = useRootSelector((state) => state.postsSlice.topic);
   const isExpandedArticle = useRootSelector(
-    (state) => state.blogSlice.isExpandedArticle,
+    (state) => state.postsSlice.isExpandedArticle,
   );
 
   const loading = !topic;

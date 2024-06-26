@@ -36,13 +36,16 @@ export const Blog = () => {
               <Spinner />
             </div>
           ) : (
-            articles.map((article) => (
-              <Topic
-                article={article}
-                expanded={false}
-                key={article.title + article.slug}
-              />
-            ))
+            articles.map(
+              (article) =>
+                article.title.length !== 0 && (
+                  <Topic
+                    article={article}
+                    expanded={false}
+                    key={article.title + article.slug}
+                  />
+                ),
+            )
           )}
         </div>
         {!loading && (

@@ -27,12 +27,26 @@
 
 .editorTagItem {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 18px;
+}
+
+.addTagEditor {
+  white-space: nowrap
+}
+
+.buttonSubmit {
+  width: 50%;
 }
 
 @media (max-width: $tableWidth) {
   .desktopSpace {
     padding: 0 15px !important;
   }
+
+  .buttonSubmit {
+    width: auto;
+  }
+  
 }

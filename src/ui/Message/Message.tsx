@@ -28,6 +28,7 @@ export const Message = ({
           })}
           id={idLabel}
           placeholder={label}
+          name="message"
         ></textarea>
       </div>
     </>

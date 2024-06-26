@@ -111,7 +111,7 @@ const postsSlice = createSlice({
 });
 
 export const fetchArticles = createAsyncThunk(
-  "blogSlice/fetchArticles",
+  "postsSlice/fetchArticles",
   async (payload: PayloadArticles) => {
     const { offset, token } = payload;
     const result = await api.get<RootArticles>(`/articles?offset=${offset}`, {
@@ -125,7 +125,7 @@ export const fetchArticles = createAsyncThunk(
 );
 
 export const fetchTopic = createAsyncThunk(
-  "blogSlice/fetchTopic",
+  "postsSlice/fetchTopic",
   async (payload: PayloadTopic) => {
     const { path, token } = payload;
 
@@ -140,7 +140,7 @@ export const fetchTopic = createAsyncThunk(
 );
 
 export const fetchSetReaction = createAsyncThunk(
-  "blogSlice/fetchSetReaction",
+  "postsSlice/fetchSetReaction",
   async (payload: PayloadReaction) => {
     const { slug, token } = payload;
     const result = await api.post<RootTopic>(`/articles/${slug}/favorite`, {
@@ -154,7 +154,7 @@ export const fetchSetReaction = createAsyncThunk(
 );
 
 export const fetchDeleteReaction = createAsyncThunk(
-  "blogSlice/fetchDeleteReaction",
+  "postsSlice/fetchDeleteReaction",
   async (payload: PayloadReaction) => {
     const { slug, token } = payload;
     const result = await api.delete<RootTopic>(`/articles/${slug}/favorite`, {

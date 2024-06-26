@@ -37,3 +37,10 @@ export type RootArticles = {
 export type RootTopic = {
   article?: Article;
 };
+
+export type PostTopic = {
+  title: string;
+  description: string;
+  body: string | null;
+  tagList: string[];
+};

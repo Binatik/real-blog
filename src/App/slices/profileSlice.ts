@@ -85,10 +85,10 @@ export const updateProfile = createAsyncThunk(
   async (payload: PayloadUpdateProfile) => {
     const { form, token } = payload;
 
-    const data = new FormData(form);
-    data.append("bio", "I work at State Farm.");
+    const formData = new FormData(form);
+    formData.append("bio", "I work at State Farm.");
 
-    const fields = Object.fromEntries(data.entries());
+    const fields = Object.fromEntries(formData.entries());
     const request = JSON.stringify({ user: fields });
 
     const result = await api.put<Profile>("/user", {

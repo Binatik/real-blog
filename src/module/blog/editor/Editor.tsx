@@ -11,21 +11,38 @@ import classNames from "classnames";
 import { validatorGroup } from "@validations/editor";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
-import { editor } from "../slices/editorSlice";
+import { createPost, editor } from "../slices/editorSlice";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
+import Cookies from "js-cookie";
 import React from "react";
+import { CookieKey } from "@src/app/enums/Cookies";
+import { useNavigate } from "react-router-dom";
 
 type EditorProps = {
   title: string;
-  description: string;
-  text: string;
 };
 
 export const Editor = ({ title }: EditorProps) => {
   const dispatch = useRootDispatch();
+  const navigate = useNavigate();
   const titleValidator = useValidation(validatorGroup.title, true);
   const descriptionValidator = useValidation(validatorGroup.description, true);
-  const tags = useRootSelector((state) => state.editorSlice.editor.tags);
+  const tags = useRootSelector((state) => state.editorSlice.tagsObject);
+
+  const token = Cookies.get(CookieKey.token);
+
+  const createPostSubmit = (
+    event: React.MouseEvent<HTMLFormElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+
+    const payload = {
+      form: event.currentTarget,
+      token: token,
+    };
+    dispatch(createPost(payload));
+    navigate("/user/");
+  };
 
   const renderTags = () => {
     if (tags.length === 0) {
@@ -62,6 +79,7 @@ export const Editor = ({ title }: EditorProps) => {
         {index === tags.length - 1 && (
           <Button
             onClick={() => dispatch(editor.addTags())}
+            className={classes.addTagEditor}
             type="button"
             size="medium"
             mode="primaryOutline"
@@ -76,14 +94,14 @@ export const Editor = ({ title }: EditorProps) => {
   return (
     <section className={classes.editorContainer}>
       <div className={classNames("container-desktop", classes.desktopSpace)}>
-        <FormControl wide>
+        <FormControl wide onSubmit={createPostSubmit}>
           <Heading className={classes.editorTitle} as="h2">
             {title}
           </Heading>
           <div className={classes.editorFields}>
             <InputField
-              name="Title"
-              type="Title"
+              name="title"
+              type="title"
               idLabel="Title"
               label="Title"
               value={titleValidator.value}
@@ -103,6 +121,14 @@ export const Editor = ({ title }: EditorProps) => {
             Tags
           </Text>
           <div className={classes.editorFields}>{renderTags()}</div>
+          <Button
+            className={classes.buttonSubmit}
+            size="medium"
+            mode="primary"
+            type="submit"
+          >
+            Send
+          </Button>
         </FormControl>
       </div>
     </section>
