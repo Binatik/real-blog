@@ -43,7 +43,7 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  transform: translateY(5px);
+  transform: translateY(25px);
 }
 
 .tagContainer {
@@ -72,10 +72,22 @@
   display: flex;
 }
 
+.descriptionContainer {
+  display: flex;
+  gap: 20px;
+  align-self: stretch;
+}
+
 .topicDescription {
   margin: 0;
-  max-width: 682px;
   padding-bottom: 25px;
+  flex-grow: 1;
+}
+
+.buttonsRight {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .reaction {

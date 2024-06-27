@@ -1,7 +1,16 @@
 import { Article } from "@api/api.types";
 import { shortenDescription } from "@src/misc/utils";
 import { splitLongWords } from "@src/misc/utils/splitLongWords";
-import { Avatar, Card, Heading, Like, RouterLink, Tag, Text } from "@ui/index";
+import {
+  Avatar,
+  Button,
+  Card,
+  Heading,
+  Like,
+  RouterLink,
+  Tag,
+  Text,
+} from "@ui/index";
 import classes from "./Topic.module.scss";
 import { useLocation } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
@@ -10,6 +19,7 @@ import classNames from "classnames";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
 import ReactMarkdown from "react-markdown";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 type TopicProps = {
   article: Article;
@@ -18,6 +28,7 @@ type TopicProps = {
 
 export const Topic = ({ article, expanded }: TopicProps) => {
   const dispatch = useRootDispatch();
+  const profile = useRootSelector((state) => state.profileSlice.profile);
   const token = Cookies.get(CookieKey.token);
   const location = useLocation();
   const redirect = location.pathname === "/";
@@ -37,7 +48,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
     return;
   }
 
-  function renderTitle() {
+  const renderTitle = () => {
     if (expanded) {
       return (
         <Heading className={classes.topicHeader} as="h2" mode="primary">
@@ -56,7 +67,22 @@ export const Topic = ({ article, expanded }: TopicProps) => {
         {shortenDescription(splitLongWords(article.title, 24), 100)}
       </RouterLink>
     );
-  }
+  };
+
+  const renderButtons = () => {
+    if (profile?.user.username === article.author.username) {
+      return (
+        <>
+          <Button type="button" mode="danger" size="small">
+            Delete
+          </Button>
+          <Button type="button" mode="success" size="small">
+            Edit
+          </Button>
+        </>
+      );
+    }
+  };
 
   return (
     <Card key={article.createdAt}>
@@ -109,14 +135,19 @@ export const Topic = ({ article, expanded }: TopicProps) => {
               </Tag>
             ))}
         </div>
-        <Text
-          as="p"
-          mode="defaultAlpha75"
-          size="small"
-          className={classes.topicDescription}
-        >
-          {splitLongWords(article.description, 55)}
-        </Text>
+        <div className={classes.descriptionContainer}>
+          <Text
+            as="p"
+            mode="defaultAlpha75"
+            size="small"
+            className={classes.topicDescription}
+          >
+            {splitLongWords(article.description, 55)}
+          </Text>
+          {expanded && (
+            <div className={classes.buttonsRight}>{renderButtons()}</div>
+          )}
+        </div>
         {expanded && <ReactMarkdown>{article.body}</ReactMarkdown>}
       </div>
     </Card>

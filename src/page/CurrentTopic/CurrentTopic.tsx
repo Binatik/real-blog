@@ -33,7 +33,7 @@ export const CurrentTopic = () => {
 
   const renderTopic = () => {
     if (loading) {
-      return <Spinner />;
+      return <Spinner position="bottom" />;
     }
 
     return <Topic article={topic} expanded={isExpandedArticle} />;
