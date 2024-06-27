@@ -37,6 +37,9 @@ export const Topic = ({ article, expanded }: TopicProps) => {
   const token = Cookies.get(CookieKey.token);
   const location = useLocation();
   const redirect = location.pathname === "/";
+  const defautPhoto =
+    "https://static.productionready.io/images/smiley-cyrus.jpg";
+  const canPhoto = article.author.image !== defautPhoto;
 
   const payload = {
     slug: article.slug,
@@ -118,7 +121,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
           </div>
           <Avatar
             className={classes.authorAvatar}
-            photo={article.author.image}
+            photo={canPhoto ? article.author.image : ""}
             width={46}
             height={46}
             alternative={article.author.username[0]}
