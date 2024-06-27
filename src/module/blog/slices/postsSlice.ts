@@ -19,6 +19,11 @@ type PayloadReaction = {
   token: string | undefined;
 };
 
+type PayloadDeleteTopic = {
+  slug: params["slug"];
+  token: string | undefined;
+};
+
 type PostsState = {
   articles: RootArticles["articles"] | null;
   articlesCount: RootArticles["articlesCount"];
@@ -158,6 +163,20 @@ export const fetchDeleteReaction = createAsyncThunk(
   async (payload: PayloadReaction) => {
     const { slug, token } = payload;
     const result = await api.delete<RootTopic>(`/articles/${slug}/favorite`, {
+      headers: {
+        authorization: `Token ${token}`,
+      },
+    });
+
+    return result;
+  },
+);
+
+export const fetchDeleteTopic = createAsyncThunk(
+  "postsSlice/deleteTopic",
+  async (payload: PayloadDeleteTopic) => {
+    const { slug, token } = payload;
+    const result = await api.delete(`/articles/${slug}`, {
       headers: {
         authorization: `Token ${token}`,
       },

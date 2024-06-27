@@ -1,8 +1,8 @@
 @import "./fonts.scss";
 @import "./vars.scss";
 
-*, 
-*::before, 
+*,
+*::before,
 *::after {
   box-sizing: border-box;
 }
@@ -32,7 +32,7 @@
   --surface-background: #2e5871;
   --main-color: #ffffff;
   --warning-color-60: #FAAD14;
-  
+
   --error-color: #F5222D;
   --error-color-90: #dc4a51;
 }
@@ -52,14 +52,20 @@ body {
   line-height: 1.5;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
 
 blockquote {
-    border-left: 3px solid var(--primary-color-90);
-    margin: 0;
-    padding: 10px 15px;
+  border-left: 3px solid var(--primary-color-90);
+  margin: 0;
+  padding: 10px 15px;
 }
 
 header {
@@ -89,6 +95,7 @@ img {
   0% {
     background: var(--default-color-70);
   }
+
   0% {
     background: var(--default-color-40);
   }
@@ -105,4 +112,30 @@ img {
   max-width: $miniDesktopWidth;
   margin: 0 auto;
   padding: 16px 15px;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+
+  h5 {
+    font-size: 12px;
+  }
+
+  h6 {
+    font-size: 10px;
+  }
 }

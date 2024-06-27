@@ -74,13 +74,14 @@
 
 .descriptionContainer {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   align-self: stretch;
+  padding-bottom: 25px;
 }
 
 .topicDescription {
   margin: 0;
-  padding-bottom: 25px;
   flex-grow: 1;
 }
 
@@ -107,7 +108,11 @@
 }
 
 
-@media (max-width: $mobileWidth)  {
+@media (max-width: $mobileWidth) {
+  .topicTop {
+    max-width: 80%;
+  }
+
   .authorContainer {
     position: relative;
     transform: translate(0, 0);
@@ -118,5 +123,5 @@
     margin-right: 0;
     padding-bottom: 16px;
   }
-  
+
 }

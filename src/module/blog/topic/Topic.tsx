@@ -12,9 +12,13 @@ import {
   Text,
 } from "@ui/index";
 import classes from "./Topic.module.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
-import { fetchDeleteReaction, fetchSetReaction } from "../slices/postsSlice";
+import {
+  fetchDeleteReaction,
+  fetchDeleteTopic,
+  fetchSetReaction,
+} from "../slices/postsSlice";
 import classNames from "classnames";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
@@ -28,6 +32,7 @@ type TopicProps = {
 
 export const Topic = ({ article, expanded }: TopicProps) => {
   const dispatch = useRootDispatch();
+  const navigate = useNavigate();
   const profile = useRootSelector((state) => state.profileSlice.profile);
   const token = Cookies.get(CookieKey.token);
   const location = useLocation();
@@ -38,15 +43,20 @@ export const Topic = ({ article, expanded }: TopicProps) => {
     token: token,
   };
 
-  function getReaction(reaction: boolean) {
+  const deleteTopic = async () => {
+    await dispatch(fetchDeleteTopic(payload));
+    navigate("/user");
+  };
+
+  const getReaction = async (reaction: boolean) => {
     if (!reaction) {
       dispatch(fetchSetReaction(payload));
       return;
     }
 
-    dispatch(fetchDeleteReaction(payload));
+    await dispatch(fetchDeleteReaction(payload));
     return;
-  }
+  };
 
   const renderTitle = () => {
     if (expanded) {
@@ -73,7 +83,12 @@ export const Topic = ({ article, expanded }: TopicProps) => {
     if (profile?.user.username === article.author.username) {
       return (
         <>
-          <Button type="button" mode="danger" size="small">
+          <Button
+            onClick={deleteTopic}
+            type="button"
+            mode="danger"
+            size="small"
+          >
             Delete
           </Button>
           <Button type="button" mode="success" size="small">

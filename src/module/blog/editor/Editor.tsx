@@ -35,7 +35,7 @@ export const Editor = ({ title }: EditorProps) => {
 
   const token = Cookies.get(CookieKey.token);
 
-  const createPostSubmit = (
+  const createPostSubmit = async (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
   ) => {
     event.preventDefault();
@@ -51,7 +51,7 @@ export const Editor = ({ title }: EditorProps) => {
       return;
     }
 
-    dispatch(createPost(payload));
+    await dispatch(createPost(payload));
   };
 
   useEffect(() => {
