@@ -19,7 +19,7 @@ type PayloadReaction = {
   token: string | undefined;
 };
 
-type BlogState = {
+type PostsState = {
   articles: RootArticles["articles"] | null;
   articlesCount: RootArticles["articlesCount"];
   topic: RootTopic["article"] | null;
@@ -27,7 +27,7 @@ type BlogState = {
   error: boolean;
 };
 
-const initialState: BlogState = {
+const initialState: PostsState = {
   articles: null,
   articlesCount: 0,
   topic: null,

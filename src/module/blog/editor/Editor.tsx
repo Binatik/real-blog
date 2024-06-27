@@ -4,6 +4,7 @@ import {
   Heading,
   InputField,
   Message,
+  Spinner,
   Text,
 } from "@ui/index";
 import classes from "./Editor.module.scss";
@@ -14,7 +15,7 @@ import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import { createPost, editor } from "../slices/editorSlice";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import Cookies from "js-cookie";
-import React from "react";
+import React, { useEffect } from "react";
 import { CookieKey } from "@src/app/enums/Cookies";
 import { useNavigate } from "react-router-dom";
 
@@ -26,8 +27,11 @@ export const Editor = ({ title }: EditorProps) => {
   const dispatch = useRootDispatch();
   const navigate = useNavigate();
   const titleValidator = useValidation(validatorGroup.title, true);
-  const descriptionValidator = useValidation(validatorGroup.description, true);
   const tags = useRootSelector((state) => state.editorSlice.tagsObject);
+  const topic = useRootSelector((state) => state.editorSlice.topic);
+  const error = useRootSelector((state) => state.editorSlice.error);
+
+  const loading = !topic;
 
   const token = Cookies.get(CookieKey.token);
 
@@ -40,9 +44,22 @@ export const Editor = ({ title }: EditorProps) => {
       form: event.currentTarget,
       token: token,
     };
+
+    titleValidator.changeValidator();
+
+    if (titleValidator.error) {
+      return;
+    }
+
     dispatch(createPost(payload));
-    navigate("/user/");
   };
+
+  useEffect(() => {
+    if (topic && !error) {
+      navigate("/user");
+      location.reload();
+    }
+  }, [error, topic]);
 
   const renderTags = () => {
     if (tags.length === 0) {
@@ -98,6 +115,11 @@ export const Editor = ({ title }: EditorProps) => {
           <Heading className={classes.editorTitle} as="h2">
             {title}
           </Heading>
+          {error && (
+            <Text as="span" size="medium" mode="danger">
+              An error occurred when formatting the article..
+            </Text>
+          )}
           <div className={classes.editorFields}>
             <InputField
               name="title"
@@ -106,14 +128,15 @@ export const Editor = ({ title }: EditorProps) => {
               label="Title"
               value={titleValidator.value}
               onChange={titleValidator.changeValue}
+              onBlur={titleValidator.changeValidator}
+              error={titleValidator.error}
+              message={titleValidator.message}
             />
             <InputField
               name="description"
               type="description"
               idLabel="description"
               label="Short description"
-              value={descriptionValidator.value}
-              onChange={descriptionValidator.changeValue}
             />
             <Message idLabel="Message" label="Text" />
           </div>
@@ -130,6 +153,7 @@ export const Editor = ({ title }: EditorProps) => {
             Send
           </Button>
         </FormControl>
+        {!loading && <Spinner />}
       </div>
     </section>
   );

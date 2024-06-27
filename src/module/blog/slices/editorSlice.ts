@@ -1,4 +1,4 @@
-import { PostTopic } from "@api/api.types";
+import { PostTopic, RootTopic } from "@api/api.types";
 import { Api } from "@api/index";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
@@ -9,19 +9,21 @@ type PayloadCreatePost = {
   token: string | undefined;
 };
 
-type tagsObject = {
-  tagsObject: {
-    tag: string;
-    id: string;
-  }[];
+type tagObject = {
+  tag: string;
+  id: string;
 };
 
-const initialState: PostTopic & tagsObject = {
-  title: "",
-  description: "",
-  body: null,
-  tagList: [],
+type EditorState = {
+  topic: RootTopic["article"] | null;
+  tagsObject: tagObject[];
+  error: boolean;
+};
+
+const initialState: EditorState = {
+  topic: null,
   tagsObject: [],
+  error: false,
 };
 
 const editorSlice = createSlice({
@@ -36,6 +38,16 @@ const editorSlice = createSlice({
         (tag) => tag.id !== action.payload,
       );
     },
+  },
+
+  extraReducers: (builder) => {
+    builder.addCase(createPost.fulfilled, (state, action) => {
+      state.error = false;
+      state.topic = action.payload.article;
+    });
+    builder.addCase(createPost.rejected, (state) => {
+      state.error = true;
+    });
   },
 });
 
@@ -75,7 +87,7 @@ export const createPost = createAsyncThunk(
 
     const request = JSON.stringify({ article: tmpData });
 
-    const result = await api.post<PostTopic>("/articles", {
+    const result = await api.post<RootTopic>("/articles", {
       headers: {
         authorization: `Token ${token}`,
         "Content-type": "application/json",
