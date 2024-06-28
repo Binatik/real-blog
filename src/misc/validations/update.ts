@@ -28,7 +28,7 @@ const validatorGroup = {
       message: "The field cannot be empty!",
     },
     {
-      pattern: /^(?=.*[a-zA-Z0-9]).{6,40}$/,
+      pattern: /^.{6,99}$/,
       message: "Password deve essere compreso tra 6 e 40 caratteri!",
     },
   ],

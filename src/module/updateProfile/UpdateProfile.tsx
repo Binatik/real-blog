@@ -13,6 +13,7 @@ function UpdateProfile() {
   const dispatch = useRootDispatch();
   const profile = useRootSelector((stete) => stete.profileSlice.profile);
   const fieldRefs = useRef<HTMLInputElement[]>([]);
+
   const userName = useValidation(
     validatorGroup.userName,
     false,
@@ -36,10 +37,6 @@ function UpdateProfile() {
       form: event.currentTarget,
       token: token,
     };
-
-    userName.changeValidator();
-    email.changeValidator();
-    newPassword.changeValidator();
 
     errorsFields.some((field, index) => {
       fieldRefs.current[index].focus();
@@ -73,8 +70,7 @@ function UpdateProfile() {
               type="text"
               idLabel="Username"
               label="username"
-              onChange={userName.changeValue}
-              onBlur={userName.changeValidator}
+              onChange={(event) => userName.changeValue(event.target.value)}
               error={userName.error}
               message={userName.message}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
@@ -85,8 +81,7 @@ function UpdateProfile() {
               type="email"
               idLabel="email"
               label="Email address"
-              onChange={email.changeValue}
-              onBlur={email.changeValidator}
+              onChange={(event) => email.changeValue(event.target.value)}
               error={email.error}
               message={email.message}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
@@ -96,8 +91,7 @@ function UpdateProfile() {
               idLabel="newpassword"
               label="Password"
               name="password"
-              onChange={newPassword.changeValue}
-              onBlur={newPassword.changeValidator}
+              onChange={(event) => newPassword.changeValue(event.target.value)}
               error={newPassword.error}
               message={newPassword.message}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[2] = ref)}

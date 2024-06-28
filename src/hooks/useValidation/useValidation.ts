@@ -3,20 +3,24 @@ import { useState } from "react";
 type ValidationItem = {
   pattern: RegExp;
   message: string;
+  initialStateValue?: string;
 };
 
 function useValidation(
   validatorGroup: ValidationItem[],
   required: boolean = true,
+  initialStateValue?: string,
 ) {
-  const [value, setValue] = useState("");
+  const state = initialStateValue ? initialStateValue : "";
+
+  const [value, setValue] = useState(state);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(true);
 
   function changeValue(ctx: string) {
-    setValue((prev) => {
+    setValue(() => {
       changeValidator(ctx);
-      return prev;
+      return ctx;
     });
   }
 
