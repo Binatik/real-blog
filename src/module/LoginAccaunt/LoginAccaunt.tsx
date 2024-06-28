@@ -33,13 +33,10 @@ function LoginAccaunt() {
 
   const isValidationFailed = errorsFields.some((field) => field);
 
-  async function loginAccountSubmit(
+  const loginAccountSubmit = async (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
-  ) {
+  ) => {
     event.preventDefault();
-
-    email.changeValidator();
-    password.changeValidator();
 
     errorsFields.some((field, index) => {
       fieldRefs.current[index].focus();
@@ -56,13 +53,13 @@ function LoginAccaunt() {
     if (token) {
       navigate("/user");
     }
-  }
+  };
 
-  function renderErrorText() {
+  const renderErrorText = () => {
     if (!hasValidCredentials && hasValidCredentials !== null) {
       return <Text mode="danger">Error, email or password is invalid</Text>;
     }
-  }
+  };
 
   return (
     <section className={classes.login}>
@@ -83,8 +80,7 @@ function LoginAccaunt() {
               idLabel="email"
               label="Email address"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
-              onChange={email.changeValue}
-              onBlur={email.changeValidator}
+              onChange={(event) => email.changeValue(event.target.value)}
               error={email.error}
               message={email.message}
             />
@@ -94,8 +90,7 @@ function LoginAccaunt() {
               label="Password"
               name="password"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
-              onChange={password.changeValue}
-              onBlur={password.changeValidator}
+              onChange={(event) => password.changeValue(event.target.value)}
               error={password.error}
               message={password.message}
             />

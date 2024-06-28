@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 type ValidationItem = {
   pattern: RegExp;
@@ -8,19 +8,20 @@ type ValidationItem = {
 function useValidation(
   validatorGroup: ValidationItem[],
   required: boolean = true,
-  initialStateValue?: string,
 ) {
-  const state = initialStateValue ? initialStateValue : "";
-
-  const [value, setValue] = useState(state);
+  const [value, setValue] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState(true);
 
-  function changeValue(event: ChangeEvent<HTMLInputElement>) {
-    setValue(event.target.value);
+  function changeValue(ctx: string) {
+    setValue((prev) => {
+      changeValidator(ctx);
+      return prev;
+    });
   }
 
-  function changeValidator() {
+  function changeValidator(value: string) {
+    // Добавили аргумент value
     if (value.trim() === "" && required) {
       setError(true);
       setMessage("This field is required");
@@ -47,7 +48,6 @@ function useValidation(
     error,
     message,
     changeValue,
-    changeValidator,
   };
 }
 

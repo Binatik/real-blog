@@ -15,7 +15,7 @@ import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import { createPost, editor } from "../slices/editorSlice";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import Cookies from "js-cookie";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { CookieKey } from "@src/app/enums/Cookies";
 import { useNavigate } from "react-router-dom";
 
@@ -27,6 +27,7 @@ export const Editor = ({ title }: EditorProps) => {
   const dispatch = useRootDispatch();
   const navigate = useNavigate();
   const titleValidator = useValidation(validatorGroup.title, true);
+  const descriptionValidator = useValidation(validatorGroup.description, true);
   const tags = useRootSelector((state) => state.editorSlice.tagsObject);
   const topic = useRootSelector((state) => state.editorSlice.topic);
   const error = useRootSelector((state) => state.editorSlice.error);
@@ -34,6 +35,10 @@ export const Editor = ({ title }: EditorProps) => {
   const loading = !topic;
 
   const token = Cookies.get(CookieKey.token);
+
+  const fieldRefs = useRef<HTMLInputElement[]>([]);
+  const errorsFields = [titleValidator.error, descriptionValidator.error];
+  const isValidationFailed = errorsFields.some((field) => field);
 
   const createPostSubmit = async (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
@@ -45,9 +50,12 @@ export const Editor = ({ title }: EditorProps) => {
       token: token,
     };
 
-    titleValidator.changeValidator();
+    errorsFields.some((field, index) => {
+      fieldRefs.current[index].focus();
+      return field;
+    });
 
-    if (titleValidator.error) {
+    if (isValidationFailed) {
       return;
     }
 
@@ -59,7 +67,7 @@ export const Editor = ({ title }: EditorProps) => {
       navigate("/user");
       location.reload();
     }
-  }, [error, topic]);
+  }, [error, topic, navigate]);
 
   const renderTags = () => {
     if (tags.length === 0) {
@@ -126,9 +134,10 @@ export const Editor = ({ title }: EditorProps) => {
               type="title"
               idLabel="Title"
               label="Title"
-              value={titleValidator.value}
-              onChange={titleValidator.changeValue}
-              onBlur={titleValidator.changeValidator}
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
+              onChange={(event) =>
+                titleValidator.changeValue(event.target.value)
+              }
               error={titleValidator.error}
               message={titleValidator.message}
             />
@@ -137,6 +146,12 @@ export const Editor = ({ title }: EditorProps) => {
               type="description"
               idLabel="description"
               label="Short description"
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
+              onChange={(event) =>
+                descriptionValidator.changeValue(event.target.value)
+              }
+              error={descriptionValidator.error}
+              message={descriptionValidator.message}
             />
             <Message idLabel="Message" label="Text" />
           </div>

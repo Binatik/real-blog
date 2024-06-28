@@ -39,15 +39,10 @@ function CreateAccount() {
   const canSubmit = isPasswordConfirmed && !isValidationFailed;
   const message = "Password and repeat password must match!";
 
-  async function createAccountSubmit(
+  const createAccountSubmit = async (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
-  ) {
+  ) => {
     event.preventDefault();
-
-    userName.changeValidator();
-    email.changeValidator();
-    password.changeValidator();
-    repeatPassword.changeValidator();
 
     errorsFields.some((field, index) => {
       fieldRefs.current[index].focus();
@@ -65,7 +60,7 @@ function CreateAccount() {
 
     await dispatch(registerProfile(event.currentTarget));
     navigate("/user");
-  }
+  };
 
   return (
     <section className={classes.create}>
@@ -86,8 +81,7 @@ function CreateAccount() {
               idLabel="username"
               label="Username"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
-              onChange={userName.changeValue}
-              onBlur={userName.changeValidator}
+              onChange={(event) => userName.changeValue(event.target.value)}
               error={userName.error}
               message={userName.message}
             />
@@ -97,8 +91,7 @@ function CreateAccount() {
               idLabel="email"
               label="Email address"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
-              onChange={email.changeValue}
-              onBlur={email.changeValidator}
+              onChange={(event) => email.changeValue(event.target.value)}
               error={email.error}
               message={email.message}
             />
@@ -108,8 +101,7 @@ function CreateAccount() {
               idLabel="password"
               label="Password"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[2] = ref)}
-              onChange={password.changeValue}
-              onBlur={password.changeValidator}
+              onChange={(event) => password.changeValue(event.target.value)}
               message={password.message}
               error={password.error}
             />
@@ -118,8 +110,9 @@ function CreateAccount() {
               idLabel="repeatPassword"
               label="Repeat Password"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[3] = ref)}
-              onChange={repeatPassword.changeValue}
-              onBlur={repeatPassword.changeValidator}
+              onChange={(event) =>
+                repeatPassword.changeValue(event.target.value)
+              }
               message={isPasswordConfirmed ? repeatPassword.message : message}
               error={!isPasswordConfirmed}
             />
