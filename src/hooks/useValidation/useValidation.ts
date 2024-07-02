@@ -21,7 +21,7 @@ function useValidation(
   const state = initialStateValue ? initialStateValue : "";
   const [value, setValue] = useState(state);
   const [message, setMessage] = useState("");
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(state === "" ? true : false);
 
   function changeValue(ctx: string) {
     setValue(() => {

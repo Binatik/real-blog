@@ -5,7 +5,7 @@ const validatorGroup = {
       message: "The field cannot be empty!",
     },
     {
-      pattern: /^[\p{L}\d_-]{3,21}$/u,
+      pattern: /^.{6,23}$/,
       message: "Invalid user name!",
     },
   ],

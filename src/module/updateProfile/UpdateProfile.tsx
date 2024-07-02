@@ -24,7 +24,7 @@ function UpdateProfile() {
 
   const token = Cookies.get(CookieKey.token);
 
-  const errorsFields = [email.error, newPassword.error, userName.error];
+  const errorsFields = [userName.error, email.error, newPassword.error];
 
   const isValidationFailed = errorsFields.some((field) => field);
 
@@ -47,7 +47,7 @@ function UpdateProfile() {
       return;
     }
 
-    dispatch(updateProfile(payload));
+    await dispatch(updateProfile(payload));
   }
 
   return (
@@ -68,7 +68,7 @@ function UpdateProfile() {
               name="username"
               value={userName.value}
               type="text"
-              idLabel="Username"
+              idLabel="username"
               label="username"
               onChange={(event) => userName.changeValue(event.target.value)}
               error={userName.error}

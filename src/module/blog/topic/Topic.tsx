@@ -25,6 +25,7 @@ import { CookieKey } from "@src/app/enums/Cookies";
 import ReactMarkdown from "react-markdown";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { params } from "../Blog";
+import { getTime } from "@src/misc/utils/getTime";
 
 type TopicProps = {
   article: Article;
@@ -125,7 +126,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
               {article.author.username}
             </Heading>
             <Text as="span" mode="defaultAlpha50">
-              March 5, 2020
+              {getTime(article.createdAt)}
             </Text>
           </div>
           <Avatar
