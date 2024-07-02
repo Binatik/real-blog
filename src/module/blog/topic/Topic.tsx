@@ -12,7 +12,7 @@ import {
   Text,
 } from "@ui/index";
 import classes from "./Topic.module.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import {
   fetchDeleteReaction,
@@ -24,6 +24,7 @@ import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
 import ReactMarkdown from "react-markdown";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
+import { params } from "../Blog";
 
 type TopicProps = {
   article: Article;
@@ -32,6 +33,7 @@ type TopicProps = {
 
 export const Topic = ({ article, expanded }: TopicProps) => {
   const dispatch = useRootDispatch();
+  const params = useParams<params>();
   const navigate = useNavigate();
   const profile = useRootSelector((state) => state.profileSlice.profile);
   const token = Cookies.get(CookieKey.token);
@@ -48,7 +50,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
 
   const deleteTopic = async () => {
     await dispatch(fetchDeleteTopic(payload));
-    navigate("/user");
+    navigate(`/user`);
   };
 
   const getReaction = async (reaction: boolean) => {
@@ -95,7 +97,9 @@ export const Topic = ({ article, expanded }: TopicProps) => {
             Delete
           </Button>
           <Button
-            onClick={() => navigate(`/user/updateTopic/${article.slug}`)}
+            onClick={() =>
+              navigate(`/user/${params.pageCount}/updateTopic/${article.slug}`)
+            }
             type="button"
             mode="success"
             size="small"

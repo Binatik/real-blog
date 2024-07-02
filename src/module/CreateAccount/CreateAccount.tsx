@@ -59,7 +59,8 @@ function CreateAccount() {
     }
 
     await dispatch(registerProfile(event.currentTarget));
-    navigate("/user/0");
+    navigate("/user");
+    location.reload();
   };
 
   return (

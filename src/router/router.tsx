@@ -10,7 +10,7 @@ import { CurrentTopic } from "@page/CurrentTopic/CurrentTopic";
 import { CreateTopic } from "@page/CreateTopic/CreateTopic";
 import { UpdateTopic } from "@page/UpdateTopic/UpdateTopic";
 
-const router = createBrowserRouter([
+const ghostRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
@@ -40,9 +40,22 @@ const router = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+]);
+
+const clientRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
       {
         element: <ProtectedRoute to="/" protectedRole="client" />,
         children: [
+          {
+            path: "user",
+            element: <Feed />,
+          },
           {
             path: "user/:pageCount",
             element: <Feed />,
@@ -60,8 +73,12 @@ const router = createBrowserRouter([
             element: <CreateTopic />,
           },
           {
-            path: "user/updateTopic/:slug",
+            path: "user/:pageCount/updateTopic/:slug",
             element: <UpdateTopic />,
+          },
+          {
+            path: "sign-in",
+            element: <Login />,
           },
         ],
       },
@@ -69,4 +86,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export { router };
+export { clientRouter, ghostRouter };

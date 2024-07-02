@@ -27,13 +27,21 @@ export const Blog = () => {
     (state) => state.postsSlice.articlesCount,
   );
   const loading = !articles;
-  const initPage = Number(params.pageCount);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+
+  const initPage = params.pageCount ? params.pageCount : "0";
+
+  const [currentPage, setCurrentPage] = useState(Number(initPage));
 
   const saveCurrentPage = (ctx: Ctx) => {
-    const token = Cookies.get(CookieKey.token);
-
     setCurrentPage(ctx.selected);
+  };
+
+  useEffect(() => {
+    const token = Cookies.get(CookieKey.token);
+    const payload = {
+      token,
+      offset: 19 * currentPage,
+    };
 
     if (token) {
       navigate(`/user/${currentPage}`);
@@ -42,17 +50,6 @@ export const Blog = () => {
     if (!token) {
       navigate(`/${currentPage}`);
     }
-  };
-
-  useEffect(() => {
-    setCurrentPage(initPage);
-  }, [initPage]);
-
-  useEffect(() => {
-    const payload = {
-      token: Cookies.get(CookieKey.token),
-      offset: 19 * currentPage,
-    };
 
     dispatch(fetchArticles(payload));
   }, [currentPage, dispatch]);

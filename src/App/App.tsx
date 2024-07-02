@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { router } from "@src/router/router";
+import { clientRouter, ghostRouter } from "@src/router/router";
 import { useEffect } from "react";
 import { CookieKey } from "./enums/Cookies";
 import { fetchCurrentProfile } from "./slices/profileSlice";
@@ -12,10 +12,10 @@ import "./global.scss";
 export const App = () => {
   const dispatch = useRootDispatch();
   const isAuthorized = useRootSelector((state) => state.authSlice.isAuthorized);
+  const role = useRootSelector((state) => state.profileSlice.role);
+  const token = Cookies.get(CookieKey.token);
 
   useEffect(() => {
-    const token = Cookies.get(CookieKey.token);
-
     if (token && isAuthorized) {
       dispatch(fetchCurrentProfile(token));
     }
@@ -23,7 +23,17 @@ export const App = () => {
     if (token && !isAuthorized) {
       dispatch(fetchCurrentProfile(token));
     }
-  }, [dispatch, isAuthorized]);
+  }, [dispatch, isAuthorized, token]);
 
-  return <RouterProvider router={router} />;
+  const renderProtectedRouter = () => {
+    if (role === "ghost" && !token) {
+      return <RouterProvider router={ghostRouter} />;
+    }
+
+    if (role === "client") {
+      return <RouterProvider router={clientRouter} />;
+    }
+  };
+
+  return <>{renderProtectedRouter()}</>;
 };
