@@ -52,7 +52,7 @@ export const Blog = () => {
     }
 
     dispatch(fetchArticles(payload));
-  }, [currentPage, dispatch]);
+  }, [currentPage, navigate, dispatch]);
 
   return (
     <div className={classes.blog}>

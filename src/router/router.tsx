@@ -53,6 +53,10 @@ const clientRouter = createBrowserRouter([
         element: <ProtectedRoute to="/" protectedRole="client" />,
         children: [
           {
+            index: true,
+            element: <Feed />,
+          },
+          {
             path: "user",
             element: <Feed />,
           },
