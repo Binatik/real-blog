@@ -15,3 +15,4 @@ export * from "./Spinner/Spinner";
 export * from "./Paginate/Paginate";
 export * from "./Like/Like";
 export * from "./Message/Message";
+export * from "./Editor/Editor";

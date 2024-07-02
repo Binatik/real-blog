@@ -83,7 +83,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
   };
 
   const renderButtons = () => {
-    if (profile?.user.username === article.author.username) {
+    if (profile?.user.username === article.author.username && token) {
       return (
         <>
           <Button
@@ -94,7 +94,12 @@ export const Topic = ({ article, expanded }: TopicProps) => {
           >
             Delete
           </Button>
-          <Button type="button" mode="success" size="small">
+          <Button
+            onClick={() => navigate(`/user/updateTopic/${article.slug}`)}
+            type="button"
+            mode="success"
+            size="small"
+          >
             Edit
           </Button>
         </>

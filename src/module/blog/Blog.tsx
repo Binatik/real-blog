@@ -1,4 +1,4 @@
-import { Paginate, Spinner } from "@ui/index";
+import { Paginate, Spinner, Text } from "@ui/index";
 import classes from "./Blog.module.scss";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { useEffect, useState } from "react";
@@ -8,15 +8,45 @@ import Arrow from "@assets/arrow.svg?react";
 import { Topic } from "./topic/Topic";
 import Cookies from "js-cookie";
 import { CookieKey } from "@src/app/enums/Cookies";
+import { useNavigate, useParams } from "react-router-dom";
+
+type Ctx = {
+  selected: number;
+};
+
+export type params = {
+  pageCount?: string | undefined;
+};
 
 export const Blog = () => {
   const dispatch = useRootDispatch();
+  const navigate = useNavigate();
+  const params = useParams<params>();
   const articles = useRootSelector((state) => state.postsSlice.articles);
   const articlesCount = useRootSelector(
     (state) => state.postsSlice.articlesCount,
   );
   const loading = !articles;
-  const [currentPage, setCurrentPage] = useState(0);
+  const initPage = Number(params.pageCount);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+
+  const saveCurrentPage = (ctx: Ctx) => {
+    const token = Cookies.get(CookieKey.token);
+
+    setCurrentPage(ctx.selected);
+
+    if (token) {
+      navigate(`/user/${currentPage}`);
+    }
+
+    if (!token) {
+      navigate(`/${currentPage}`);
+    }
+  };
+
+  useEffect(() => {
+    setCurrentPage(initPage);
+  }, [initPage]);
 
   useEffect(() => {
     const payload = {
@@ -48,13 +78,18 @@ export const Blog = () => {
             )
           )}
         </div>
+        {articles?.length === 0 && (
+          <Text size="big" mode="defaultAlpha50" as="p">
+            The page you are looking for has not been added yet!
+          </Text>
+        )}
         {!loading && (
           <Paginate
             pageRangeDisplayed={3}
             pageCount={Math.ceil(articlesCount / 19)}
             initialPage={currentPage}
             marginPagesDisplayed={1}
-            onPageChange={(ctx) => setCurrentPage(ctx.selected)}
+            onPageChange={(ctx) => saveCurrentPage(ctx)}
             previousLabel={<Arrow className={classes.arrowLeft} />}
             nextLabel={<Arrow className={classes.arrowRight} />}
           />

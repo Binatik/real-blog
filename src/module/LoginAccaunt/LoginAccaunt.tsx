@@ -51,7 +51,7 @@ function LoginAccaunt() {
     const token = Cookies.get(CookieKey.token);
 
     if (token) {
-      navigate("/user");
+      navigate("/user/0");
     }
   };
 

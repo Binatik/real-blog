@@ -6,13 +6,19 @@ type ValidationItem = {
   initialStateValue?: string;
 };
 
+export type ReturnValidator = {
+  value: string;
+  error: boolean;
+  message: string;
+  changeValue: (ctx: string) => void;
+};
+
 function useValidation(
   validatorGroup: ValidationItem[],
   required: boolean = true,
   initialStateValue?: string,
-) {
+): ReturnValidator {
   const state = initialStateValue ? initialStateValue : "";
-
   const [value, setValue] = useState(state);
   const [message, setMessage] = useState("");
   const [error, setError] = useState(true);

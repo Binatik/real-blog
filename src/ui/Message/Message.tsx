@@ -14,6 +14,7 @@ export const Message = ({
   idLabel,
   mode = "default",
   size = "medium",
+  ...props
 }: MessageProps) => {
   return (
     <>
@@ -29,6 +30,7 @@ export const Message = ({
           id={idLabel}
           placeholder={label}
           name="message"
+          {...props}
         ></textarea>
       </div>
     </>

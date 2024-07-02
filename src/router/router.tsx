@@ -7,7 +7,8 @@ import { Home } from "@page/Home/Home";
 import { Feed } from "@page/Feed/Feed";
 import { UpdateProfile } from "@module/updateProfile/UpdateProfile";
 import { CurrentTopic } from "@page/CurrentTopic/CurrentTopic";
-import { Create } from "@page/Create/Create";
+import { CreateTopic } from "@page/CreateTopic/CreateTopic";
+import { UpdateTopic } from "@page/UpdateTopic/UpdateTopic";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         element: <ProtectedRoute to="/" protectedRole="ghost" />,
         children: [
           {
+            path: "/:pageCount",
+            element: <Home />,
+          },
+          {
             path: "sign-up",
             element: <Register />,
           },
@@ -30,7 +35,7 @@ const router = createBrowserRouter([
             element: <Login />,
           },
           {
-            path: "/:slug",
+            path: "/:pageCount/:slug",
             element: <CurrentTopic />,
           },
         ],
@@ -39,7 +44,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute to="/" protectedRole="client" />,
         children: [
           {
-            path: "user",
+            path: "user/:pageCount",
             element: <Feed />,
           },
           {
@@ -47,12 +52,16 @@ const router = createBrowserRouter([
             element: <UpdateProfile />,
           },
           {
-            path: "user/:slug",
+            path: "user/:pageCount/:slug",
             element: <CurrentTopic />,
           },
           {
-            path: "user/creater",
-            element: <Create />,
+            path: "user/create",
+            element: <CreateTopic />,
+          },
+          {
+            path: "user/updateTopic/:slug",
+            element: <UpdateTopic />,
           },
         ],
       },

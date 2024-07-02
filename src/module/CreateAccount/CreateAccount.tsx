@@ -59,7 +59,7 @@ function CreateAccount() {
     }
 
     await dispatch(registerProfile(event.currentTarget));
-    navigate("/user");
+    navigate("/user/0");
   };
 
   return (

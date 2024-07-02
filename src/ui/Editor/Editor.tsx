@@ -4,70 +4,36 @@ import {
   Heading,
   InputField,
   Message,
-  Spinner,
   Text,
 } from "@ui/index";
 import classes from "./Editor.module.scss";
 import classNames from "classnames";
-import { validatorGroup } from "@validations/editor";
-import { useValidation } from "@hooks/useValidation/useValidation";
+import { ReturnValidator } from "@hooks/useValidation/useValidation";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
-import { createPost, editor } from "../slices/editorSlice";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
-import Cookies from "js-cookie";
-import React, { useEffect, useRef } from "react";
-import { CookieKey } from "@src/app/enums/Cookies";
-import { useNavigate } from "react-router-dom";
+import { FormHTMLAttributes } from "react";
+import { editor } from "@module/blog/slices/editorSlice";
 
 type EditorProps = {
-  title: string;
-};
-
-export const Editor = ({ title }: EditorProps) => {
-  const dispatch = useRootDispatch();
-  const navigate = useNavigate();
-  const titleValidator = useValidation(validatorGroup.title, true);
-  const descriptionValidator = useValidation(validatorGroup.description, true);
-  const tags = useRootSelector((state) => state.editorSlice.tagsObject);
-  const topic = useRootSelector((state) => state.editorSlice.topic);
-  const error = useRootSelector((state) => state.editorSlice.error);
-
-  const loading = !topic;
-
-  const token = Cookies.get(CookieKey.token);
-
-  const fieldRefs = useRef<HTMLInputElement[]>([]);
-  const errorsFields = [titleValidator.error, descriptionValidator.error];
-  const isValidationFailed = errorsFields.some((field) => field);
-
-  const createPostSubmit = async (
-    event: React.MouseEvent<HTMLFormElement, MouseEvent>,
-  ) => {
-    event.preventDefault();
-
-    const payload = {
-      form: event.currentTarget,
-      token: token,
-    };
-
-    errorsFields.some((field, index) => {
-      fieldRefs.current[index].focus();
-      return field;
-    });
-
-    if (isValidationFailed) {
-      return;
-    }
-
-    await dispatch(createPost(payload));
+  children: React.ReactNode;
+  fieldRefs: React.MutableRefObject<HTMLInputElement[]>;
+  field: {
+    title: ReturnValidator;
+    description: ReturnValidator;
+    body?: ReturnValidator;
   };
+} & FormHTMLAttributes<HTMLFormElement>;
 
-  useEffect(() => {
-    if (topic && !error) {
-      navigate("/user");
-      location.reload();
-    }
-  }, [error, topic, navigate]);
+export const Editor = ({
+  children,
+  fieldRefs,
+  field,
+  ...props
+}: EditorProps) => {
+  const dispatch = useRootDispatch();
+
+  const tags = useRootSelector((state) => state.editorSlice.tagsObject);
+  const error = useRootSelector((state) => state.editorSlice.error);
 
   const renderTags = () => {
     if (tags.length === 0) {
@@ -119,9 +85,9 @@ export const Editor = ({ title }: EditorProps) => {
   return (
     <section className={classes.editorContainer}>
       <div className={classNames("container-desktop", classes.desktopSpace)}>
-        <FormControl wide onSubmit={createPostSubmit}>
+        <FormControl wide {...props}>
           <Heading className={classes.editorTitle} as="h2">
-            {title}
+            {children}
           </Heading>
           {error && (
             <Text as="span" size="medium" mode="danger">
@@ -130,16 +96,16 @@ export const Editor = ({ title }: EditorProps) => {
           )}
           <div className={classes.editorFields}>
             <InputField
+              autoFocus
               name="title"
               type="title"
               idLabel="Title"
               label="Title"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
-              onChange={(event) =>
-                titleValidator.changeValue(event.target.value)
-              }
-              error={titleValidator.error}
-              message={titleValidator.message}
+              value={field.title.value}
+              onChange={(event) => field.title.changeValue(event.target.value)}
+              error={field.title.error}
+              message={field.title.message}
             />
             <InputField
               name="description"
@@ -147,13 +113,19 @@ export const Editor = ({ title }: EditorProps) => {
               idLabel="description"
               label="Short description"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
+              value={field.description.value}
               onChange={(event) =>
-                descriptionValidator.changeValue(event.target.value)
+                field.description.changeValue(event.target.value)
               }
-              error={descriptionValidator.error}
-              message={descriptionValidator.message}
+              error={field.description.error}
+              message={field.description.message}
             />
-            <Message idLabel="Message" label="Text" />
+            <Message
+              onChange={(event) => field.body?.changeValue(event.target.value)}
+              value={field.body?.value}
+              idLabel="Message"
+              label="Text"
+            />
           </div>
           <Text size="medium" mode="defaultAlpha75">
             Tags
@@ -168,7 +140,6 @@ export const Editor = ({ title }: EditorProps) => {
             Send
           </Button>
         </FormControl>
-        {!loading && <Spinner />}
       </div>
     </section>
   );

@@ -32,7 +32,7 @@ function Auth() {
   }
 
   function linkCreate() {
-    navigate("/user/creater");
+    navigate("/user/create");
   }
 
   const signUpLocation = location.pathname === "/sign-up";

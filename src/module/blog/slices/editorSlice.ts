@@ -1,11 +1,13 @@
 import { PostTopic, RootTopic } from "@api/api.types";
 import { Api } from "@api/index";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { params } from "../update/Update";
 
 const api = new Api();
 
-type PayloadCreatePost = {
-  form: HTMLFormElement;
+type PayloadTopic = {
+  form?: HTMLFormElement;
+  path?: params["slug"];
   token: string | undefined;
 };
 
@@ -15,14 +17,16 @@ type tagObject = {
 };
 
 type EditorState = {
-  topic: RootTopic["article"] | null;
+  fieldData: PostTopic | null;
   tagsObject: tagObject[];
+  loading: boolean;
   error: boolean;
 };
 
 const initialState: EditorState = {
-  topic: null,
+  fieldData: null,
   tagsObject: [],
+  loading: true,
   error: false,
 };
 
@@ -43,7 +47,8 @@ const editorSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(createPost.fulfilled, (state, action) => {
       state.error = false;
-      state.topic = action.payload.article;
+      state.loading = false;
+      state.fieldData = action.payload;
     });
     builder.addCase(createPost.rejected, (state) => {
       state.error = true;
@@ -53,7 +58,7 @@ const editorSlice = createSlice({
 
 export const createPost = createAsyncThunk(
   "editorSlice/createPost",
-  async (payload: PayloadCreatePost) => {
+  async (payload: PayloadTopic) => {
     const { form, token } = payload;
     const formData = new FormData(form);
 
@@ -87,7 +92,7 @@ export const createPost = createAsyncThunk(
 
     const request = JSON.stringify({ article: tmpData });
 
-    const result = await api.post<RootTopic>("/articles", {
+    await api.post<RootTopic>("/articles", {
       headers: {
         authorization: `Token ${token}`,
         "Content-type": "application/json",
@@ -95,9 +100,26 @@ export const createPost = createAsyncThunk(
       body: request,
     });
 
-    return result;
+    return tmpData;
   },
 );
+
+// export const fetchTopic = createAsyncThunk(
+//   "postsSlice/fetchTopic",
+//   async (payload: PayloadTopic) => {
+//     const { path, token } = payload;
+
+//     const result = await api.post<RootTopic>("/articles", {
+//       headers: {
+//         authorization: `Token ${token}`,
+//         "Content-type": "application/json",
+//       },
+//       body: request,
+//     });
+
+//     return result;
+//   },
+// );
 
 const editor = editorSlice.actions;
 

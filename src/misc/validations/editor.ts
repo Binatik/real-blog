@@ -21,14 +21,14 @@ const validatorGroup = {
     },
   ],
 
-  tag: [
+  body: [
     {
       pattern: /^(.+)$/,
       message: "The field cannot be empty!",
     },
     {
-      pattern: /^(?=.*[a-zA-Z0-9]).{6,44}$/,
-      message: "Tag deve essere compreso tra 6 e 44 caratteri!",
+      pattern: /^.{20,99}$/,
+      message: "Description deve essere compreso tra 20 e 199 caratteri!",
     },
   ],
 };

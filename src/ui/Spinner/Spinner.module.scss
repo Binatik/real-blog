@@ -22,6 +22,13 @@
   transform: translate(-50%, 50%);
 }
 
+.spinner.spinnerCenter {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+}
+
 @keyframes pgfill {
   0% {
     background-image: linear-gradient(var(--main-color) 20px, transparent 0), linear-gradient(var(--main-color) 20px, transparent 0), linear-gradient(var(--main-color) 20px, transparent 0), linear-gradient(var(--main-color) 20px, transparent 0);
