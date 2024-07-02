@@ -7,7 +7,7 @@ const api = new Api();
 
 type PayloadTopic = {
   form?: HTMLFormElement;
-  path?: params["slug"];
+  slug?: params["slug"];
   token: string | undefined;
 };
 
@@ -104,22 +104,53 @@ export const createPost = createAsyncThunk(
   },
 );
 
-// export const fetchTopic = createAsyncThunk(
-//   "postsSlice/fetchTopic",
-//   async (payload: PayloadTopic) => {
-//     const { path, token } = payload;
+export const updatePost = createAsyncThunk(
+  "editorSlice/createPost",
+  async (payload: PayloadTopic) => {
+    const { form, token, slug } = payload;
+    const formData = new FormData(form);
 
-//     const result = await api.post<RootTopic>("/articles", {
-//       headers: {
-//         authorization: `Token ${token}`,
-//         "Content-type": "application/json",
-//       },
-//       body: request,
-//     });
+    const formFields = Object.fromEntries(formData.entries());
 
-//     return result;
-//   },
-// );
+    const tmpData: PostTopic = {
+      title: "",
+      description: "",
+      body: null,
+      tagList: [],
+    };
+
+    for (const key in formFields) {
+      if (key === "title") {
+        tmpData.title = formFields[key] as string;
+        continue;
+      }
+
+      if (key === "description") {
+        tmpData.description = formFields[key] as string;
+        continue;
+      }
+
+      if (key === "message") {
+        tmpData.body = formFields[key] as string;
+        continue;
+      }
+
+      tmpData.tagList = [...tmpData.tagList, formFields[key] as string];
+    }
+
+    const request = JSON.stringify({ article: tmpData });
+
+    await api.put<RootTopic>(`/articles/${slug}`, {
+      headers: {
+        authorization: `Token ${token}`,
+        "Content-type": "application/json",
+      },
+      body: request,
+    });
+
+    return tmpData;
+  },
+);
 
 const editor = editorSlice.actions;
 

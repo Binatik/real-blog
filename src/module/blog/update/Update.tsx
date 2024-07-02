@@ -8,6 +8,7 @@ import { useValidation } from "@hooks/useValidation/useValidation";
 import { validatorGroup } from "@validations/editor";
 import { Editor, Spinner } from "@ui/index";
 import { fetchTopic } from "../slices/postsSlice";
+import { updatePost } from "../slices/editorSlice";
 
 export type params = {
   slug?: string | undefined;
@@ -38,7 +39,7 @@ export const Update = () => {
   const sendLoading = useRootSelector((state) => state.editorSlice.loading);
   const error = useRootSelector((state) => state.editorSlice.error);
 
-  // const token = Cookies.get(CookieKey.token);
+  const token = Cookies.get(CookieKey.token);
 
   useEffect(() => {
     const payload = {
@@ -49,16 +50,16 @@ export const Update = () => {
     dispatch(fetchTopic(payload));
   }, [dispatch, params.slug]);
 
-  const createPostSubmit = async (
+  const updatePostSubmit = async (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
   ) => {
     event.preventDefault();
 
-    // const payload = {
-    //   form: event.currentTarget,
-    //   token: token,
-    //   slug: params
-    // };
+    const payload = {
+      form: event.currentTarget,
+      token: token,
+      slug: params.slug,
+    };
 
     errorsFields.some((field, index) => {
       fieldRefs.current[index].focus();
@@ -69,7 +70,7 @@ export const Update = () => {
       return;
     }
 
-    // await dispatch(createPost(payload));
+    await dispatch(updatePost(payload));
   };
 
   useEffect(() => {
@@ -84,7 +85,7 @@ export const Update = () => {
 
     return (
       <Editor
-        onSubmit={createPostSubmit}
+        onSubmit={updatePostSubmit}
         fieldRefs={fieldRefs}
         field={{ ...validate }}
       >
