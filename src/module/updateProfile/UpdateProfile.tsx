@@ -38,12 +38,12 @@ function UpdateProfile() {
       token: token,
     };
 
-    errorsFields.some((field, index) => {
-      fieldRefs.current[index].focus();
-      return field;
-    });
-
     if (isValidationFailed) {
+      errorsFields.some((field, index) => {
+        fieldRefs.current[index].focus();
+        return field;
+      });
+
       return;
     }
 

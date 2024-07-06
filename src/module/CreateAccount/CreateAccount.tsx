@@ -47,17 +47,16 @@ function CreateAccount() {
   ) => {
     event.preventDefault();
 
-    errorsFields.some((field, index) => {
-      fieldRefs.current[index].focus();
-      return field;
-    });
-
     if (!userConsent) {
       setUsersConsent(false);
       return;
     }
 
     if (!canSubmit) {
+      errorsFields.some((field, index) => {
+        fieldRefs.current[index].focus();
+        return field;
+      });
       return;
     }
 

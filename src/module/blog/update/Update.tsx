@@ -60,12 +60,12 @@ export const Update = () => {
       slug: params.slug,
     };
 
-    errorsFields.some((field, index) => {
-      fieldRefs.current[index].focus();
-      return field;
-    });
-
     if (isValidationFailed) {
+      errorsFields.some((field, index) => {
+        fieldRefs.current[index].focus();
+        return field;
+      });
+
       return;
     }
 

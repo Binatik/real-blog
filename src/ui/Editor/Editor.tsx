@@ -58,6 +58,7 @@ export const Editor = ({
           type="tag"
           idLabel={tag.id}
           label="Tag"
+          wide={false}
         />
         <Button
           onClick={() => dispatch(editor.removeTag(tag.id))}
@@ -104,6 +105,7 @@ export const Editor = ({
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
               value={field.title.value}
               onChange={(event) => field.title.changeValue(event.target.value)}
+              onBlur={(event) => field.title.changeValue(event.target.value)}
               error={field.title.error}
               message={field.title.message}
             />
@@ -112,6 +114,7 @@ export const Editor = ({
               type="description"
               idLabel="description"
               label="Short description"
+              onBlur={(event) => field.title.changeValue(event.target.value)}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
               value={field.description.value}
               onChange={(event) =>

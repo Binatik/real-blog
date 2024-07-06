@@ -6,6 +6,7 @@ type InputFieldProps = {
   mode?: "default";
   size?: "medium";
   idLabel: string;
+  wide?: boolean;
   labelHidden?: boolean;
   label: string;
   labelClass?: string;
@@ -20,6 +21,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
       idLabel,
       label,
       error,
+      wide = true,
       message,
       labelHidden,
       mode = "default",
@@ -43,7 +45,7 @@ const InputField = forwardRef<HTMLInputElement, InputFieldProps>(
     }
 
     return (
-      <div className={classes.inputField}>
+      <div className={classNames(classes.inputField, { [classes.wide]: wide })}>
         <label
           className={classNames(labelClass, classes.inputFieldLabel, {
             [classes.labelHidden]: labelHidden,
