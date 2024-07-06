@@ -16,15 +16,21 @@ function UpdateProfile() {
 
   const userName = useValidation(
     validatorGroup.userName,
-    false,
+    true,
     profile?.user.username,
   );
   const email = useValidation(validatorGroup.email, false, profile?.user.email);
   const newPassword = useValidation(validatorGroup.newPassword, false);
+  const photo = useValidation(validatorGroup.photo, false);
 
   const token = Cookies.get(CookieKey.token);
 
-  const errorsFields = [userName.error, email.error, newPassword.error];
+  const errorsFields = [
+    userName.error,
+    email.error,
+    newPassword.error,
+    photo.error,
+  ];
 
   const isValidationFailed = errorsFields.some((field) => field);
 
@@ -71,6 +77,8 @@ function UpdateProfile() {
               idLabel="username"
               label="username"
               onChange={(event) => userName.changeValue(event.target.value)}
+              onBlur={(event) => userName.changeValue(event.target.value)}
+              onFocus={(event) => userName.changeValue(event.target.value)}
               error={userName.error}
               message={userName.message}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
@@ -82,6 +90,8 @@ function UpdateProfile() {
               idLabel="email"
               label="Email address"
               onChange={(event) => email.changeValue(event.target.value)}
+              onBlur={(event) => email.changeValue(event.target.value)}
+              onFocus={(event) => email.changeValue(event.target.value)}
               error={email.error}
               message={email.message}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
@@ -92,6 +102,8 @@ function UpdateProfile() {
               label="Password"
               name="password"
               onChange={(event) => newPassword.changeValue(event.target.value)}
+              onBlur={(event) => newPassword.changeValue(event.target.value)}
+              onFocus={(event) => newPassword.changeValue(event.target.value)}
               error={newPassword.error}
               message={newPassword.message}
               ref={(ref: HTMLInputElement) => (fieldRefs.current[2] = ref)}
@@ -102,6 +114,10 @@ function UpdateProfile() {
               idLabel="file"
               label="Avatar image (url)"
               name="image"
+              ref={(ref: HTMLInputElement) => (fieldRefs.current[3] = ref)}
+              onChange={(event) => photo.changeValue(event.target.value)}
+              error={photo.error}
+              message={photo.message}
             />
           </div>
           <Button type="submit" size="medium" mode="primary">

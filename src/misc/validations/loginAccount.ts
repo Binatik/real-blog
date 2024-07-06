@@ -1,10 +1,6 @@
 const validatorGroup = {
   email: [
     {
-      pattern: /^(.+)$/,
-      message: "The field cannot be empty!",
-    },
-    {
       pattern:
         /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
       message: "The email must be a valid email address!",
@@ -13,8 +9,8 @@ const validatorGroup = {
 
   password: [
     {
-      pattern: /^(.+)$/,
-      message: "The field cannot be empty!",
+      pattern: /^.{6,399}$/,
+      message: "",
     },
   ],
 };

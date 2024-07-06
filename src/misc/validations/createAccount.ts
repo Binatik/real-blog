@@ -1,20 +1,12 @@
 const validatorGroup = {
   userName: [
     {
-      pattern: /^(.+)$/,
-      message: "The field cannot be empty!",
-    },
-    {
       pattern: /^[\p{L}\d_-]{3,21}$/u,
       message: "Invalid user name!",
     },
   ],
 
   email: [
-    {
-      pattern: /^(.+)$/,
-      message: "The field cannot be empty!",
-    },
     {
       pattern:
         /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
@@ -24,19 +16,15 @@ const validatorGroup = {
 
   password: [
     {
-      pattern: /^(.+)$/,
-      message: "The field cannot be empty!",
-    },
-    {
-      pattern: /^(?=.*[a-zA-Z0-9]).{6,40}$/,
-      message: "Your password needs to be at least 6 characters!",
+      pattern: /^(?=.*[a-zA-Z0-9]).{6,99}$/,
+      message: "Your password needs to be at least 6 characters and 99!",
     },
   ],
 
   repeatPassword: [
     {
-      pattern: /^(.+)$/,
-      message: "The field cannot be empty!",
+      pattern: /^.{17,399}$/,
+      message: "",
     },
   ],
 };

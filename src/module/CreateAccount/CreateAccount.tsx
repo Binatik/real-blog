@@ -25,10 +25,10 @@ function CreateAccount() {
 
   const apiError = useRootSelector((state) => state.authSlice.apiError);
 
-  const userName = useValidation(validatorGroup.userName);
-  const email = useValidation(validatorGroup.email);
-  const password = useValidation(validatorGroup.password);
-  const repeatPassword = useValidation(validatorGroup.repeatPassword, false);
+  const userName = useValidation(validatorGroup.userName, true);
+  const email = useValidation(validatorGroup.email, true);
+  const password = useValidation(validatorGroup.password, true);
+  const repeatPassword = useValidation(validatorGroup.repeatPassword, true);
 
   const errorsFields = [
     userName.error,

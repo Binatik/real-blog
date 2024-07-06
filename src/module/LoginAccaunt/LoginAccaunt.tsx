@@ -24,8 +24,8 @@ function LoginAccaunt() {
 
   const fieldRefs = useRef<HTMLInputElement[]>([]);
 
-  const email = useValidation(validatorGroup.email, false);
-  const password = useValidation(validatorGroup.password, false);
+  const email = useValidation(validatorGroup.email, true);
+  const password = useValidation(validatorGroup.password, true);
 
   const errorsFields = [email.error, password.error];
 
@@ -73,6 +73,7 @@ function LoginAccaunt() {
               label="Email address"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[0] = ref)}
               onChange={(event) => email.changeValue(event.target.value)}
+              onBlur={(event) => email.changeValue(event.target.value)}
               error={email.error}
               message={email.message}
             />
@@ -83,6 +84,8 @@ function LoginAccaunt() {
               name="password"
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
               onChange={(event) => password.changeValue(event.target.value)}
+              onBlur={(event) => password.changeValue(event.target.value)}
+              onFocus={(event) => password.changeValue(event.target.value)}
               error={password.error}
               message={password.message}
             />
