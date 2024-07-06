@@ -1,3 +1,8 @@
+.text {
+  transition: opacity 0.2s;
+  opacity: 1;
+}
+
 .text.defaultMode {
   color: var(--default-color-70);
 }
@@ -24,4 +29,8 @@
 
 .text.bigSize {
   font-size: 18px;
+}
+
+.text.hidden {
+  opacity: 0;
 }

@@ -15,12 +15,15 @@ import { useRef, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
+import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 function CreateAccount() {
   const dispatch = useRootDispatch();
   const navigate = useNavigate();
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
+
+  const apiError = useRootSelector((state) => state.authSlice.apiError);
 
   const userName = useValidation(validatorGroup.userName);
   const email = useValidation(validatorGroup.email);
@@ -137,6 +140,10 @@ function CreateAccount() {
               Sign In.
             </RouterLink>
           </div>
+          <Text
+            hidden={!apiError}
+            mode="danger"
+          >{`email or password ${apiError && apiError.errors.email}`}</Text>
         </FormControl>
       </div>
     </section>

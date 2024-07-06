@@ -44,3 +44,10 @@ export type PostTopic = {
   body: string | null;
   tagList: string[];
 };
+
+export type ResponseErrorMessage = {
+  errors: {
+    ["email or password"]: string;
+    email: string;
+  };
+};

@@ -1,9 +1,6 @@
 import { Method } from "./api.types";
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Z…xNTJ9.CLB3NVauBhZci6TbWuLi03hhUjYOzIFHXYstFZQ3cyQ
+import { ApiError, ResponseError } from "./Error";
 
-// {username: 'serega111111',
-// email: 'sss@mal.ru',
-// token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Z…xNTJ9.CLB3NVauBhZci6TbWuLi03hhUjYOzIFHXYstFZQ3cyQ'
 export class Api {
   private api: "https://blog.kata.academy/api";
 
@@ -17,13 +14,19 @@ export class Api {
   ) {
     try {
       const response = await fetch(`${this.api}${url}`, fetchOptions);
+      //result Any но он не требуется к типизации в данном кейсе это обходится иначе!
+      const result = await response.json();
 
       if (!response.ok) {
-        throw new Error(`Error status ${response.status}`);
+        throw new ResponseError(result);
       }
-      return response.json();
+      return result;
     } catch (error) {
-      throw new Error("Network error");
+      if (error instanceof ResponseError) {
+        throw new ApiError(error);
+      } else if (error instanceof Error) {
+        throw new Error("Network error");
+      }
     }
   }
 

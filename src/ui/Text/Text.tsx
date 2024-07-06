@@ -13,6 +13,7 @@ function Text({
   as = "span",
   mode = "default",
   size = "small",
+  hidden,
   children,
   className,
   ...props
@@ -22,6 +23,7 @@ function Text({
   return (
     <Tag
       className={classNames(className, classes.text, {
+        [classes.hidden]: hidden,
         [classes.defaultMode]: mode === "default",
         [classes.defaultModeAlpha50]: mode === "defaultAlpha50",
         [classes.defaultModeAlpha75]: mode === "defaultAlpha75",

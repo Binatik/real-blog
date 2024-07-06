@@ -20,9 +20,7 @@ import Cookies from "js-cookie";
 function LoginAccaunt() {
   const navigate = useNavigate();
   const dispatch = useRootDispatch();
-  const hasValidCredentials = useRootSelector(
-    (state) => state.authSlice.hasValidCredentials,
-  );
+  const apiError = useRootSelector((state) => state.authSlice.apiError);
 
   const fieldRefs = useRef<HTMLInputElement[]>([]);
 
@@ -53,12 +51,6 @@ function LoginAccaunt() {
     if (token) {
       navigate("/user");
       location.reload();
-    }
-  };
-
-  const renderErrorText = () => {
-    if (!hasValidCredentials && hasValidCredentials !== null) {
-      return <Text mode="danger">Error, email or password is invalid</Text>;
     }
   };
 
@@ -105,7 +97,10 @@ function LoginAccaunt() {
               Sign Up.
             </RouterLink>
           </div>
-          {renderErrorText()}
+          <Text
+            hidden={!apiError}
+            mode="danger"
+          >{`email or password ${apiError && apiError.errors["email or password"]}`}</Text>
         </FormControl>
       </div>
     </section>
