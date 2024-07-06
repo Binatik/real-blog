@@ -37,7 +37,6 @@ export const Update = () => {
   const isValidationFailed = errorsFields.some((field) => field);
 
   const sendLoading = useRootSelector((state) => state.editorSlice.loading);
-  const error = useRootSelector((state) => state.editorSlice.error);
 
   const token = Cookies.get(CookieKey.token);
 
@@ -71,14 +70,8 @@ export const Update = () => {
     }
 
     await dispatch(updatePost(payload));
+    navigate("/user/0");
   };
-
-  useEffect(() => {
-    if (!sendLoading && !error) {
-      navigate("/user/0");
-      location.reload();
-    }
-  }, [error, sendLoading, navigate]);
 
   const renderEditTopic = () => {
     if (loadingTopic) return <Spinner position="center" />;

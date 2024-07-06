@@ -29,7 +29,7 @@ const validatorGroup = {
     },
     {
       pattern: /^(?=.*[a-zA-Z0-9]).{6,40}$/,
-      message: "Password deve essere compreso tra 6 e 40 caratteri!",
+      message: "Your password needs to be at least 6 characters!",
     },
   ],
 

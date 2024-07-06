@@ -37,7 +37,7 @@ function CreateAccount() {
   const isPasswordConfirmed = password.value === repeatPassword.value;
   const isValidationFailed = errorsFields.some((field) => field);
   const canSubmit = isPasswordConfirmed && !isValidationFailed;
-  const message = "Password and repeat password must match!";
+  const message = "Passwords must match!";
 
   const createAccountSubmit = async (
     event: React.MouseEvent<HTMLFormElement, MouseEvent>,
@@ -124,6 +124,8 @@ function CreateAccount() {
             })}
             idLabel="license"
             label="I agree to the processing of my personal information"
+            error={userConsent}
+            messageError="You didn't give consent!"
             onChange={(event) => setUsersConsent(event.currentTarget.checked)}
           />
           <Button type="submit" size="medium" mode="primary">

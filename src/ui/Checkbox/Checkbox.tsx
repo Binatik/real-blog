@@ -1,4 +1,5 @@
 import { InputHTMLAttributes } from "react";
+import { Text } from "@ui/Text/Text";
 import classes from "./Checkbox.module.scss";
 import classNames from "classnames";
 
@@ -7,16 +8,34 @@ type CheckboxProps = {
   idLabel: string;
   space?: "middle";
   type?: "checkbox";
+  messageError: string;
+  error: boolean | null;
 } & InputHTMLAttributes<HTMLInputElement>;
 
 function Checkbox({
   label,
   type = "checkbox",
   space = "middle",
+  messageError,
+  error,
   idLabel,
   className,
   ...props
 }: CheckboxProps) {
+  function renderErrorMessage() {
+    return (
+      <Text
+        mode="danger"
+        size="small"
+        className={classNames({
+          [classes.inputError]: error,
+        })}
+      >
+        {messageError}
+      </Text>
+    );
+  }
+
   return (
     <>
       <input
@@ -34,6 +53,7 @@ function Checkbox({
       >
         {label}
       </label>
+      {error === false && renderErrorMessage()}
     </>
   );
 }

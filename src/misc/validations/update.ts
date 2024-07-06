@@ -29,7 +29,7 @@ const validatorGroup = {
     },
     {
       pattern: /^.{6,99}$/,
-      message: "Password deve essere compreso tra 6 e 40 caratteri!",
+      message: "The new password must be reliable!",
     },
   ],
 };

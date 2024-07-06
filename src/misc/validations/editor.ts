@@ -5,8 +5,8 @@ const validatorGroup = {
       message: "The field cannot be empty!",
     },
     {
-      pattern: /^.{3,99}$/,
-      message: "Title deve essere compreso tra 6 e 99 caratteri!",
+      pattern: /^.{9,133}$/,
+      message: "The title should have a short title name!",
     },
   ],
 
@@ -16,8 +16,8 @@ const validatorGroup = {
       message: "The field cannot be empty!",
     },
     {
-      pattern: /^.{20,99}$/,
-      message: "Description deve essere compreso tra 20 e 199 caratteri!",
+      pattern: /^.{17,399}$/,
+      message: "The article should contain a normal description!",
     },
   ],
 
@@ -25,10 +25,6 @@ const validatorGroup = {
     {
       pattern: /^(.+)$/,
       message: "The field cannot be empty!",
-    },
-    {
-      pattern: /^.{20,99}$/,
-      message: "Description deve essere compreso tra 20 e 199 caratteri!",
     },
   ],
 };
