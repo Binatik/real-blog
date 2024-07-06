@@ -40,6 +40,28 @@ const ghostRouter = createBrowserRouter([
           },
         ],
       },
+      {
+        //приватные children если ghostRouter но не clientRouter
+        element: <ProtectedRoute to="/" protectedRole="private" />,
+        children: [
+          {
+            path: "user",
+            element: <Feed />,
+          },
+          {
+            path: "user/create",
+            element: <CreateTopic />,
+          },
+          {
+            path: "user/:pageCount/updateTopic/:slug",
+            element: <UpdateTopic />,
+          },
+          {
+            path: "user/profile",
+            element: <UpdateProfile />,
+          },
+        ],
+      },
     ],
   },
 ]);
@@ -50,12 +72,12 @@ const clientRouter = createBrowserRouter([
     element: <Layout />,
     children: [
       {
+        index: true,
+        element: <Feed />,
+      },
+      {
         element: <ProtectedRoute to="/" protectedRole="client" />,
         children: [
-          {
-            index: true,
-            element: <Feed />,
-          },
           {
             path: "user",
             element: <Feed />,
@@ -79,6 +101,16 @@ const clientRouter = createBrowserRouter([
           {
             path: "user/:pageCount/updateTopic/:slug",
             element: <UpdateTopic />,
+          },
+        ],
+      },
+      {
+        //приватные children если clientRouter но не ghostRouter
+        element: <ProtectedRoute to="/" protectedRole="private" />,
+        children: [
+          {
+            path: "sign-up",
+            element: <Register />,
           },
           {
             path: "sign-in",

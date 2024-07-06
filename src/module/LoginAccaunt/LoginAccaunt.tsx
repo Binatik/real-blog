@@ -50,7 +50,6 @@ function LoginAccaunt() {
 
     if (token) {
       navigate("/user");
-      location.reload();
     }
   };
 

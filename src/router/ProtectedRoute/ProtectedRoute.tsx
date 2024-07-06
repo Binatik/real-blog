@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 
 type ProtectedRouteProps = {
-  protectedRole: "ghost" | "client";
+  protectedRole: "ghost" | "client" | "private";
 } & NavigateProps;
 
 function ProtectedRoute({ protectedRole, ...props }: ProtectedRouteProps) {
