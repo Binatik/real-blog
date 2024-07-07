@@ -23,8 +23,8 @@ const validatorGroup = {
 
   repeatPassword: [
     {
-      pattern: /^.{17,399}$/,
-      message: "",
+      pattern: /^.{5,399}$/,
+      message: "1-399",
     },
   ],
 };

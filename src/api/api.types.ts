@@ -7,6 +7,7 @@ export type Profile = {
     username: string;
     bio: string;
     image: null | string;
+    password?: string;
   };
 };
 

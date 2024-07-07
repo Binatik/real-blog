@@ -9,7 +9,7 @@ import {
 } from "@ui/index";
 import classes from "./CreateAccount.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
-import { registerProfile } from "@src/app/slices/authSlice";
+import { auth, registerProfile } from "@src/app/slices/authSlice";
 import { validatorGroup } from "@src/misc/validations/createAccount";
 import { useRef, useState } from "react";
 import classNames from "classnames";
@@ -61,7 +61,7 @@ function CreateAccount() {
     }
 
     await dispatch(registerProfile(event.currentTarget));
-    navigate("/user");
+    navigate("/user/0");
   };
 
   return (
@@ -134,7 +134,12 @@ function CreateAccount() {
           </Button>
           <div className={classes.login}>
             <Text as="span">Already have an account?</Text>
-            <RouterLink to="/sign-in" size="small" mode="primary">
+            <RouterLink
+              onClick={() => dispatch(auth.deleteApiError())}
+              to="/sign-in"
+              size="small"
+              mode="primary"
+            >
               Sign In.
             </RouterLink>
           </div>

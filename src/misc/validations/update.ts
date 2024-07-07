@@ -1,7 +1,7 @@
 const validatorGroup = {
   userName: [
     {
-      pattern: /^.{6,23}$/,
+      pattern: /^.{4,23}$/,
       message: "Invalid user name!",
     },
   ],

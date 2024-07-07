@@ -114,7 +114,9 @@ export const Editor = ({
               type="description"
               idLabel="description"
               label="Short description"
-              onBlur={(event) => field.title.changeValue(event.target.value)}
+              onBlur={(event) =>
+                field.description.changeValue(event.target.value)
+              }
               ref={(ref: HTMLInputElement) => (fieldRefs.current[1] = ref)}
               value={field.description.value}
               onChange={(event) =>

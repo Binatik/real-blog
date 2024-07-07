@@ -61,7 +61,7 @@ const profileSlice = createSlice({
       Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
     });
     builder.addCase(updateProfile.rejected, (state) => {
-      state.status = "pending";
+      state.status = "fulfilled";
       state.error = true;
     });
   },
@@ -88,10 +88,16 @@ export const updateProfile = createAsyncThunk(
     const formData = new FormData(form);
     formData.append("bio", "I work at State Farm.");
 
+    const password = formData.get("password") as string;
+
+    if (password.trim() === "") {
+      formData.delete("password");
+    }
+
     const fields = Object.fromEntries(formData.entries());
     const request = JSON.stringify({ user: fields });
 
-    const result = await api.put<Profile>("/user", {
+    const result = await api.put<Profile>("/user111", {
       headers: {
         authorization: `Token ${token}`,
         "Content-type": "application/json",

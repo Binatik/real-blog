@@ -10,7 +10,7 @@ import classes from "./LoginAccaunt.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { validatorGroup } from "@src/misc/validations/loginAccount";
 import { useRef } from "react";
-import { loginProfile } from "@src/app/slices/authSlice";
+import { auth, loginProfile } from "@src/app/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
@@ -25,7 +25,7 @@ function LoginAccaunt() {
   const fieldRefs = useRef<HTMLInputElement[]>([]);
 
   const email = useValidation(validatorGroup.email, true);
-  const password = useValidation(validatorGroup.password, true);
+  const password = useValidation(validatorGroup.password, false);
 
   const errorsFields = [email.error, password.error];
 
@@ -49,7 +49,7 @@ function LoginAccaunt() {
     const token = Cookies.get(CookieKey.token);
 
     if (token) {
-      navigate("/user");
+      navigate("/user/0");
     }
   };
 
@@ -95,7 +95,12 @@ function LoginAccaunt() {
           </Button>
           <div className={classes.register}>
             <Text>Don’t have an account?</Text>
-            <RouterLink to="/sign-up" size="small" mode="primary">
+            <RouterLink
+              onClick={() => dispatch(auth.deleteApiError())}
+              to="/sign-up"
+              size="small"
+              mode="primary"
+            >
               Sign Up.
             </RouterLink>
           </div>

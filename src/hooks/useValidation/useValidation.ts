@@ -21,7 +21,10 @@ function useValidation(
   const state = initialStateValue ? initialStateValue : "";
   const [value, setValue] = useState(state);
   const [message, setMessage] = useState("");
-  const [error, setError] = useState(state === "" ? true : false);
+
+  const fieldIsEmpty = state.trim() === "" && !required ? false : true;
+  const modeState = fieldIsEmpty && required ? true : false;
+  const [error, setError] = useState(modeState);
 
   function changeValue(ctx: string) {
     setValue(() => {
@@ -31,10 +34,14 @@ function useValidation(
   }
 
   function changeValidator(value: string) {
-    // Добавили аргумент value
     if (value.trim() === "" && required) {
       setError(true);
       setMessage("This field is required");
+      return;
+    }
+
+    if (value.trim() === "" && !required) {
+      setError(false);
       return;
     }
 

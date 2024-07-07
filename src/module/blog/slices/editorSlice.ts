@@ -92,7 +92,7 @@ export const createPost = createAsyncThunk(
 
     const request = JSON.stringify({ article: tmpData });
 
-    await api.post<RootTopic>("/articles", {
+    await api.post<RootTopic>("/articles111", {
       headers: {
         authorization: `Token ${token}`,
         "Content-type": "application/json",

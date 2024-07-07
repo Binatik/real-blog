@@ -26,6 +26,9 @@ const authSlice = createSlice({
     logOut: () => {
       Cookies.remove(CookieKey.token);
     },
+    deleteApiError: (state) => {
+      state.apiError = null;
+    },
   },
 
   extraReducers: (builder) => {

@@ -60,6 +60,10 @@ const ghostRouter = createBrowserRouter([
             path: "user/profile",
             element: <UpdateProfile />,
           },
+          {
+            path: "user/:pageCount/:slug",
+            element: <CurrentTopic />,
+          },
         ],
       },
     ],

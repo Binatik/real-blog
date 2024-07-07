@@ -18,14 +18,17 @@ function Auth() {
   const location = useLocation();
 
   function linkSignUp() {
+    dispatch(auth.deleteApiError());
     navigate("/sign-up");
   }
 
   function linkSignIn() {
+    dispatch(auth.deleteApiError());
     navigate("/sign-in");
   }
 
   function linkLogOut() {
+    dispatch(auth.deleteApiError());
     dispatch(auth.logOut());
     dispatch(profile.updateRole());
     navigate("/sign-in");

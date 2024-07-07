@@ -27,6 +27,7 @@ export const Message = ({
             [classes.defaultMode]: mode === "default",
             [classes.mediumSize]: size === "medium",
           })}
+          rows={10}
           id={idLabel}
           placeholder={label}
           name="message"
