@@ -155,13 +155,19 @@ export const Topic = ({ article, expanded }: TopicProps) => {
 
         <div className={classes.tagContainer}>
           {article.tagList &&
-            article.tagList.map((tag) => (
-              <Tag key={self.crypto.randomUUID()} className={classes.topicTag}>
-                <Text as="span" mode="off" size="small">
-                  {tag}
-                </Text>
-              </Tag>
-            ))}
+            article.tagList.map(
+              (tag) =>
+                tag.trim() !== "" && (
+                  <Tag
+                    key={self.crypto.randomUUID()}
+                    className={classes.topicTag}
+                  >
+                    <Text as="span" mode="off" size="small">
+                      {tag}
+                    </Text>
+                  </Tag>
+                ),
+            )}
         </div>
         <div className={classes.descriptionContainer}>
           <Text

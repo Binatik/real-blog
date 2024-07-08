@@ -14,8 +14,6 @@ import { auth, loginProfile } from "@src/app/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
-import { CookieKey } from "@src/app/enums/Cookies";
-import Cookies from "js-cookie";
 
 function LoginAccaunt() {
   const navigate = useNavigate();
@@ -46,11 +44,8 @@ function LoginAccaunt() {
     }
 
     await dispatch(loginProfile(event.currentTarget));
-    const token = Cookies.get(CookieKey.token);
-
-    if (token) {
-      navigate("/user/0");
-    }
+    location.reload();
+    navigate("/");
   };
 
   return (

@@ -15,7 +15,7 @@ function Header() {
           [classes.auth]: token,
         })}
       >
-        <RouterLink to={token ? "/user" : "/"}>Real World</RouterLink>
+        <RouterLink to={"/"}>Real World</RouterLink>
         <Auth />
       </div>
     </header>

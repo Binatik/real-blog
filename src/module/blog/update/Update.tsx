@@ -8,7 +8,7 @@ import { useValidation } from "@hooks/useValidation/useValidation";
 import { validatorGroup } from "@validations/editor";
 import { Editor, Spinner } from "@ui/index";
 import { fetchTopic } from "../slices/postsSlice";
-import { updatePost } from "../slices/editorSlice";
+import { editor, updatePost } from "../slices/editorSlice";
 
 export type params = {
   slug?: string | undefined;
@@ -20,7 +20,13 @@ export const Update = () => {
   const navigate = useNavigate();
 
   const topic = useRootSelector((state) => state.postsSlice.topic);
-  const loadingTopic = !topic;
+  const tags = useRootSelector((state) => state.postsSlice.topic?.tagList);
+
+  const topicLoading = !topic;
+
+  useEffect(() => {
+    dispatch(editor.getTags(tags));
+  }, [dispatch, tags]);
 
   const validate = {
     title: useValidation(validatorGroup.title, true, topic?.title),
@@ -35,8 +41,6 @@ export const Update = () => {
   const fieldRefs = useRef<HTMLInputElement[]>([]);
   const errorsFields = [validate.title.error, validate.description.error];
   const isValidationFailed = errorsFields.some((field) => field);
-
-  const sendLoading = useRootSelector((state) => state.editorSlice.loading);
 
   const token = Cookies.get(CookieKey.token);
 
@@ -70,12 +74,10 @@ export const Update = () => {
     }
 
     await dispatch(updatePost(payload));
-    navigate("/user/0");
+    navigate("/");
   };
 
   const renderEditTopic = () => {
-    if (loadingTopic) return <Spinner position="center" />;
-
     return (
       <Editor
         onSubmit={updatePostSubmit}
@@ -87,10 +89,5 @@ export const Update = () => {
     );
   };
 
-  return (
-    <>
-      {renderEditTopic()}
-      {!sendLoading && <Spinner />}
-    </>
-  );
+  return topicLoading ? <Spinner position="center" /> : renderEditTopic();
 };

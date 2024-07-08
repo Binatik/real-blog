@@ -32,8 +32,21 @@ export const Editor = ({
 }: EditorProps) => {
   const dispatch = useRootDispatch();
 
-  const tags = useRootSelector((state) => state.editorSlice.tagsObject);
+  const tags = useRootSelector((state) => state.editorSlice.tagList);
   const error = useRootSelector((state) => state.editorSlice.error);
+  const rejected = useRootSelector((state) => state.editorSlice.rejected);
+
+  const updateValueTag = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    id?: string,
+  ) => {
+    const payload = {
+      id,
+      updateTag: event.target.value,
+    };
+
+    dispatch(editor.updateTag(payload));
+  };
 
   const renderTags = () => {
     if (tags.length === 0) {
@@ -52,16 +65,18 @@ export const Editor = ({
     return tags.map((tag, index) => (
       <div key={tag.id} className={classes.editorTagItem}>
         <InputField
+          value={tag.tag}
           className={classes.editorPlaceholder}
+          onChange={(event) => updateValueTag(event, tag.id)}
           labelHidden
           name={tag.id}
           type="tag"
-          idLabel={tag.id}
+          idLabel={tag.id ? tag.id : ""}
           label="Tag"
           wide={false}
         />
         <Button
-          onClick={() => dispatch(editor.removeTag(tag.id))}
+          onClick={() => dispatch(editor.removeTag(tag.id ? tag.id : ""))}
           type="button"
           size="medium"
           mode="danger"
@@ -90,9 +105,9 @@ export const Editor = ({
           <Heading className={classes.editorTitle} as="h2">
             {children}
           </Heading>
-          {error && (
+          {rejected && (
             <Text as="span" size="medium" mode="danger">
-              An error occurred when formatting the article..
+              {error.message}
             </Text>
           )}
           <div className={classes.editorFields}>

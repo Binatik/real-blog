@@ -39,11 +39,16 @@ export type RootTopic = {
   article?: Article;
 };
 
+export type TagList = {
+  id?: string;
+  tag: string;
+};
+
 export type PostTopic = {
   title: string;
   description: string;
   body: string | null;
-  tagList: string[];
+  tagList: TagList[];
 };
 
 export type ResponseErrorMessage = {

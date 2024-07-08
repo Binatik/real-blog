@@ -28,9 +28,10 @@ function Auth() {
   }
 
   function linkLogOut() {
+    dispatch(profile.updateRole());
     dispatch(auth.deleteApiError());
     dispatch(auth.logOut());
-    dispatch(profile.updateRole());
+
     navigate("/sign-in");
   }
 
