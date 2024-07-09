@@ -11,7 +11,7 @@ import classes from "./CreateAccount.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { auth, registerProfile } from "@src/app/slices/authSlice";
 import { validatorGroup } from "@src/misc/validations/createAccount";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { useNavigate } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
@@ -24,6 +24,7 @@ function CreateAccount() {
   const [userConsent, setUsersConsent] = useState<boolean | null>(null);
 
   const apiError = useRootSelector((state) => state.authSlice.apiError);
+  const loading = useRootSelector((state) => state.authSlice.loading);
 
   const userName = useValidation(validatorGroup.userName, true);
   const email = useValidation(validatorGroup.email, true);
@@ -61,9 +62,14 @@ function CreateAccount() {
     }
 
     await dispatch(registerProfile(event.currentTarget));
-    location.reload();
-    navigate("/");
   };
+
+  useEffect(() => {
+    if (!apiError && !loading) {
+      location.reload();
+      navigate("/");
+    }
+  }, [loading, apiError, navigate]);
 
   return (
     <section className={classes.create}>

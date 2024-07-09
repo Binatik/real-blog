@@ -9,7 +9,7 @@ import {
 import classes from "./LoginAccaunt.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { validatorGroup } from "@src/misc/validations/loginAccount";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { auth, loginProfile } from "@src/app/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
@@ -19,11 +19,12 @@ function LoginAccaunt() {
   const navigate = useNavigate();
   const dispatch = useRootDispatch();
   const apiError = useRootSelector((state) => state.authSlice.apiError);
+  const loading = useRootSelector((state) => state.authSlice.loading);
 
   const fieldRefs = useRef<HTMLInputElement[]>([]);
 
   const email = useValidation(validatorGroup.email, true);
-  const password = useValidation(validatorGroup.password, false);
+  const password = useValidation(validatorGroup.password, true);
 
   const errorsFields = [email.error, password.error];
 
@@ -44,9 +45,14 @@ function LoginAccaunt() {
     }
 
     await dispatch(loginProfile(event.currentTarget));
-    location.reload();
-    navigate("/");
   };
+
+  useEffect(() => {
+    if (!apiError && !loading) {
+      location.reload();
+      navigate("/");
+    }
+  }, [loading, apiError, navigate]);
 
   return (
     <section className={classes.login}>

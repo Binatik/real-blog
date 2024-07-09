@@ -1,4 +1,4 @@
-import { Api, Profile } from "@api/index";
+import { Api, ApiError, Profile } from "@api/index";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { CookieKey } from "@src/app/enums/Cookies";
 import Cookies from "js-cookie";
@@ -11,9 +11,11 @@ type PayloadUpdateProfile = {
 };
 
 type AuthState = {
-  profile: Profile | null;
+  profile?: Profile | null;
   status: "pending" | "fulfilled" | "rejected" | null;
   role: "ghost" | "client";
+  loading: boolean;
+  errorMessage: string;
   error: boolean;
 };
 
@@ -21,6 +23,8 @@ const initialState: AuthState = {
   profile: null,
   status: null,
   error: false,
+  loading: false,
+  errorMessage: "",
   role: "ghost",
 };
 
@@ -52,17 +56,25 @@ const profileSlice = createSlice({
 
     builder.addCase(updateProfile.pending, (state) => {
       state.status = "pending";
-      state.error = false;
+      state.loading = true;
     });
     builder.addCase(updateProfile.fulfilled, (state, action) => {
       state.status = "fulfilled";
       state.error = false;
+      state.loading = false;
       state.profile = action.payload;
-      Cookies.set(CookieKey.token, action.payload.user.token, { expires: 120 });
+
+      if (action.payload) {
+        Cookies.set(CookieKey.token, action.payload.user.token, {
+          expires: 120,
+        });
+      }
     });
-    builder.addCase(updateProfile.rejected, (state) => {
+    builder.addCase(updateProfile.rejected, (state, action) => {
       state.status = "fulfilled";
+      state.loading = false;
       state.error = true;
+      state.errorMessage = action.payload as string;
     });
   },
 });
@@ -80,9 +92,13 @@ export const fetchCurrentProfile = createAsyncThunk(
   },
 );
 
-export const updateProfile = createAsyncThunk(
+export const updateProfile = createAsyncThunk<
+  Profile | undefined,
+  PayloadUpdateProfile,
+  { rejectValue: string }
+>(
   "profileSlice/updateProfile",
-  async (payload: PayloadUpdateProfile) => {
+  async (payload: PayloadUpdateProfile, { rejectWithValue }) => {
     const { form, token } = payload;
 
     const formData = new FormData(form);
@@ -97,15 +113,22 @@ export const updateProfile = createAsyncThunk(
     const fields = Object.fromEntries(formData.entries());
     const request = JSON.stringify({ user: fields });
 
-    const result = await api.put<Profile>("/user111", {
-      headers: {
-        authorization: `Token ${token}`,
-        "Content-type": "application/json",
-      },
-      body: request,
-    });
+    try {
+      const result = await api.put<Profile>("/user", {
+        headers: {
+          authorization: `Token ${token}`,
+          "Content-type": "application/json",
+        },
+        body: request,
+      });
 
-    return result;
+      return result;
+    } catch (error) {
+      if (error instanceof ApiError) {
+        const message = Object.values(error.body.errors)[0];
+        return rejectWithValue(message);
+      }
+    }
   },
 );
 

@@ -1,4 +1,4 @@
-import { Button, FormControl, Heading, InputField } from "@ui/index";
+import { Button, FormControl, Heading, InputField, Text } from "@ui/index";
 import classes from "./UpdateProfile.module.scss";
 import { useValidation } from "@hooks/useValidation/useValidation";
 import { useRef } from "react";
@@ -12,6 +12,10 @@ import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 function UpdateProfile() {
   const dispatch = useRootDispatch();
   const profile = useRootSelector((stete) => stete.profileSlice.profile);
+  const error = useRootSelector((stete) => stete.profileSlice.error);
+  const errorMessage = useRootSelector(
+    (stete) => stete.profileSlice.errorMessage,
+  );
   const fieldRefs = useRef<HTMLInputElement[]>([]);
 
   const userName = useValidation(
@@ -123,6 +127,9 @@ function UpdateProfile() {
           <Button type="submit" size="medium" mode="primary">
             Save
           </Button>
+          <Text hidden={!error} mode="danger">
+            {errorMessage}
+          </Text>
         </FormControl>
       </div>
     </section>
