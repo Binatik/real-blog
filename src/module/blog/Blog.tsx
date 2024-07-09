@@ -43,13 +43,13 @@ export const Blog = () => {
       offset: 19 * currentPage,
     };
 
-    // if (token) {
-    //   navigate(`/user/${currentPage}`);
-    // }
+    if (token) {
+      navigate(`/user/${currentPage}`);
+    }
 
-    // if (!token) {
-    //   navigate(`/${currentPage}`);
-    // }
+    if (!token) {
+      navigate(`/${currentPage}`);
+    }
 
     dispatch(fetchArticles(payload));
   }, [currentPage, navigate, dispatch]);
