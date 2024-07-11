@@ -182,8 +182,6 @@ export const updatePost = createAsyncThunk<
     const message = formData.get(EditorFieldKey.message);
     const tagList: string[] = [];
 
-    console.log(message);
-
     //Чистим все что бы оставить только теги.
     formData.delete(EditorFieldKey.title);
     formData.delete(EditorFieldKey.description);

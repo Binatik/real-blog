@@ -2,6 +2,7 @@ import { Article } from "@api/api.types";
 import { shortenDescription } from "@src/misc/utils";
 import { splitLongWords } from "@src/misc/utils/splitLongWords";
 import {
+  Alert,
   Avatar,
   Button,
   Card,
@@ -26,6 +27,7 @@ import ReactMarkdown from "react-markdown";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { params } from "../Blog";
 import { getTime } from "@src/misc/utils/getTime";
+import { useState } from "react";
 
 type TopicProps = {
   article: Article;
@@ -33,6 +35,7 @@ type TopicProps = {
 };
 
 export const Topic = ({ article, expanded }: TopicProps) => {
+  const [alert, setAlert] = useState(false);
   const dispatch = useRootDispatch();
   const params = useParams<params>();
   const navigate = useNavigate();
@@ -47,6 +50,10 @@ export const Topic = ({ article, expanded }: TopicProps) => {
   const payload = {
     slug: article.slug,
     token: token,
+  };
+
+  const onAlert = () => {
+    setAlert((prev) => (prev = !prev));
   };
 
   const deleteTopic = async () => {
@@ -89,12 +96,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
     if (profile?.user.username === article.author.username && token) {
       return (
         <>
-          <Button
-            onClick={deleteTopic}
-            type="button"
-            mode="danger"
-            size="small"
-          >
+          <Button onClick={onAlert} type="button" mode="danger" size="small">
             Delete
           </Button>
           <Button
@@ -185,6 +187,15 @@ export const Topic = ({ article, expanded }: TopicProps) => {
         </div>
         {expanded && <ReactMarkdown>{article.body}</ReactMarkdown>}
       </div>
+      {alert && (
+        <Alert
+          className={classes.topicAlert}
+          onChangeAlertYes={deleteTopic}
+          onChangeAlertNo={onAlert}
+        >
+          Are you sure to delete this article?
+        </Alert>
+      )}
     </Card>
   );
 };

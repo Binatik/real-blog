@@ -16,3 +16,4 @@ export * from "./Paginate/Paginate";
 export * from "./Like/Like";
 export * from "./Message/Message";
 export * from "./Editor/Editor";
+export * from "./Alert/Alert";

@@ -1,0 +1,16 @@
+.alert {
+  position: absolute;
+  border-radius: 4px;
+  right: 0;
+  bottom: 0; 
+  background-color: var(--main-color);
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.15);
+}
+
+.alertButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 13px;
+}

@@ -31,7 +31,7 @@ function useValidation(
     if (value.trim() !== "") {
       setError(false);
     }
-  }, []);
+  }, [value]);
 
   function changeValue(ctx: string) {
     setValue(() => {
