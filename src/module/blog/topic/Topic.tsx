@@ -157,6 +157,7 @@ export const Topic = ({ article, expanded }: TopicProps) => {
           {article.tagList &&
             article.tagList.map(
               (tag) =>
+                tag &&
                 tag.trim() !== "" && (
                   <Tag
                     key={self.crypto.randomUUID()}

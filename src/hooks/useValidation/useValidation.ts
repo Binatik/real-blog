@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 type ValidationItem = {
   pattern: RegExp;
@@ -19,12 +19,19 @@ function useValidation(
   initialStateValue?: string,
 ): ReturnValidator {
   const state = initialStateValue ? initialStateValue : "";
+
   const [value, setValue] = useState(state);
   const [message, setMessage] = useState("");
 
   const fieldIsEmpty = state.trim() === "" && !required ? false : true;
   const modeState = fieldIsEmpty && required ? true : false;
   const [error, setError] = useState(modeState);
+
+  useLayoutEffect(() => {
+    if (value.trim() !== "") {
+      setError(false);
+    }
+  }, []);
 
   function changeValue(ctx: string) {
     setValue(() => {

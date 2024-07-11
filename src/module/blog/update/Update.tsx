@@ -21,7 +21,6 @@ export const Update = () => {
 
   const topic = useRootSelector((state) => state.postsSlice.topic);
   const tags = useRootSelector((state) => state.postsSlice.topic?.tagList);
-
   const topicLoading = !topic;
 
   useEffect(() => {
@@ -69,7 +68,6 @@ export const Update = () => {
         fieldRefs.current[index].focus();
         return field;
       });
-
       return;
     }
 

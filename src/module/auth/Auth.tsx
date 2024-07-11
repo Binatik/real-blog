@@ -8,6 +8,7 @@ import { auth } from "@src/app/slices/authSlice";
 import { profile } from "@src/app/slices/profileSlice";
 import { useRootSelector } from "@hooks/useRootSelector/useRootSelector";
 import { useRootDispatch } from "@hooks/useRootDispatch/useRootDispatch";
+import { editor } from "@module/blog/slices/editorSlice";
 
 function Auth() {
   const token = Cookies.get(CookieKey.token);
@@ -36,6 +37,7 @@ function Auth() {
   }
 
   function linkCreate() {
+    dispatch(editor.resetTags());
     navigate("/user/create");
   }
 

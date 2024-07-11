@@ -71,6 +71,9 @@ const editorSlice = createSlice({
     removeTag: (state, action: PayloadAction<string>) => {
       state.tagList = state.tagList.filter((tag) => tag.id !== action.payload);
     },
+    resetTags: (state) => {
+      state.tagList = state.tagList = [];
+    },
   },
 
   extraReducers: (builder) => {
@@ -140,7 +143,7 @@ export const createPost = createAsyncThunk<
       article: {
         title,
         description,
-        message,
+        body: message,
         tagList,
       },
     });
@@ -179,6 +182,8 @@ export const updatePost = createAsyncThunk<
     const message = formData.get(EditorFieldKey.message);
     const tagList: string[] = [];
 
+    console.log(message);
+
     //Чистим все что бы оставить только теги.
     formData.delete(EditorFieldKey.title);
     formData.delete(EditorFieldKey.description);
@@ -194,7 +199,7 @@ export const updatePost = createAsyncThunk<
       article: {
         title,
         description,
-        message,
+        body: message,
         tagList,
       },
     });
